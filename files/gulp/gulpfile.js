@@ -73,7 +73,7 @@ const webpack       = require('webpack-stream');
 
 gulp.task('watch', () => {
   browserSync.init({
-    proxy: '{% = local %}',
+    proxy: '{%= local %}',
     port: 3000,
     open: true,
     notify: false,
