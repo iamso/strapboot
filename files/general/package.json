@@ -1,0 +1,25 @@
+{
+ "name": "{%= name %}",
+  "url": "{%= homepage %}",
+  "description": "{%= description %}",
+  "version": "{%= version %}",
+  "author": "{%= author %}",
+  "copyright": "{%= copyright %}",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "{%= repository %}"
+  },
+  "engines": {
+    "node": ">=6.x.x"
+  },
+  {%= dependencies %},
+  "main": "{%= taskrunner %}file.js",
+  "scripts": {
+    "start": "{%= taskrunner %}",
+    "postinstall": "[ -z \"$npm_config_production\" ] && ./node_modules/.bin/bower install",
+    "dev": "{%= taskrunner %} dev",
+    "dist": "{%= taskrunner %} dist"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,20 @@
+
+body {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: stretch;
+}
+header {
+  background: #ccc;
+  flex: 0 0 0%;
+}
+main {
+  flex: 1 0 0%;
+}
+footer {
+  background: #ccc;
+  flex: 0 0 0%;
+}
