@@ -124,7 +124,7 @@ gulp.task('scss', () => {
     }))
     .pipe(rename('bundle.min.css'))
     .pipe(banner(comment))
-    .pipe(gulp.dest(src.cssDest))
+    .pipe(gulp.dest(src.scssDest))
     .pipe(reload({stream: true}))
     .pipe(notify('scss done'));
 });
