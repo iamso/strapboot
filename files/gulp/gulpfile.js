@@ -45,7 +45,7 @@ const src           = {
   scssAll:  'assets/css/_src/**/*.scss',
   scssMain: 'assets/css/_src/main.scss',
   scssDest: 'assets/css',
-  jsAll:    'assets/js/_src/**/*js',
+  jsAll:    'assets/js/_src/**/*.js',
   jsMain:   'assets/js/_src/main.js',
   jsDest:   'assets/js',
 };
