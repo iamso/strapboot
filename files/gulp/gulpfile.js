@@ -28,10 +28,10 @@ const pkg             = require('./package.json');
 const browserSync     = require('browser-sync').create();
 const reload          = browserSync.reload;
 
-const styles         = '{%= styles %}'; // css | scss
-const scripts        = '{%= scripts %}'; // webpack | concat
+const styles          = '{%= styles %}'; // css | scss
+const scripts         = '{%= scripts %}'; // webpack | concat
 
-const comment       = `/*!
+const comment         = `/*!
  * ${pkg.name}
  *
  * Made with ❤ by ${pkg.author}
@@ -40,7 +40,7 @@ const comment       = `/*!
  */
 `;
 
-const src           = {
+const src             = {
   cssAll:   'assets/css/_src/**/*.css',
   cssMain:  'assets/css/_src/main.css',
   cssDest:  'assets/css',
@@ -52,7 +52,7 @@ const src           = {
   jsDest:   'assets/js',
 };
 
-const uglifyConfig  = {
+const uglifyConfig    = {
   mangle: {
     except: ['jQuery, u']
   },
@@ -62,15 +62,15 @@ const uglifyConfig  = {
   preserveComments: false,
 };
 
-const autoprefixerConfig = {
+const prefixConfig    = {
   browsers: ['last 4 version', 'Android 4', 'iOS 7'],
   diff: true,
   map: false,
   remove: false,
 };
 
-const jshintConfig  = require('./.config/jshint.config');
-const webpackConfig = require('./.config/webpack.config');
+const jshintConfig    = require('./.config/jshint.config');
+const webpackConfig   = require('./.config/webpack.config');
 
 gulp.task('watch', () => {
   browserSync.init({
@@ -90,7 +90,7 @@ gulp.task('css', () => {
     .pipe(postcss([
       postcssImport,
       postcssMixins,
-      postcssCssnext(autoprefixerConfig),
+      postcssCssnext(prefixConfig),
       postcssComments({removeAll: true}),
       postcssReporter({ clearMessages: true }),
     ], {syntax: postcssScss}))
@@ -113,8 +113,8 @@ gulp.task('css', () => {
 gulp.task('scss', () => {
   return gulp.src(src.scssMain)
     // .pipe(sourcemaps.init())
-    .pipe(autoprefixer(autoprefixerConfig))
     .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer(prefixConfig))
     // .pipe(sourcemaps.write())
     .pipe(rename('bundle.css'))
     .pipe(banner(comment))
