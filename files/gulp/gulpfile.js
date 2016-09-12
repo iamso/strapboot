@@ -8,6 +8,7 @@ const postcssMixins   = require('postcss-mixins');
 const postcssCssnext  = require('postcss-cssnext');
 const postcssComments = require('postcss-discard-comments');
 const postcssScss     = require('postcss-scss');
+const postcssReporter = require('postcss-reporter');
 const sourcemaps      = require('gulp-sourcemaps');
 const rename          = require('gulp-rename');
 const cssnano         = require('gulp-cssnano');
@@ -91,7 +92,8 @@ gulp.task('css', () => {
       postcssMixins,
       postcssCssnext(autoprefixerConfig),
       postcssComments({removeAll: true}),
-    ]), {syntax: postcssScss})
+      postcssReporter({ clearMessages: true }),
+    ], {syntax: postcssScss}))
     // .pipe(sourcemaps.write())
     .pipe(rename('bundle.css'))
     .pipe(banner(comment))
@@ -111,8 +113,8 @@ gulp.task('css', () => {
 gulp.task('scss', () => {
   return gulp.src(src.scssMain)
     // .pipe(sourcemaps.init())
-    .pipe(sass())
     .pipe(autoprefixer(autoprefixerConfig))
+    .pipe(sass().on('error', sass.logError))
     // .pipe(sourcemaps.write())
     .pipe(rename('bundle.css'))
     .pipe(banner(comment))
@@ -135,7 +137,7 @@ gulp.task('webpack', ['jshint'], () => {
     .pipe(rename('bundle.js'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
-    .pipe(uglify(uglifyConfig))
+    .pipe(uglify(uglifyConfig).on('error', onError))
     .pipe(rename('bundle.min.js'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
@@ -155,7 +157,7 @@ gulp.task('concat', ['jshint'], () => {
     .pipe(concat('bundle.js'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
-    .pipe(uglify(uglifyConfig))
+    .pipe(uglify(uglifyConfig).on('error', onError))
     .pipe(rename('bundle.min.js'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
@@ -171,7 +173,7 @@ gulp.task('jshint', () => {
 
 gulp.task('fallback', () =>  {
   return gulp.src('assets/js/_src/fallback.js')
-    .pipe(uglify(uglifyConfig))
+    .pipe(uglify(uglifyConfig).on('error', onError))
     .pipe(banner(comment))
     .pipe(rename('fallback.min.js'))
     .pipe(gulp.dest(src.jsDest));
@@ -211,7 +213,7 @@ gulp.task('modernizr', () => {
       "uglify" : true,
       "matchCommunityTests" : true,
     }))
-    .pipe(uglify(uglifyConfig))
+    .pipe(uglify(uglifyConfig).on('error', onError))
     .pipe(gulp.dest(`${src.jsDest}/vendor`));
 });
 
@@ -268,3 +270,9 @@ gulp.task('dist', [styles, scripts, 'fallback', 'vendor', 'modernizr', 'manifest
   return gulp.src('./')
     .pipe(notify('dist done'));
 });
+
+// generic error handler
+function onError(err) {
+  // console.log(err.toString());
+  this.emit('end');
+}
