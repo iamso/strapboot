@@ -1,16 +1,11 @@
 {
   "name": "strapboot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An interactive, customizable project template",
   "main": "index.js",
   "bin": {
     "strapboot": "index.js"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Steve Ottoz <so@dev.so>",
-  "license": "MIT",
   "dependencies": {
     "colors": "^1.1.2",
     "git-config": "0.0.7",
@@ -22,5 +17,27 @@
     "shelljs": "^0.7.4",
     "through2": "^2.0.1",
     "vinyl-fs": "^2.4.3"
-  }
+  },
+  "devDependencies": {
+    
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamso/strapboot.git"
+  },
+  "keywords": [
+    "interactive",
+    "customizable",
+    "projejct",
+    "template"
+  ],
+  "author": "iamso <so@dev.so>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iamso/strapboot/issues"
+  },
+  "homepage": "https://github.com/iamso/strapboot#readme"
 }
