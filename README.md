@@ -30,4 +30,6 @@ During the setup, you can choose if you want Gulp or Grunt as taskrunner. Whatev
 
 Check the gulpfile / grunt configs for further information.
 
+## License
 
+[MIT License](LICENSE)
