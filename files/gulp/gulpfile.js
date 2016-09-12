@@ -1,5 +1,6 @@
 const gulp            = require('gulp');
 const gutil           = require("gulp-util");
+const webpack         = require('gulp-webpack');
 const autoprefixer    = require('gulp-autoprefixer');
 const postcss         = require('gulp-postcss');
 const postcssImport   = require('postcss-import');
@@ -69,7 +70,6 @@ const autoprefixerConfig = {
 
 const jshintConfig  = require('./.config/jshint.config');
 const webpackConfig = require('./.config/webpack.config');
-const webpack       = require('webpack-stream');
 
 gulp.task('watch', () => {
   browserSync.init({
