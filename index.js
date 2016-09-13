@@ -201,7 +201,14 @@ inquirer.prompt(questions).then((answers) => {
           });
       }
       else {
-        resolve();
+        console.log(colors.bold(`\nWriting scss files:`));
+        files.scss
+          .pipe(sort())
+          .pipe(map(process))
+          .pipe(vfs.dest(`${dir}/assets/css/_src`))
+          .on('end', () => {
+            resolve();
+          });
       }
     });
   }
