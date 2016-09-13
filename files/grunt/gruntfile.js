@@ -6,7 +6,6 @@ module.exports = function(grunt) {
   // load grunt config
   require('load-grunt-config')(grunt, {
     config: {
-      humans: grunt.file.readJSON('humans.json'),
       banner: '/*!\n' +
       ' * <%= package.name %>\n' +
       ' * \n' +
