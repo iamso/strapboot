@@ -36,6 +36,6 @@
     "postcss-import": "^8.1.2",
     "postcss-mixins": "^5.2.0",
     "postcss-nested": "^1.0.0",
-    "postcss-reporter": "^1.4.1"
-    "postcss-scss": "^0.2.1",
+    "postcss-reporter": "^1.4.1",
+    "postcss-scss": "^0.2.1"
   }
