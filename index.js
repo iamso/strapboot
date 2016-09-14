@@ -16,35 +16,35 @@
 
   const base      = __dirname;
 
-  let files = {
-    general: vfs.src([
-      `${base}/files/general/{.,}**/{.,}*`,
-      `!${base}/files/**/.DS_Store`
-    ]),
-    gulp: vfs.src([
-      `${base}/files/gulp/{.,}**/{.,}*`,
-      `!${base}/files/gulp/package.json`,
-      `!${base}/files/**/.DS_Store`
-    ]),
-    grunt: vfs.src([
-      `${base}/files/grunt/{.,}**/{.,}*`,
-      `!${base}/files/grunt/package.json`,
-      `!${base}/files/**/.DS_Store`
-    ]),
-    css: vfs.src([
-      `${base}/files/css/{.,}**/{.,}*`,
-      `!${base}/files/**/.DS_Store`
-    ]),
-    scss: vfs.src([
-      `${base}/files/scss/{.,}**/{.,}*`,
-      `!${base}/files/**/.DS_Store`
-    ]),
-  };
-
   _.templateSettings.interpolate = /\{%=([\s\S]+?)%\}/g;
 
-
   module.exports = (answers, dir) => {
+
+    let files = {
+      general: vfs.src([
+        `${base}/files/general/{.,}**/{.,}*`,
+        `!${base}/files/**/.DS_Store`
+      ]),
+      gulp: vfs.src([
+        `${base}/files/gulp/{.,}**/{.,}*`,
+        `!${base}/files/gulp/package.json`,
+        `!${base}/files/**/.DS_Store`
+      ]),
+      grunt: vfs.src([
+        `${base}/files/grunt/{.,}**/{.,}*`,
+        `!${base}/files/grunt/package.json`,
+        `!${base}/files/**/.DS_Store`
+      ]),
+      css: vfs.src([
+        `${base}/files/css/{.,}**/{.,}*`,
+        `!${base}/files/**/.DS_Store`
+      ]),
+      scss: vfs.src([
+        `${base}/files/scss/{.,}**/{.,}*`,
+        `!${base}/files/**/.DS_Store`
+      ]),
+    };
+
     return new Promise((resolveAll) => {
       answers.year = (new Date()).getFullYear();
       answers.dependencies = fs.readFileSync(`${base}/files/${answers.taskrunner}/package.json`, 'utf-8');
