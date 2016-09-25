@@ -18,9 +18,9 @@
 })(function () {
   'use strict';
 
-  var base = $('#fallback-js').data('base');
+  var base = document.querySelector('#fallback-js').dataset.base;
 
   // check for jQuery presence
-  window.jQuery || document.write('<script src="' + (base || '') + '/assets/js/vendor/jquery.min.js"><\/script>');
+  !!window.jQuery || document.write('<script src="' + (base || '') + '/assets/js/vendor/jquery.min.js"><\/script>');
 
 });
