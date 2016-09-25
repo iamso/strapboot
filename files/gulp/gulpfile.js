@@ -187,7 +187,8 @@ gulp.task('fallback', () =>  {
 
 gulp.task('vendor', () => {
   return gulp.src([
-    'bower_components/jquery/dist/jquery*',
+      'bower_components/jquery/dist/jquery*',
+      'bower_components/promise-polyfill/promise.*',
     ])
     .pipe(gulp.dest('assets/js/vendor'));
 });
