@@ -1,7 +1,10 @@
 const gulp            = require('gulp');
 const gutil           = require("gulp-util");
+{% if (scripts === 'webpack') { %}
 const webpack         = require('gulp-webpack');
-const autoprefixer    = require('gulp-autoprefixer');
+{% } else { %}
+const concat          = require('gulp-concat');
+{% } %}{% if (styles === 'css') { %}
 const postcss         = require('gulp-postcss');
 const postcssImport   = require('postcss-import');
 const postcssMixins   = require('postcss-mixins');
@@ -9,9 +12,13 @@ const postcssCssnext  = require('postcss-cssnext');
 const postcssComments = require('postcss-discard-comments');
 const postcssScss     = require('postcss-scss');
 const postcssReporter = require('postcss-reporter');
+{% } else { %}
+const sass            = require('gulp-sass');
+const autoprefixer    = require('gulp-autoprefixer');
+{% } %}
 const sourcemaps      = require('gulp-sourcemaps');
-const rename          = require('gulp-rename');
 const cssnano         = require('gulp-cssnano');
+const rename          = require('gulp-rename');
 const uglify          = require('gulp-uglify');
 const jshint          = require('gulp-jshint');
 const banner          = require('gulp-banner');
@@ -19,17 +26,12 @@ const manifest        = require('gulp-manifest');
 const modernizr       = require('gulp-modernizr');
 const imagemin        = require('gulp-imagemin');
 const htmlmin         = require('gulp-htmlmin');
-const sass            = require('gulp-sass');
-const concat          = require('gulp-concat');
 const notify          = require('gulp-notify');
 
 const pkg             = require('./package.json');
 
 const browserSync     = require('browser-sync').create();
 const reload          = browserSync.reload;
-
-const styles          = '{%= styles %}'; // css | scss
-const scripts         = '{%= scripts %}'; // webpack | concat
 
 const comment         = `/*!
  * ${pkg.name}
@@ -41,12 +43,9 @@ const comment         = `/*!
 `;
 
 const src             = {
-  cssAll:   'assets/css/_src/**/*.css',
-  cssMain:  'assets/css/_src/main.css',
+  cssAll:   'assets/css/_src/**/*.{%= styles %}',
+  cssMain:  'assets/css/_src/main.{%= styles %}',
   cssDest:  'assets/css',
-  scssAll:  'assets/css/_src/**/*.scss',
-  scssMain: 'assets/css/_src/main.scss',
-  scssDest: 'assets/css',
   jsAll:    'assets/js/_src/**/*.js',
   jsMain:   'assets/js/_src/main.js',
   jsDest:   'assets/js',
@@ -70,7 +69,7 @@ const prefixConfig    = {
 };
 
 const jshintConfig    = require('./.config/jshint.config');
-const webpackConfig   = require('./.config/webpack.config');
+{% if (scripts === 'webpack') { %}const webpackConfig   = require('./.config/webpack.config');{% } %}
 
 gulp.task('watch', () => {
   browserSync.init({
@@ -80,10 +79,10 @@ gulp.task('watch', () => {
     notify: false,
   });
 
-  gulp.watch(src[`${styles}All`], [styles]);
-  gulp.watch(src.jsAll, [scripts]);
+  gulp.watch(src.cssAll, ['css']);
+  gulp.watch(src.jsAll, ['js']);
 });
-
+{% if (styles === 'css') { %}
 gulp.task('css', () => {
   return gulp.src(src.cssMain)
     // .pipe(sourcemaps.init())
@@ -109,16 +108,16 @@ gulp.task('css', () => {
     .pipe(reload({stream: true}))
     .pipe(notify('css done'));
 });
-
-gulp.task('scss', () => {
-  return gulp.src(src.scssMain)
+{% } else { %}
+gulp.task('css', () => {
+  return gulp.src(src.cssMain)
     // .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer(prefixConfig))
     // .pipe(sourcemaps.write())
     .pipe(rename('bundle.css'))
     .pipe(banner(comment))
-    .pipe(gulp.dest(src.scssDest))
+    .pipe(gulp.dest(src.cssDest))
     .pipe(cssnano({
       discardComments: {
         removeAll: true
@@ -130,8 +129,8 @@ gulp.task('scss', () => {
     .pipe(reload({stream: true}))
     .pipe(notify('scss done'));
 });
-
-gulp.task('webpack', ['jshint'], () => {
+{% } %}{% if (scripts === 'webpack') { %}
+gulp.task('js', ['jshint'], () => {
   return gulp.src(src.jsMain)
     .pipe(webpack(webpackConfig))
     .pipe(rename('bundle.js'))
@@ -144,8 +143,8 @@ gulp.task('webpack', ['jshint'], () => {
     .pipe(reload({stream: true}))
     .pipe(notify('js done'));
 });
-
-gulp.task('concat', ['jshint'], () => {
+{% } else { %}
+gulp.task('js', ['jshint'], () => {
   return gulp.src([
       'assets/js/_src/components/cssevents.js',
       'bower_components/u.js/dist/u.js',
@@ -164,7 +163,7 @@ gulp.task('concat', ['jshint'], () => {
     .pipe(reload({stream: true}))
     .pipe(notify('js done'));
 });
-
+{% } %}
 gulp.task('jshint', () => {
   return gulp.src(src.jsAll)
     .pipe(jshint(jshintConfig))
@@ -264,9 +263,9 @@ gulp.task('public', () => {
 
 gulp.task('default', ['dist', 'watch']);
 
-gulp.task('dev', [styles, scripts, 'fallback', 'modernizr', 'watch']);
+gulp.task('dev', ['css', 'js', 'fallback', 'modernizr', 'watch']);
 
-gulp.task('dist', [styles, scripts, 'fallback', 'vendor', 'modernizr', 'manifest', 'imagemin'], () => {
+gulp.task('dist', ['css', 'js', 'fallback', 'vendor', 'modernizr', 'manifest', 'imagemin'], () => {
   return gulp.src('./')
     .pipe(notify('dist done'));
 });
