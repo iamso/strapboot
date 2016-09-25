@@ -48,6 +48,8 @@
     return new Promise((resolveAll) => {
       answers.year = (new Date()).getFullYear();
       answers.dependencies = fs.readFileSync(`${base}/files/${answers.taskrunner}/package.json`, 'utf-8');
+      answers.styles = answers.styles || 'scss';
+      answers.scripts = answers.scripts || '';
 
       // console.log(answers);
 
@@ -82,26 +84,14 @@
       }
       function writeStyles() {
         return new Promise((resolve) => {
-          if (answers.taskrunner === 'gulp') {
-            console.log(colors.bold(`\nWriting ${answers.styles} files:`));
-            files[answers.styles]
-              .pipe(sort())
-              .pipe(map(process))
-              .pipe(vfs.dest(`${dir}/assets/css/_src`))
-              .on('end', () => {
-                resolve();
-              });
-          }
-          else {
-            console.log(colors.bold(`\nWriting scss files:`));
-            files.scss
-              .pipe(sort())
-              .pipe(map(process))
-              .pipe(vfs.dest(`${dir}/assets/css/_src`))
-              .on('end', () => {
-                resolve();
-              });
-          }
+          console.log(colors.bold(`\nWriting ${answers.styles} files:`));
+          files[answers.styles]
+            .pipe(sort())
+            .pipe(map(process))
+            .pipe(vfs.dest(`${dir}/assets/css/_src`))
+            .on('end', () => {
+              resolve();
+            });
         });
       }
       function writeInstructions(cb) {
