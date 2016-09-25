@@ -27,6 +27,8 @@ const modernizr       = require('gulp-modernizr');
 const imagemin        = require('gulp-imagemin');
 const htmlmin         = require('gulp-htmlmin');
 const notify          = require('gulp-notify');
+const iconfont        = require('gulp-iconfont');
+const consolidate     = require('gulp-consolidate');
 
 const pkg             = require('./package.json');
 
@@ -43,12 +45,16 @@ const comment         = `/*!
 `;
 
 const src             = {
-  cssAll:   'assets/css/_src/**/*.{%= styles %}',
-  cssMain:  'assets/css/_src/main.{%= styles %}',
-  cssDest:  'assets/css',
-  jsAll:    'assets/js/_src/**/*.js',
-  jsMain:   'assets/js/_src/main.js',
-  jsDest:   'assets/js',
+  cssAll:       'assets/css/_src/**/*.{%= styles %}',
+  cssMain:      'assets/css/_src/main.{%= styles %}',
+  cssDest:      'assets/css',
+  jsAll:        'assets/js/_src/**/*.js',
+  jsMain:       'assets/js/_src/main.js',
+  jsDest:       'assets/js',
+  iconsAll:     'assets/icons/*.svg',
+  iconsCss:     'assets/icons/_template/_icons.css',
+  iconsCssDest: 'assets/css/_src/partials/modules/',
+  iconsDest:    'assets/fonts',
 };
 
 const uglifyConfig    = {
@@ -81,6 +87,7 @@ gulp.task('watch', () => {
 
   gulp.watch(src.cssAll, ['css']);
   gulp.watch(src.jsAll, ['js']);
+  gulp.watch(src.iconsAll, ['iconfont']);
 });
 {% if (styles === 'css') { %}
 gulp.task('css', () => {
@@ -261,11 +268,35 @@ gulp.task('public', () => {
     .pipe(gulp.dest('./public'));
 });
 
+gulp.task('iconfont', function(){
+  gulp.src(src.iconsAll)
+    .pipe(iconfont({
+      fontName: 'icons',
+      prependUnicode: false,
+      formats: ['woff2', 'woff', 'svg'],
+    }))
+    .on('glyphs', function(glyphs, options) {
+      glyphs = glyphs.map((glyph) => {
+        glyph.codepoint = glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase();
+        return glyph;
+      });
+      gulp.src(src.iconsCss)
+        .pipe(consolidate('lodash', Object.assign({}, options, {
+          glyphs: glyphs,
+          cssPrefix: 'icon-',
+          fontPath: '../fonts/',
+        })))
+        .pipe(rename('_icons.{%= styles %}'))
+        .pipe(gulp.dest(src.iconsCssDest));
+    })
+    .pipe(gulp.dest(src.iconsDest));
+});
+
 gulp.task('default', ['dist', 'watch']);
 
-gulp.task('dev', ['css', 'js', 'fallback', 'modernizr', 'watch']);
+gulp.task('dev', ['iconfont', 'css', 'js', 'fallback', 'modernizr', 'watch']);
 
-gulp.task('dist', ['css', 'js', 'fallback', 'vendor', 'modernizr', 'manifest', 'imagemin'], () => {
+gulp.task('dist', ['iconfont', 'css', 'js', 'fallback', 'vendor', 'modernizr', 'manifest', 'imagemin'], () => {
   return gulp.src('./')
     .pipe(notify('dist done'));
 });
