@@ -16,7 +16,11 @@
 
   const base      = __dirname;
 
-  _.templateSettings.interpolate = /\{%=([\s\S]+?)%\}/g;
+  _.templateSettings = {
+    evaluate:    /\{%(.+?)%\}/g,
+    interpolate: /\{%=(.+?)%\}/g,
+    escape: /\{%-(.+?)%\}/g
+  };
 
   module.exports = (answers, dir) => {
 
@@ -128,9 +132,7 @@ ${colors.green('Done.')}`);
         if (file.isBuffer()) {
           if (isText('', file.contents)) {
             let content = file.contents.toString();
-            content = content.replace(/<%=/g, encodeURIComponent('<%='));
             content = _.template(content, null, _.templateSettings)(answers);
-            content = content.replace(new RegExp(encodeURIComponent('<%='), 'g'), '<%=');
             file.contents = new Buffer(content);
           }
         }
