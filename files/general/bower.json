@@ -17,6 +17,7 @@
   "dependencies": {
     "autocreate.js": "0.*",
     "fastclick": "^1.0.6",
+    "httpromise": "0.*",
     "jquery": "^3.1.0",
     "promise-polyfill": "^6.0.2",
     "Tetragon.js": "0.*",
