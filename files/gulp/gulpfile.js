@@ -275,6 +275,9 @@ gulp.task('iconfont', function(){
       fontName: 'icons',
       prependUnicode: false,
       formats: ['woff2', 'woff', 'svg'],
+      normalize: true,
+      centerHorizontally: true,
+      fontHeight: 1000 // IMPORTANT
     }))
     .on('glyphs', function(glyphs, options) {
       glyphs = glyphs.map((glyph) => {

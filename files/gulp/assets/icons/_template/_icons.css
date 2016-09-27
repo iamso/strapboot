@@ -4,22 +4,23 @@
   <% } %>src: <% if (formats.indexOf('eot') > -1) { %>url('<%= fontPath %><%= fontName %>.eot?#iefix') format('eot'), <% } %><% if (formats.indexOf('woff2') > -1) { %>url('<%= fontPath %><%= fontName %>.woff2') format('woff2'), <% } %><% if (formats.indexOf('woff') > -1) { %>url('<%= fontPath %><%= fontName %>.woff') format('woff'), <% } %><% if (formats.indexOf('ttf') > -1) { %>url('<%= fontPath %><%= fontName %>.ttf') format('truetype'), <% } %><% if (formats.indexOf('svg') > -1) { %>url('<%= fontPath %><%= fontName %>.svg#<%= fontName %>') format('svg')<% } %>;
 }
 
-[class*="<%= cssPrefix %>"]:before {
+[class*="<%= cssPrefix %>"] {
   display: inline-block;
-  font-family: "<%= fontName %>";
+  font-family: "<%= fontName %>" !important;
   font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  /* speak: none; only necessary if not using the private unicode range (firstGlyph option) */
+  line-height: 1;
+  speak: none;
   text-decoration: none;
   text-transform: none;
 }
 
 <% _.each(glyphs, function(glyph) { %>
 .<%= cssPrefix %><%= glyph.name %>:before {
-	content: "\<%= glyph.codepoint %>";
+  content: "\<%= glyph.codepoint %>";
 }
 <% }); %>
