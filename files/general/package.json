@@ -1,6 +1,6 @@
 {
  "name": "{%= name %}",
-  "url": "{%= homepage %}",
+  "homepage": "{%= homepage %}",
   "description": "{%= description %}",
   "version": "{%= version %}",
   "author": "{%= author %}",
