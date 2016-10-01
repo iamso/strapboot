@@ -1,6 +1,6 @@
 {
   "name": "strapboot",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "An interactive, customizable project template",
   "main": "index.js",
   "bin": {
