@@ -3,19 +3,7 @@
  * adds fallback- and polyfill-scripts if necessary
  */
 
-;(function (factory) {
-  'use strict';
-
-  if (/^f/.test(typeof define) && define.amd) {
-    define([], factory);
-  }
-  else if (/^o/.test(typeof exports)) {
-    factory();
-  }
-  else {
-    factory();
-  }
-})(function () {
+;(function(window, document, undefined) {
   'use strict';
 
   var base = document.querySelector('#fallback-js').dataset.base;
@@ -26,4 +14,4 @@
   // check for Promise support
   !!window.Promise || document.write('<script src="' + (base || '') + '/assets/js/vendor/promise.min.js"><\/script>');
 
-});
+})(window, document);

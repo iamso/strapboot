@@ -47,19 +47,28 @@
         `${base}/files/scss/{.,}**/{.,}*`,
         `!${base}/files/**/.DS_Store`
       ]),
+      webpack: vfs.src([
+        `${base}/files/js/webpack/{.,}**/{.,}*`,
+        `!${base}/files/**/.DS_Store`
+      ]),
+      concat: vfs.src([
+        `${base}/files/js/concat/{.,}**/{.,}*`,
+        `!${base}/files/**/.DS_Store`
+      ]),
     };
 
     return new Promise((resolveAll) => {
       answers.year = (new Date()).getFullYear();
       answers.dependencies = fs.readFileSync(`${base}/files/${answers.taskrunner}/package.json`, 'utf-8');
       answers.styles = answers.styles || 'scss';
-      answers.scripts = answers.scripts || '';
+      answers.scripts = answers.scripts || 'concat';
 
       // console.log(answers);
 
       writeGeneral()
         .then(writeTaskrunner)
         .then(writeStyles)
+        .then(writeScripts)
         .then(writeInstructions);;
 
       function writeGeneral() {
@@ -93,6 +102,18 @@
             .pipe(sort())
             .pipe(map(process))
             .pipe(vfs.dest(`${dir}/assets/css/_src`))
+            .on('end', () => {
+              resolve();
+            });
+        });
+      }
+      function writeScripts() {
+        return new Promise((resolve) => {
+          console.log(colors.bold(`\nWriting javascript files:`));
+          files[answers.scripts]
+            .pipe(sort())
+            .pipe(map(process))
+            .pipe(vfs.dest(`${dir}/assets/js/_src`))
             .on('end', () => {
               resolve();
             });

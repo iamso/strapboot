@@ -3,21 +3,8 @@
  * main script, this is where all the action happens ;)
  */
 
-;(function (factory) {
+;(function($, window, document, undefined) {
   'use strict';
-
-  if (/^f/.test(typeof define) && define.amd) {
-    define(['ujs', 'fastclick', './components/cssevents.js'], factory);
-  }
-  else if (/^o/.test(typeof exports)) {
-    factory(require('ujs'), require('fastclick'), require('./components/cssevents.js'));
-  }
-  else {
-    factory(jQuery, FastClick);
-  }
-})(function ($, FastClick) {
-  'use strict';
-
 
   var el;
 
@@ -90,12 +77,5 @@
    */
   $(app.init.bind(app));
 
-  /**
-   * Require additional ujsscripts
-   */
-  if (!/^u/.test(typeof require)) {
-    require('./components/social.js');
-    require('./components/log.js');
-  }
 
-});
+})(jQuery, window, document);

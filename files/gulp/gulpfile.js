@@ -1,5 +1,6 @@
 const gulp            = require('gulp');
 const gutil           = require("gulp-util");
+const babel           = require('gulp-babel');
 {% if (scripts === 'webpack') { %}
 const webpack         = require('gulp-webpack');
 {% } else { %}
@@ -160,6 +161,9 @@ gulp.task('js', ['jshint'], () => {
       'assets/js/_src/components/social.js',
       'assets/js/_src/components/log.js',
     ])
+    .pipe(babel({
+      presets: ['es2015', 'stage-0'],
+    }))
     .pipe(concat('bundle.js'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
@@ -179,9 +183,14 @@ gulp.task('jshint', () => {
 
 gulp.task('fallback', () =>  {
   return gulp.src('assets/js/_src/fallback.js')
-    .pipe(uglify(uglifyConfig).on('error', onError))
+    .pipe(babel({
+      presets: ['es2015', 'stage-0'],
+    }))
     .pipe(banner(comment))
+    .pipe(gulp.dest(src.jsDest))
+    .pipe(uglify(uglifyConfig).on('error', onError))
     .pipe(rename('fallback.min.js'))
+    .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest));
 });
 
