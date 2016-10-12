@@ -133,9 +133,9 @@ gulp.task('css', () => {
     }))
     .pipe(rename('bundle.min.css'))
     .pipe(banner(comment))
-    .pipe(gulp.dest(src.scssDest))
+    .pipe(gulp.dest(src.cssDest))
     .pipe(reload({stream: true}))
-    .pipe(notify('scss done'));
+    .pipe(notify('css done'));
 });
 {% } %}{% if (scripts === 'webpack') { %}
 gulp.task('js', ['jshint'], () => {
