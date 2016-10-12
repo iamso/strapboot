@@ -69,7 +69,6 @@ const uglifyConfig    = {
 };
 
 const prefixConfig    = {
-  browsers: ['last 4 version', 'Android 4', 'iOS 7'],
   diff: true,
   map: false,
   remove: false,
