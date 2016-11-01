@@ -154,7 +154,7 @@ gulp.task('js', ['jshint'], () => {
 gulp.task('js', ['jshint'], () => {
   return gulp.src([
       'assets/js/_src/components/cssevents.js',
-      'bower_components/u.js/dist/u.js',
+      'bower_components/ujs/dist/u.js',
       'bower_components/fastclick/lib/fastclick.js',
       'assets/js/_src/main.js',
       'assets/js/_src/components/social.js',

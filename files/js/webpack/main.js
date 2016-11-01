@@ -1,7 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
-import u from 'u.js';
+import u from 'ujs';
 import FastClick from 'fastclick';
 import http from 'httpromise';
 import './lib/cssevents';

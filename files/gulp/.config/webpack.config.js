@@ -16,7 +16,6 @@ module.exports = {
 
   resolve: {
     alias: {
-      ujs: `${__dirname}/bower_components/u.js/dist/u.min.js`,
     },
   },
 
