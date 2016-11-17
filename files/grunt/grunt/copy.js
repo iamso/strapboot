@@ -1,13 +1,16 @@
 module.exports = {
-  jquery: {
+  vendor: {
     files: [
       {
         expand: true,
-        cwd: 'bower_components/jquery/dist',
-        src: ['**/jquery*'],
-        dest: 'assets/js/vendor'
-      }
-    ],
+        src: [
+          'bower_components/jquery/dist/jquery*',
+          'bower_components/promise-polyfill/promise.*',
+        ],
+        dest: 'assets/js/vendor',
+        filter: 'isFile',
+        flatten: true,
+      },
+    ]
   }
-
 };
