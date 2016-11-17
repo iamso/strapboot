@@ -3,7 +3,7 @@
 import $ from 'jquery';
 import u from 'ujs';
 import FastClick from 'fastclick';
-import http from 'httpromise';
+import http from 'httprom';
 import './lib/cssevents';
 import App from './modules/app';
 import log from './modules/log';
