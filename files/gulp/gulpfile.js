@@ -2,7 +2,7 @@ const gulp            = require('gulp');
 const gutil           = require("gulp-util");
 const babel           = require('gulp-babel');
 {% if (scripts === 'webpack') { %}
-const webpack         = require('gulp-webpack');
+const webpack         = require('webpack-stream');
 {% } else { %}
 const concat          = require('gulp-concat');
 {% } %}{% if (styles === 'css') { %}
