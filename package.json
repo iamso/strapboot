@@ -1,6 +1,6 @@
 {
   "name": "strapboot",
-  "version": "0.5.7",
+  "version": "0.6.0",
   "description": "An interactive, customizable project template",
   "main": "index.js",
   "bin": {
@@ -19,7 +19,7 @@
     "vinyl-fs": "^2.4.3"
   },
   "devDependencies": {
-    
+
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
