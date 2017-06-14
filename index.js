@@ -124,7 +124,7 @@
       function writeInstructions(cb) {
         console.log(`
 ${colors.bold('Instructions:')}
-You should now install project dependencies with ${colors.underline('npm install')}.
+You should now install project dependencies with ${colors.underline(`${answers.packagemanager} install`)}.
 After that, you may execute project tasks with ${colors.underline(answers.taskrunner)}.
 
 ${colors.green('Done.')}`);
@@ -172,4 +172,3 @@ ${colors.green('Done.')}`);
   };
 
 })(module);
-
