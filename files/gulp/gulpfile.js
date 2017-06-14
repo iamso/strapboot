@@ -12,6 +12,11 @@ const postcssMixins   = require('postcss-mixins');
 const postcssCssnext  = require('postcss-cssnext');
 const postcssComments = require('postcss-discard-comments');
 const postcssScss     = require('postcss-scss');
+const postcssNested   = require('postcss-nested');
+const postcssEach     = require('postcss-each');
+const postcssFor      = require('postcss-for');
+const postcssCond     = require('postcss-conditionals');
+const postcssSimple   = require('postcss-simple-vars');
 const postcssReporter = require('postcss-reporter');
 {% } else { %}
 const sass            = require('gulp-sass');
@@ -96,7 +101,12 @@ gulp.task('css', () => {
     .pipe(postcss([
       postcssImport,
       postcssMixins,
+      postcssFor,
+      postcssEach,
+      postcssSimple,
+      postcssCond,
       postcssCssnext(prefixConfig),
+      postcssNested,
       postcssComments({removeAll: true}),
       postcssReporter({ clearMessages: true }),
     ], {syntax: postcssScss}))
