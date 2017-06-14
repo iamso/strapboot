@@ -65,12 +65,14 @@ const src             = {
 
 const uglifyConfig    = {
   mangle: {
-    except: ['jQuery, u']
+    reserved: ['jQuery']
   },
   compress: {
     drop_console: true
   },
-  preserveComments: false,
+  output: {
+    comments: false,
+  }
 };
 
 const prefixConfig    = {
