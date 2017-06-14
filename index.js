@@ -59,9 +59,11 @@
 
     return new Promise((resolveAll) => {
       answers.year = (new Date()).getFullYear();
+      answers.taskrunner = answers.taskrunner || 'gulp';
+      answers.styles = answers.styles || 'css';
+      answers.scripts = answers.scripts || 'webpack';
+      answers.packagemanager = answers.packagemanager || 'yarn';
       answers.dependencies = fs.readFileSync(`${base}/files/${answers.taskrunner}/package.json`, 'utf-8');
-      answers.styles = answers.styles || 'scss';
-      answers.scripts = answers.scripts || 'concat';
 
       // console.log(answers);
 
