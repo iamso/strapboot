@@ -120,7 +120,15 @@
         "concat",
       ]
     },
-
+    {
+      type: "list",
+      name: "packagemanager",
+      message: "package manager:",
+      choices: [
+        "yarn",
+        "npm",
+      ]
+    },
   ];
 
   if (globule.find(`${dir}/{.,}*`, `!${dir}/**/.DS_Store`).length) {
