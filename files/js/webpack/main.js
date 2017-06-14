@@ -8,6 +8,7 @@ import './lib/cssevents';
 import App from './modules/app';
 import log from './modules/log';
 import social from './modules/social';
+import Element from './components/element';
 
 const app = new App();
 
@@ -18,6 +19,7 @@ app.regInit(() => {
     docEl: $(document.documentElement),
     html: $('html'),
     body: $('body'),
+    main: $('#main'),
   };
   app.name = '{%= name %}';
   app.lang = app.$.html.attr('lang');
@@ -37,6 +39,12 @@ app.regInit(() => {
       .then((data) => {
         console.log(data);
       });
+});
+
+app.regInit(() => {
+  const el = new Element({type: 'h3'});
+  el.text = 'This is dynamically created Element';
+  el.attach(app.$.main[0]);
 });
 
 app.regInit(social);
