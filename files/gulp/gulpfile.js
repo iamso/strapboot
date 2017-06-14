@@ -290,7 +290,7 @@ gulp.task('public', () => {
     .pipe(gulp.dest('./public'));
 });
 
-gulp.task('iconfont', function(){
+gulp.task('iconfont', () => {
   gulp.src(src.iconsAll)
     .pipe(iconfont({
       fontName: 'icons',
@@ -300,7 +300,7 @@ gulp.task('iconfont', function(){
       centerHorizontally: true,
       fontHeight: 1000 // IMPORTANT
     }))
-    .on('glyphs', function(glyphs, options) {
+    .on('glyphs', (glyphs, options) => {
       glyphs = glyphs.map((glyph) => {
         glyph.codepoint = glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase();
         return glyph;
