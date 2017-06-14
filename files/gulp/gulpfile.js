@@ -26,7 +26,7 @@ const sourcemaps      = require('gulp-sourcemaps');
 const cssnano         = require('gulp-cssnano');
 const rename          = require('gulp-rename');
 const uglify          = require('gulp-uglify');
-const jshint          = require('gulp-jshint');
+const eslint          = require('gulp-eslint');
 const banner          = require('gulp-banner');
 const manifest        = require('gulp-manifest');
 const modernizr       = require('gulp-modernizr');
@@ -81,7 +81,7 @@ const prefixConfig    = {
   remove: false,
 };
 
-const jshintConfig    = require('./.config/jshint.config');
+const eslintConfig    = require('./.config/eslint.config');
 {% if (scripts === 'webpack') { %}const webpackConfig   = require('./.config/webpack.config');{% } %}
 
 gulp.task('watch', () => {
@@ -149,7 +149,7 @@ gulp.task('css', () => {
     .pipe(notify('css done'));
 });
 {% } %}{% if (scripts === 'webpack') { %}
-gulp.task('js', ['jshint'], () => {
+gulp.task('js', ['eslint'], () => {
   return gulp.src(src.jsMain)
     .pipe(webpack(webpackConfig))
     .pipe(rename('bundle.js'))
@@ -163,7 +163,7 @@ gulp.task('js', ['jshint'], () => {
     .pipe(notify('js done'));
 });
 {% } else { %}
-gulp.task('js', ['jshint'], () => {
+gulp.task('js', ['eslint'], () => {
   return gulp.src([
       'assets/js/_src/components/cssevents.js',
       'bower_components/ujs/dist/u.js',
@@ -187,10 +187,10 @@ gulp.task('js', ['jshint'], () => {
     .pipe(notify('js done'));
 });
 {% } %}
-gulp.task('jshint', () => {
+gulp.task('eslint', () => {
   return gulp.src(src.jsAll)
-    .pipe(jshint(jshintConfig))
-    .pipe(jshint.reporter('jshint-stylish'));
+    .pipe(eslint(eslintConfig))
+    .pipe(eslint.format());
 });
 
 gulp.task('fallback', () =>  {
