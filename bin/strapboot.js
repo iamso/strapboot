@@ -93,7 +93,7 @@
       message: "taskrunner:",
       choices: [
         "gulp",
-        "grunt"
+        "grunt",
       ]
     },
     {
@@ -105,7 +105,7 @@
       message: "styles:",
       choices: [
         "css",
-        "scss"
+        "scss",
       ]
     },
     {
@@ -117,7 +117,7 @@
       message: "scripts:",
       choices: [
         "webpack",
-        "concat"
+        "concat",
       ]
     },
 
@@ -132,7 +132,7 @@
 
   inquirer.prompt(questions).then((answers) => {
     strapboot(answers, dir).then(() => {
-      console.log('strapboot is done');
+      // console.log('strapboot is done');
     });
 
   });
