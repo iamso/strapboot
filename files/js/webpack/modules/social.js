@@ -1,5 +1,7 @@
 'use strict';
 
+/* eslint-disable */
+
 export default function social() {
   // Google+
   //
