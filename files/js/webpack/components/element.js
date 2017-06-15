@@ -1,18 +1,22 @@
 export default class Element {
-  constructor({type = 'div', id = '', classes = []} = {}) {
-    this.el = document.createElement(type);
+  constructor(type = 'div', {id = '', classes = []} = {}) {
+    this.el = type instanceof Node ? type : document.createElement(type);
+    this.init(id, classes);
+  }
+  init(id, classes = []) {
+    this.classList = this.el.classList;
     if (id) {
       this.el.id = id;
     }
     for (let c of classes) {
-      this.el.classList.add(c);
+      this.classList.add(c);
     }
   }
   bind(app) {
     this.app = app;
   }
   attach(parent = document.body) {
-    parent = parent.nodeType === 1 ? parent : parent.element;
+    parent = parent instanceof Element ? parent.element : parent;
     if (!parent.contains(this.el)) {
       parent.appendChild(this.el);
     }

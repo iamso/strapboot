@@ -2,7 +2,7 @@ import Element from './element';
 
 export default class Select extends Element {
   constructor({id = '', classes = []} = {}) {
-    super({type: 'select', id, classes});
+    super('select', {id, classes});
   }
   focus() {
     this.el.focus();
@@ -44,7 +44,7 @@ export default class Select extends Element {
 
 export class Option extends Element {
   constructor({id = '', classes = []} = {}) {
-    super({type: 'option', id, classes});
+    super('option', {id, classes});
   }
   get value() {
     return this.el.value;

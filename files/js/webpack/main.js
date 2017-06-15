@@ -42,7 +42,7 @@ app.regInit(() => {
 });
 
 app.regInit(() => {
-  const el = new Element({type: 'h3'});
+  const el = new Element('h3');
   el.text = 'This is dynamically created Element';
   el.attach(app.$.main[0]);
 });

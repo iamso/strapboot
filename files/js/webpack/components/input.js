@@ -1,8 +1,8 @@
 import Element from './element';
 
 export default class Input extends Element {
-  constructor({type = 'input', id = '', classes = []} = {}) {
-    super({type, id, classes});
+  constructor(type = 'input', {id = '', classes = []} = {}) {
+    super(type, {id, classes});
   }
   focus() {
     this.el.focus();
