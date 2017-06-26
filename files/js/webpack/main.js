@@ -7,6 +7,7 @@ import log from './modules/log';
 import social from './modules/social';
 import Element from './components/element';
 
+import * as utils from './modules/utils';
 
 app.regInit(() => {
   // httpromise example
