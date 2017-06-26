@@ -1,34 +1,37 @@
-'use strict';
+import $ from 'jquery';
+import FastClick from 'fastclick';
+import App from '../lib/app';
 
-export default class App {
-  constructor() {
-    this.isMobile = false;
-    this.isTouch = Modernizr.touchevents;
-    this.isIos = /(iPad|iPhone|iPod)/g.test( navigator.userAgent );
-    this.isAndroid = /(Android)/gi.test( navigator.userAgent );
-    this.cssAnimations = Modernizr.cssanimations;
-    this.cssTransitions = Modernizr.csstransitions;
-    this._initFn = [];
-  }
+const app = new App();
 
-  // register init function
-  regInit(fn) {
-    return this._initFn.push(fn) - 1;
-  }
+app.config = JSON.parse($('#main-js').html());
 
-  // unregister init function
-  unregInit(i) {
-    /^f/.test(typeof i) ?
-      (i = this._initFn.indexOf(i)) > -1 ?
-        this._initFn.splice(i, 1) :
-        void(0) :
-          this._initFn.splice(i, 1);
-  }
+app.regInit(() => {
+  app.$ = {
+    win: $(window),
+    doc: $(document),
+    docEl: $(document.documentElement),
+    html: $('html'),
+    body: $('body'),
+    htmlBody: $('html, body'),
+    header: $('#header'),
+    main: $('#main'),
+    footer: $('#footer'),
+  };
+  app.name = '{%= name %}';
+  app.lang = app.$.html.attr('lang');
 
-  // run registered init functions
-  init() {
-    for (let fn of this._initFn) {
-      fn();
-    }
-  }
-}
+  // attach fastclick listener
+  FastClick.attach(document.body);
+
+  // add os specific classes
+  app.isAndroid && app.$.html.addClass('is-android');
+  app.isIos && app.$.html.addClass('is-ios');
+  app.isIphone && app.$.html.addClass('is-iphone');
+  app.isIpad && app.$.html.addClass('is-ipad');
+  app.isSafari && app.$.html.addClass('is-safari');
+  app.isIE && app.$.html.addClass('is-ie');
+  app.isEdge && app.$.html.addClass('is-edge');
+});
+
+export default app;
