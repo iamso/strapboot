@@ -1,5 +1,3 @@
-'use strict';
-
 import $ from 'jquery';
 import u from 'ujs';
 import http from 'httprom';
