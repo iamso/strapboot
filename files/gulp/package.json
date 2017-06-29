@@ -24,7 +24,7 @@
     "gulp-manifest": "^0.1.1",
     "gulp-modernizr": "^1.0.0-alpha",
     "gulp-notify": "^3.0.0",
-    "gulp-postcss": "^7.0.0",
+    "gulp-postcss": "^6.4.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.0",
@@ -39,11 +39,10 @@
     "postcss-each": "^0.10.0",
     "postcss-flexboxgrid": "^0.1.1",
     "postcss-for": "^2.1.1",
-    "postcss-import": "^10.0.0",
-    "postcss-mixins": "^6.0.0",
-    "postcss-nested": "^2.0.2",
+    "postcss-import": "^9.1.0",
+    "postcss-mixins": "^6.0.1",
+    "postcss-nested": "^1.0.1",
     "postcss-reporter": "^4.0.0",
-    "postcss-scss": "^1.0.1",
     "postcss-simple-vars": "^4.0.0",
     "webpack-stream": "^3.2.0"
   }

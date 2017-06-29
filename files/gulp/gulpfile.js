@@ -11,7 +11,6 @@ const postcssImport   = require('postcss-import');
 const postcssMixins   = require('postcss-mixins');
 const postcssCssnext  = require('postcss-cssnext');
 const postcssComments = require('postcss-discard-comments');
-const postcssScss     = require('postcss-scss');
 const postcssNested   = require('postcss-nested');
 const postcssEach     = require('postcss-each');
 const postcssFor      = require('postcss-for');
@@ -111,7 +110,7 @@ gulp.task('css', () => {
       postcssNested,
       postcssComments({removeAll: true}),
       postcssReporter({ clearMessages: true }),
-    ], {syntax: postcssScss}))
+    ]))
     // .pipe(sourcemaps.write())
     .pipe(rename('bundle.css'))
     .pipe(banner(comment))
