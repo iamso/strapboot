@@ -13,6 +13,7 @@ const postcssCssnext  = require('postcss-cssnext');
 const postcssComments = require('postcss-discard-comments');
 const postcssNested   = require('postcss-nested');
 const postcssEach     = require('postcss-each');
+const postcssGradients= require('postcss-easing-gradients');
 const postcssFor      = require('postcss-for');
 const postcssCond     = require('postcss-conditionals');
 const postcssSimple   = require('postcss-simple-vars');
@@ -106,6 +107,7 @@ gulp.task('css', () => {
       postcssEach,
       postcssSimple,
       postcssCond,
+      postcssGradients,
       postcssCssnext(prefixConfig),
       postcssNested,
       postcssComments({removeAll: true}),
