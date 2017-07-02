@@ -118,7 +118,8 @@ gulp.task('css', () => {
     .pipe(cssnano({
       discardComments: {
         removeAll: true
-      }
+      },
+      zindex:  false,
     }))
     .pipe(rename('bundle.min.css'))
     .pipe(banner(comment))
@@ -139,7 +140,8 @@ gulp.task('css', () => {
     .pipe(cssnano({
       discardComments: {
         removeAll: true
-      }
+      },
+      zindex:  false,
     }))
     .pipe(rename('bundle.min.css'))
     .pipe(banner(comment))
