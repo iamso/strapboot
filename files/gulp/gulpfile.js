@@ -154,11 +154,11 @@ gulp.task('css', () => {
 {% } %}{% if (scripts === 'webpack') { %}
 gulp.task('js', ['eslint'], () => {
   return gulp.src(src.jsMain)
-    .pipe(webpack(webpackConfig))
+    .pipe(webpack(webpackConfig)).on('error', onError)
     .pipe(rename('bundle.js'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
-    .pipe(uglify(uglifyConfig).on('error', onError))
+    .pipe(uglify(uglifyConfig)).on('error', onError)
     .pipe(rename('bundle.min.js'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
@@ -179,10 +179,10 @@ gulp.task('js', ['eslint'], () => {
     .pipe(babel({
       presets: ['es2015', 'stage-0'],
     }))
-    .pipe(concat('bundle.js'))
+    .pipe(concat('bundle.js')).on('error', onError)
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
-    .pipe(uglify(uglifyConfig).on('error', onError))
+    .pipe(uglify(uglifyConfig)).on('error', onError)
     .pipe(rename('bundle.min.js'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
@@ -331,6 +331,6 @@ gulp.task('dist', ['iconfont', 'css', 'js', 'fallback', 'vendor', 'modernizr', '
 
 // generic error handler
 function onError(err) {
-  // console.log(err.toString());
+  gutil.log(err.message);
   this.emit('end');
 }
