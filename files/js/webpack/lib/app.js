@@ -16,10 +16,10 @@ export default class App {
     this.isOpera = navigator.userAgent.toLowerCase().indexOf("op") > -1;
 
     if ((this.isChrome) && (this.isSafari)) {
-      this.isSafari=false;
+      this.isSafari = false;
     }
     if ((this.isChrome) && (this.isOpera)) {
-      this.isChrome=false;
+      this.isChrome = false;
     }
 
     this.cssAnimations = Modernizr.cssanimations;

@@ -1,5 +1,3 @@
-'use strict';
-
 const base = document.querySelector('#fallback-js').dataset.base;
 
 // check for jQuery presence
