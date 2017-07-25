@@ -50,7 +50,7 @@ export function getBreakpoint() {
   return Object.keys(breakpoints).filter(breakpoint => {
     return (wWidth >= breakpoints[breakpoint] * fontSize);
   }).reverse()[0] || 'xs';
-};
+}
 
 // check if the breakpoint matches
 export function breakpointMatch(breakpoint, type = 'min') {
@@ -70,4 +70,11 @@ export function breakpointMatch(breakpoint, type = 'min') {
     type = 'min';
   }
   return window.matchMedia(`(${type}-width: ${size}em)`).matches;
-};
+}
+
+// sleep function using promise
+export function sleep(time = 1000) {
+  return new Promise(resolve => {
+    setTimeout(resolve, time);
+  });
+}
