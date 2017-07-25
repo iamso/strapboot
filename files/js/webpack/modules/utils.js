@@ -1,3 +1,24 @@
+// compare two (object-) arrays
+export function compareArrays(arr1 = [], arr2 = [], props = []) {
+  return arr1.length === arr2.length && arr1.every((item, i) => {
+      let same = true;
+
+      if (props && Array.isArray(props) && props.length) {
+        for (let prop of props) {
+          if (arr1[i][prop] !== arr2[i][prop]) {
+            same = false;
+            break;
+          }
+        }
+      }
+      else {
+        same = arr1[i] === arr2[i];
+      }
+      return same;
+    });
+}
+
+// get the response url in ajax requests
 export function getResponseURL(xhr = {}) {
   try {
     if ('responseURL' in xhr) {
