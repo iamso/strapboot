@@ -40,6 +40,7 @@ export const breakpoints = {
   lg:  75,
   xl:  90,
   xxl: 120,
+  xxxl: 140,
 };
 
 // get the current breakpoint
