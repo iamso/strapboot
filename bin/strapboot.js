@@ -94,11 +94,12 @@
       choices: [
         "gulp",
         "grunt",
+        // "webpack",
       ]
     },
     {
       when: (response) => {
-        return response.taskrunner === 'gulp';
+        return response.taskrunner === 'gulp' || response.taskrunner === 'webpack';
       },
       type: 'list',
       name: 'styles',
