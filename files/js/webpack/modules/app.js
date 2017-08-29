@@ -4,8 +4,6 @@ import App from '../lib/app';
 
 const app = new App();
 
-app.config = JSON.parse($('#main-js').html());
-
 app.regInit(() => {
   app.$ = {
     win: $(window),
