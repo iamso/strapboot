@@ -45,7 +45,7 @@ module.exports = {
         // Options to configure babel with
         query: {
           plugins: ['transform-runtime'],
-          presets: ['es2015', 'stage-0'],
+          presets: ['es2015', 'es2017', 'stage-0'],
         }
       }
     ]
