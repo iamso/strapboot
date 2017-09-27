@@ -39,6 +39,7 @@
     "u.route.js": "0.*",
     "u.strength.js": "0.*",
     "u.tmpl.js": "0.*",
-    "u.vibrate.js": "0.*"
+    "u.vibrate.js": "0.*",
+    "objectFitPolyfill": "^2.0.5"
   }
 }
