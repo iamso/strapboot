@@ -1,5 +1,4 @@
 let webpack = require('webpack');
-let BowerWebpackPlugin = require('bower-webpack-plugin');
 let path = require('path');
 
 module.exports = {
@@ -10,23 +9,24 @@ module.exports = {
   },
 
   externals: {
-    "jquery": "jQuery",
-    // "ujs": "ujs",
+    'jquery': 'jQuery',
   },
 
   resolve: {
     alias: {
     },
+    modules: ['bower_components', 'node_modules'],
+    descriptionFiles: ['bower.json', 'package.json'],
+    mainFields: ['browser', 'main'],
   },
 
   plugins: [
-    new BowerWebpackPlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery"
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery'
     }),
   ],
 
@@ -39,6 +39,7 @@ module.exports = {
         test: /\.jsx?$/,
 
         exclude: [
+          /bower_components/,
           /node_modules/,
         ],
 
