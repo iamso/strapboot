@@ -152,7 +152,7 @@ gulp.task('css', () => {
     .pipe(notify('css done'));
 });
 {% } %}{% if (scripts === 'webpack') { %}
-gulp.task('js', ['eslint'], () => {
+gulp.task('js', ['eslint', 'fallback'], () => {
   return gulp.src(src.jsMain)
     .pipe(webpack(webpackConfig)).on('error', onError)
     .pipe(rename('bundle.js'))
