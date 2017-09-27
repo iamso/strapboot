@@ -9,13 +9,16 @@ import Element from './components/element';
 
 import * as utils from './modules/utils';
 
-app.regInit(() => {
+// use a getter for isMobile
+delete app.isMobile;
+Object.defineProperty(app, 'isMobile', {
+  get: () => utils.breakpointMatch('xs', 'max')
+});
+
+app.regInit(async () => {
   // httpromise example
-  http('https://req.dev.so')
-    .get()
-      .then((data) => {
-        console.log(data);
-      });
+  const data = await http('https://req.dev.so').get();
+  console.log(data);
 });
 
 app.regInit(() => {
@@ -27,13 +30,11 @@ app.regInit(() => {
 app.regInit(social);
 app.regInit(log);
 
-$(() => {
-  app.init().then(() => {
-    app.initialized = true;
-    app.pageInit().then(() => {
-      // do something
-    });
-  });
+$(async () => {
+  await app.init();
+  app.initialized = true;
+  await app.pageInit();
+  // do something
 });
 
 window.app = app; // remove for prod
