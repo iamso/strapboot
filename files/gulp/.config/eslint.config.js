@@ -24,6 +24,7 @@ module.exports = exports = {
     "max-len": WARN,
   },
   "parserOptions": {
+    "ecmaVersion": 8,
     "sourceType": "module"
   }
 };
