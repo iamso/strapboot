@@ -7,6 +7,7 @@ const webpack         = require('webpack-stream');
 const concat          = require('gulp-concat');
 {% } %}{% if (styles === 'css') { %}
 const postcss         = require('gulp-postcss');
+const postcssApply    = require('postcss-apply');
 const postcssImport   = require('postcss-import');
 const postcssMixins   = require('postcss-mixins');
 const postcssCssnext  = require('postcss-cssnext');
@@ -108,6 +109,7 @@ gulp.task('css', () => {
       postcssSimple,
       postcssCond,
       postcssGradient,
+      postcssApply,
       postcssCssnext(prefixConfig),
       postcssNested,
       postcssComments({removeAll: true}),
