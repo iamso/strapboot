@@ -1,12 +1,13 @@
 export default class App {
   constructor() {
     this.isMobile = false;
-    this.isTouch = Modernizr.touchevents;
+    this.isTouch = (('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch) || (navigator.msMaxTouchPoints > 0));
 
-    this.isIos = /(iPad|iPhone|iPod)/g.test( navigator.userAgent );
-    this.isIphone = /(iPhone|iPod)/g.test( navigator.userAgent );
-    this.isIpad = /(iPad)/g.test( navigator.userAgent );
-    this.isAndroid = /(Android)/gi.test( navigator.userAgent );
+    this.isIos = /iP(hone|od|ad)/g.test(navigator.platform);
+    this.isIos9 = /iP(hone|od|ad)/g.test(navigator.platform) && +(navigator.appVersion).match(/OS (\d+)?/)[1] <= 9;
+    this.isIphone = /iP(hone|od)/g.test(navigator.platform);
+    this.isIpad = /(iPad)/g.test(navigator.platform);
+    this.isAndroid = /(Android)/gi.test(navigator.userAgent);
 
     this.isIE = /Trident\/|MSIE /.test(navigator.userAgent);
     this.isEdge = /Edge\//.test(navigator.userAgent);
@@ -22,8 +23,6 @@ export default class App {
       this.isChrome = false;
     }
 
-    this.cssAnimations = Modernizr.cssanimations;
-    this.cssTransitions = Modernizr.csstransitions;
     this.cssTransformSVG = (() => {
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       svg.setAttribute('viewBox', '0 0 2 2');
