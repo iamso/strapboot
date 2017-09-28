@@ -26,7 +26,6 @@ const autoprefixer    = require('gulp-autoprefixer');
 const sourcemaps      = require('gulp-sourcemaps');
 const cssnano         = require('gulp-cssnano');
 const rename          = require('gulp-rename');
-const uglify          = require('gulp-uglify');
 const eslint          = require('gulp-eslint');
 const banner          = require('gulp-banner');
 const manifest        = require('gulp-manifest');
@@ -64,17 +63,18 @@ const src             = {
   iconsDest:    'assets/fonts',
 };
 
-const uglifyConfig    = {
-  mangle: {
-    reserved: ['jQuery']
-  },
-  compress: {
-    drop_console: true
-  },
-  output: {
-    comments: false,
+const babelMinify = [
+  'minify',
+  {
+    mangle: {
+      exclude: ['jQuery', '$']
+    },
+    deadcode: true,
+    removeConsole: true,
+    removeDebugger: true,
+    removeUndefined: true,
   }
-};
+];
 
 const prefixConfig    = {
   diff: true,
@@ -160,7 +160,9 @@ gulp.task('js', ['eslint', 'fallback'], () => {
     .pipe(rename('bundle.js'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
-    .pipe(uglify(uglifyConfig)).on('error', onError)
+    .pipe(babel({
+      presets: [babelMinify]
+    }))
     .pipe(rename('bundle.min.js'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
@@ -184,7 +186,9 @@ gulp.task('js', ['eslint'], () => {
     .pipe(concat('bundle.js')).on('error', onError)
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
-    .pipe(uglify(uglifyConfig)).on('error', onError)
+    .pipe(babel({
+      presets: [babelMinify]
+    }))
     .pipe(rename('bundle.min.js'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
@@ -205,7 +209,9 @@ gulp.task('fallback', () =>  {
     }))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
-    .pipe(uglify(uglifyConfig).on('error', onError))
+    .pipe(babel({
+      presets: [babelMinify]
+    }))
     .pipe(rename('fallback.min.js'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest));
@@ -247,7 +253,9 @@ gulp.task('modernizr', () => {
       "uglify" : true,
       "matchCommunityTests" : true,
     }))
-    .pipe(uglify(uglifyConfig).on('error', onError))
+    .pipe(babel({
+      presets: [babelMinify]
+    }))
     .pipe(gulp.dest(`${src.jsDest}/vendor`));
 });
 
