@@ -1,5 +1,16 @@
-let webpack = require('webpack');
-let path = require('path');
+const webpack = require('webpack');
+const path = require('path');
+const pkg = require('../package.json');
+
+let include = [
+  /assets/,
+  /bower_components/,
+];
+if (pkg.dependencies) {
+  for (let dependency of Object.keys(pkg.dependencies)) {
+    include.push(new RegExp(`node_modules/${dependency.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}/.*`, 'gi'));
+  }
+}
 
 module.exports = {
   name: 'js',
@@ -38,10 +49,7 @@ module.exports = {
         // Only run `.js` and `.jsx` files through Babel
         test: /\.jsx?$/,
 
-        exclude: [
-          /bower_components/,
-          /node_modules/,
-        ],
+        include,
 
         // Options to configure babel with
         query: {
@@ -56,5 +64,4 @@ module.exports = {
       }
     ]
   }
-
 };
