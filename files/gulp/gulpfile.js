@@ -219,9 +219,9 @@ gulp.task('fallback', () =>  {
 
 gulp.task('vendor', () => {
   return gulp.src([
-      'bower_components/jquery/dist/jquery*',
-      'bower_components/promise-polyfill/promise.*',
-      'bower_components/objectFitPolyfill/dist/*',
+      'node_modules/jquery/dist/jquery*',
+      'node_modules/promise-polyfill/promise.*',
+      'node_modules/objectFitPolyfill/dist/*',
     ])
     .pipe(gulp.dest('assets/js/vendor'));
 });

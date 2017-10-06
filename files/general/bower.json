@@ -16,30 +16,14 @@
   ],
   "dependencies": {
     "autocreate.js": "0.*",
-    "fastclick": "1.*",
-    "httprom": "0.*",
-    "routrrr": "0.*",
-    "cacherrr": "0.*",
-    "codein": "0.*",
-    "cssevents": "0.*",
-    "faul": "0.*",
-    "flugrid": "0.*",
-    "izitin": "0.*",
-    "jquery": "3.*",
-    "promise-polyfill": "*",
     "Tetragon.js": "0.*",
-    "tiny-msg-client": "0.*",
     "tooltips.scss": "0.*",
     "u.circularrr.js": "0.*",
     "u.formlabel.js": "0.*",
-    "u.insight.js": "0.*",
-    "ujs": "0.*",
     "u.log.js": "0.*",
     "u.optiscroll.js": "0.*",
-    "u.route.js": "0.*",
     "u.strength.js": "0.*",
     "u.tmpl.js": "0.*",
-    "u.vibrate.js": "0.*",
-    "objectFitPolyfill": "^2.0.5"
+    "u.vibrate.js": "0.*"
   }
 }
