@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import FastClick from 'fastclick';
+import 'fastclick';
 import App from '../lib/app';
 
 const app = new App();

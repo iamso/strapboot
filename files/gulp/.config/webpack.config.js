@@ -24,9 +24,9 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery'
+      // $: 'jquery',
+      // jQuery: 'jquery',
+      // 'window.jQuery': 'jquery'
     }),
   ],
 
@@ -46,7 +46,12 @@ module.exports = {
         // Options to configure babel with
         query: {
           plugins: ['transform-runtime'],
-          presets: ['es2015', 'es2017', 'stage-0'],
+          presets: [
+            ['env', {
+              loose: true,
+              modules: false
+            }]
+          ],
         }
       }
     ]

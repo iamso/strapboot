@@ -181,7 +181,7 @@ gulp.task('js', ['eslint'], () => {
       'assets/js/_src/components/log.js',
     ])
     .pipe(babel({
-      presets: ['es2015', 'es2017', 'stage-0'],
+      presets: ['env'],
     }))
     .pipe(concat('bundle.js')).on('error', onError)
     .pipe(banner(comment))
@@ -205,7 +205,7 @@ gulp.task('eslint', () => {
 gulp.task('fallback', () =>  {
   return gulp.src('assets/js/_src/fallback.js')
     .pipe(babel({
-      presets: ['es2015', 'es2017', 'stage-0'],
+      presets: ['env'],
     }))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
