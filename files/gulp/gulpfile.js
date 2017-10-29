@@ -88,7 +88,7 @@ const eslintConfig    = require('./.config/eslint.config');
 {% if (scripts === 'webpack') { %}const webpackConfig   = require('./.config/webpack.config');{% } %}
 
 gulp.task('watch', () => {
-  browserSync.init({
+  browserSync.init(['**/*.html', '**/*.php'], {
     proxy: '{%= local %}',
     port: 3000,
     open: true,
