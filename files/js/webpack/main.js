@@ -27,9 +27,6 @@ app.regInit(() => {
   el.attach(app.$.main[0]);
 });
 
-app.regInit(social);
-app.regInit(log);
-
 $(async () => {
   await app.init();
   app.initialized = true;
