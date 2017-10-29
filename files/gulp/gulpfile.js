@@ -18,6 +18,7 @@ const postcssGradient = require('postcss-easing-gradients');
 const postcssFor      = require('postcss-for');
 const postcssCond     = require('postcss-conditionals');
 const postcssSimple   = require('postcss-simple-vars');
+const postcssProps    = require('postcss-custom-properties');
 const postcssReporter = require('postcss-reporter');
 {% } else { %}
 const sass            = require('gulp-sass');
@@ -104,6 +105,7 @@ gulp.task('css', () => {
     .pipe(postcss([
       postcssImport,
       postcssMixins,
+      postcssProps,
       postcssFor,
       postcssEach,
       postcssSimple,

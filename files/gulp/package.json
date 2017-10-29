@@ -33,6 +33,7 @@
     "postcss-comment": "^1.0.3",
     "postcss-conditionals": "^2.1.0",
     "postcss-cssnext": "^3.0.2",
+    "postcss-custom-properties": "^6.2.0",
     "postcss-discard-comments": "^2.0.4",
     "postcss-each": "^0.10.0",
     "postcss-easing-gradients": "^1.2.3",
