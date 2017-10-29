@@ -3,8 +3,8 @@ import u from 'ujs';
 import http from 'httprom';
 import 'cssevents';
 import app from './modules/app';
-import log from './modules/log';
-import social from './modules/social';
+import './modules/log';
+import './modules/social';
 import Element from './components/element';
 
 import * as utils from './modules/utils';

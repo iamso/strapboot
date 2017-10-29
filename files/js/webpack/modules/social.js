@@ -1,6 +1,8 @@
 /* eslint-disable */
 
-export default function social() {
+import app from './app';
+
+app.regInit(() => {
   // Google+
   //
   window.___gcfg = {lang: app.lang};
@@ -24,4 +26,4 @@ export default function social() {
   // Twitter
   //
   (function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}})(document, 'script', 'twitter-wjs');
-}
+});
