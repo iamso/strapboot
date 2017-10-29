@@ -36,6 +36,7 @@ const htmlmin         = require('gulp-htmlmin');
 const notify          = require('gulp-notify');
 const iconfont        = require('gulp-iconfont');
 const consolidate     = require('gulp-consolidate');
+const replace         = require('gulp-replace');
 
 const pkg             = require('./package.json');
 
@@ -162,6 +163,7 @@ gulp.task('js', ['eslint', 'fallback'], () => {
     .pipe(rename('bundle.js'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
+    .pipe(replace(/window\.app\s\=.*/, ''))
     .pipe(babel({
       presets: [babelMinify]
     }))
@@ -188,6 +190,7 @@ gulp.task('js', ['eslint'], () => {
     .pipe(concat('bundle.js')).on('error', onError)
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
+    .pipe(replace(/window\.app\s\=.*/, ''))
     .pipe(babel({
       presets: [babelMinify]
     }))
