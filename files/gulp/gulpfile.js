@@ -100,7 +100,7 @@ gulp.task('watch', () => {
   gulp.watch(src.iconsAll, ['iconfont']);
 });
 {% if (styles === 'css') { %}
-gulp.task('css', () => {
+gulp.task('css', (done) => {
   return gulp.src(src.cssMain)
     // .pipe(sourcemaps.init())
     .pipe(postcss([
@@ -118,6 +118,7 @@ gulp.task('css', () => {
       postcssComments({removeAll: true}),
       postcssReporter({ clearMessages: true }),
     ]))
+    .on('error', done)
     // .pipe(sourcemaps.write())
     .pipe(rename('bundle.css'))
     .pipe(banner(comment))
