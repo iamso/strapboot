@@ -321,6 +321,7 @@ gulp.task('iconfont', () => {
       });
       gulp.src(src.iconsCss)
         .pipe(consolidate('lodash', Object.assign({}, options, {
+          timeStamp: Math.round(+new Date()/1000),
           glyphs: glyphs,
           cssPrefix: 'icon-',
           fontPath: '../fonts/',
