@@ -175,7 +175,7 @@ gulp.task('js', ['eslint', 'fallback'], () => {
     .pipe(notify('js done'));
 });
 {% } else { %}
-gulp.task('js', ['eslint'], () => {
+gulp.task('js', ['eslint', 'fallback'], () => {
   return gulp.src([
       'assets/js/_src/components/cssevents.js',
       'bower_components/ujs/dist/u.js',
