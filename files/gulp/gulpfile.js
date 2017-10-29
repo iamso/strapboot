@@ -227,6 +227,7 @@ gulp.task('vendor', () => {
       'node_modules/jquery/dist/jquery*',
       'node_modules/promise-polyfill/promise.*',
       'node_modules/objectFitPolyfill/dist/*',
+      'node_modules/intersection-observer/intersection-observer.js',
     ])
     .pipe(gulp.dest('assets/js/vendor'));
 });

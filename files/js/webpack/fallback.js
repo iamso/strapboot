@@ -15,6 +15,9 @@ html.classList.add('js');
 // check for object-fit support
 !!('objectFit' in html.style) || (html.classList.add('no-objectfit'), document.write(`<script src="${src}/vendor/objectFitPolyfill.basic.min.js"><\/script>`));
 
+// check for IntersectionObserver support
+!!window.IntersectionObserver || document.write(`<script src="${src}/vendor/intersection-observer.js"><\/script>`);
+
 // check for location origin support (mostly IE)
 if (!window.location.origin) {
   window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
