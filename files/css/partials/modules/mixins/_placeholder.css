@@ -8,10 +8,17 @@
     color: $color;
     opacity: 1;
   }
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
   &:-ms-input-placeholder {
     color: $color;
   }
-  &::-webkit-input-placeholder {
+  &::-ms-input-placeholder {
     color: $color;
+  }
+  &::placeholder {
+    color: $color;
+    opacity: 1;
   }
 }
