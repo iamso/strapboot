@@ -1,7 +1,7 @@
 export default class App {
   constructor() {
     this.isMobile = false;
-    this.isTouch = (('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch) || (navigator.msMaxTouchPoints > 0));
+    this.isTouch = (('ontouchstart' in window) || (window.DocumentTouch && document instanceof window.DocumentTouch) || (navigator.msMaxTouchPoints > 0));
 
     this.isIos = /iP(hone|od|ad)/g.test(navigator.platform);
     this.isIos9 = /iP(hone|od|ad)/g.test(navigator.platform) && +(navigator.appVersion).match(/OS (\d+)?/)[1] <= 9;
@@ -13,8 +13,8 @@ export default class App {
     this.isEdge = /Edge\//.test(navigator.userAgent);
     this.isChrome = navigator.userAgent.indexOf('Chrome') > -1;
     this.isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
-    this.isSafari = navigator.userAgent.indexOf("Safari") > -1;
-    this.isOpera = navigator.userAgent.toLowerCase().indexOf("op") > -1;
+    this.isSafari = navigator.userAgent.indexOf('Safari') > -1;
+    this.isOpera = navigator.userAgent.toLowerCase().indexOf('op') > -1;
 
     if ((this.isChrome) && (this.isSafari)) {
       this.isSafari = false;
@@ -52,16 +52,14 @@ export default class App {
   // unregister init function
   unregInit(i) {
     /^f/.test(typeof i) ?
-      (i = this._initFn.indexOf(i)) > -1 ?
-        this._initFn.splice(i,1) :
-        void(0) :
-          this._initFn.splice(i,1);
+      (i = this._initFn.indexOf(i)) > -1 && this._initFn.splice(i, 1) :
+      this._initFn.splice(i, 1);
   }
 
   // run registered init functions
   init() {
     let p = Promise.resolve();
-    for (let fn of this._initFn) {
+    for (const fn of this._initFn) {
       p = p.then(() => Promise.resolve(fn()));
     }
     return p;
@@ -75,16 +73,14 @@ export default class App {
   // unregister pageInit function
   unregPageInit(i) {
     /^f/.test(typeof i) ?
-      (i = this._pageInitFn.indexOf(i)) > -1 ?
-        this._pageInitFn.splice(i,1) :
-        void(0) :
-          this._pageInitFn.splice(i,1);
+      (i = this._pageInitFn.indexOf(i)) > -1 && this._pageInitFn.splice(i, 1) :
+      this._pageInitFn.splice(i, 1);
   }
 
   // run registered init functions
   pageInit() {
     let p = Promise.resolve();
-    for (let fn of this._pageInitFn) {
+    for (const fn of this._pageInitFn) {
       p = p.then(() => Promise.resolve(fn()));
     }
     return p;

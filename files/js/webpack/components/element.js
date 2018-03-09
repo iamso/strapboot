@@ -8,7 +8,7 @@ export default class Element {
     if (id) {
       this.el.id = id;
     }
-    for (let c of classes) {
+    for (const c of classes) {
       this.classList.add(c);
     }
   }
@@ -47,15 +47,15 @@ export default class Element {
   }
   on(event, handler) {
     const events = event.split(' ');
-    for (let event of events) {
-      this.el.addEventListener(event, handler);
+    for (const e of events) {
+      this.el.addEventListener(e, handler);
     }
     return this;
   }
   off(event, handler) {
     const events = event.split(' ');
-    for (let event of events) {
-      this.el.removeEventListener(event, handler);
+    for (const e of events) {
+      this.el.removeEventListener(e, handler);
     }
     return this;
   }
@@ -69,13 +69,11 @@ export default class Element {
     return [].slice.call(this.el.children, 0);
   }
   attr(attribute, value) {
-    if (value !== undefined) {
+    if (value !== []._) {
       this.el.setAttribute(attribute, value);
       return this;
     }
-    else {
-      return this.el.getAttribute(attribute);
-    }
+    return this.el.getAttribute(attribute);
   }
   get text() {
     return this.el.innerText;

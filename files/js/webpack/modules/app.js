@@ -1,3 +1,5 @@
+/* global FastClick */
+
 import $ from 'jquery';
 import 'fastclick';
 import App from '../lib/app';

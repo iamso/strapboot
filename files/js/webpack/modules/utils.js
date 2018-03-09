@@ -1,21 +1,21 @@
 // compare two (object-) arrays
 export function compareArrays(arr1 = [], arr2 = [], props = []) {
   return arr1.length === arr2.length && arr1.every((item, i) => {
-      let same = true;
+    let same = true;
 
-      if (props && Array.isArray(props) && props.length) {
-        for (let prop of props) {
-          if (arr1[i][prop] !== arr2[i][prop]) {
-            same = false;
-            break;
-          }
+    if (props && Array.isArray(props) && props.length) {
+      for (const prop of props) {
+        if (arr1[i][prop] !== arr2[i][prop]) {
+          same = false;
+          break;
         }
       }
-      else {
-        same = arr1[i] === arr2[i];
-      }
-      return same;
-    });
+    }
+    else {
+      same = arr1[i] === arr2[i];
+    }
+    return same;
+  });
 }
 
 // get the response url in ajax requests
@@ -34,11 +34,11 @@ export function getResponseURL(xhr = {}) {
 
 // breakpoints in rem
 export const breakpoints = {
-  xs:  30,
-  sm:  48,
-  md:  64,
-  lg:  75,
-  xl:  90,
+  xs: 30,
+  sm: 48,
+  md: 64,
+  lg: 75,
+  xl: 90,
   xxl: 120,
   xxxl: 140,
 };
@@ -49,7 +49,7 @@ export function getBreakpoint() {
   const fontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
   return Object.keys(breakpoints).filter(breakpoint => {
     return (wWidth >= breakpoints[breakpoint] * fontSize);
-  }).reverse()[0] || 'xs';
+  }).reverse()[0] || 'xs';
 }
 
 // check if the breakpoint matches
@@ -63,7 +63,7 @@ export function breakpointMatch(breakpoint, type = 'min') {
       size = breakpoints[breakpointOrder[index]] - 0.001;
     }
     else {
-      return false
+      return false;
     }
   }
   else {

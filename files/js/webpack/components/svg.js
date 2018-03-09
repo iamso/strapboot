@@ -24,22 +24,21 @@ export default class SVG extends Element {
         if (this.classList.contains(className)) {
           this.classList.remove(className);
           return false;
-        } else {
-          this.classList.add(className);
-          return true;
         }
+        this.classList.add(className);
+        return true;
       },
     };
     if (id) {
       this.el.id = id;
     }
-    for (let c of classes) {
+    for (const c of classes) {
       this.classList.add(c);
     }
   }
   attr(attribute, value) {
     const ns = attribute.split(':');
-    if (value !== undefined) {
+    if (value !== []._) {
       if (ns.length < 2) {
         this.el.setAttribute(attribute, value);
       }
@@ -48,15 +47,10 @@ export default class SVG extends Element {
       }
       return this;
     }
-    else {
-      if (ns.length < 2) {
-        return this.el.getAttribute(attribute);
-      }
-      else {
-        this.el.getAttributeNS(`http://www.w3.org/1999/${ns[0]}`, attribute);
-      }
-
+    else if (ns.length < 2) {
+      return this.el.getAttribute(attribute);
     }
+    this.el.getAttributeNS(`http://www.w3.org/1999/${ns[0]}`, attribute);
   }
   get className() {
     return this.attr('class') || '';

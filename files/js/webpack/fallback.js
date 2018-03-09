@@ -20,7 +20,7 @@ html.classList.add('js');
 
 // check for location origin support (mostly IE)
 if (!window.location.origin) {
-  window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+  window.location.origin = `${window.location.protocol}//${window.location.hostname}${window.location.port ? `:${window.location.port}` : ''}`;
 }
 
 // fallback for requestIdleCallback
@@ -36,11 +36,11 @@ window.requestIdleCallback =
         }
       });
     }, 1);
-  }
+  };
 
 // fallback for cancelIdleCallback
 window.cancelIdleCallback =
   window.cancelIdleCallback ||
   function(id) {
     clearTimeout(id);
-  }
+  };
