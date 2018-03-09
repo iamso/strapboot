@@ -1,5 +1,6 @@
 const gulp            = require('gulp');
 const gutil           = require("gulp-util");
+const path            = require('path');
 const babel           = require('gulp-babel');
 {% if (scripts === 'webpack') { %}
 const webpack         = require('webpack-stream');
@@ -84,10 +85,9 @@ const prefixConfig    = {
   remove: false,
 };
 
-const eslintConfig    = require('./.config/eslint.config');
-{% if (scripts === 'webpack') { %}const webpackConfig   = require('./.config/webpack.config');{% } %}
+{% if (scripts === 'webpack') { %}const webpackConfig   = require('./webpack.config');{% } %}
 
-gulp.task('watch', () => {
+gulp.task('watch', (done) => {
   browserSync.init(['**/*.html', '**/*.php'], {
     proxy: '{%= local %}',
     port: 3000,
@@ -95,9 +95,10 @@ gulp.task('watch', () => {
     notify: false,
   });
 
-  gulp.watch(src.cssAll, ['css']);
-  gulp.watch(src.jsAll, ['js']);
-  gulp.watch(src.iconsAll, ['iconfont']);
+  gulp.watch(src.cssAll, gulp.series('css'));
+  gulp.watch(src.jsAll, gulp.series('js'));
+  gulp.watch(src.iconsAll, gulp.series('iconfont'));
+  done();
 });
 {% if (styles === 'css') { %}
 gulp.task('css', (done) => {
@@ -157,8 +158,32 @@ gulp.task('css', () => {
     .pipe(reload({stream: true}))
     .pipe(notify('css done'));
 });
-{% } %}{% if (scripts === 'webpack') { %}
-gulp.task('js', ['eslint', 'fallback'], () => {
+{% } %}
+
+gulp.task('eslint', () => {
+  return gulp.src(src.jsAll)
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+gulp.task('fallback', () =>  {
+  return gulp.src('assets/js/_src/fallback.js')
+    .pipe(babel({
+      presets: ['env'],
+    }))
+    .pipe(banner(comment))
+    .pipe(gulp.dest(src.jsDest))
+    .pipe(babel({
+      presets: [babelMinify]
+    }))
+    .pipe(rename('fallback.min.js'))
+    .pipe(banner(comment))
+    .pipe(gulp.dest(src.jsDest));
+});
+
+{% if (scripts === 'webpack') { %}
+gulp.task('js', gulp.series('eslint', 'fallback', () => {
   return gulp.src(src.jsMain)
     .pipe(webpack(webpackConfig)).on('error', onError)
     .pipe(rename('bundle.js'))
@@ -173,9 +198,9 @@ gulp.task('js', ['eslint', 'fallback'], () => {
     .pipe(gulp.dest(src.jsDest))
     .pipe(reload({stream: true}))
     .pipe(notify('js done'));
-});
+}));
 {% } else { %}
-gulp.task('js', ['eslint', 'fallback'], () => {
+gulp.task('js', gulp.series('eslint', 'fallback', () => {
   return gulp.src([
       'assets/js/_src/components/cssevents.js',
       'bower_components/ujs/dist/u.js',
@@ -200,33 +225,13 @@ gulp.task('js', ['eslint', 'fallback'], () => {
     .pipe(gulp.dest(src.jsDest))
     .pipe(reload({stream: true}))
     .pipe(notify('js done'));
-});
+}));
 {% } %}
-gulp.task('eslint', () => {
-  return gulp.src(src.jsAll)
-    .pipe(eslint(eslintConfig))
-    .pipe(eslint.format());
-});
-
-gulp.task('fallback', () =>  {
-  return gulp.src('assets/js/_src/fallback.js')
-    .pipe(babel({
-      presets: ['env'],
-    }))
-    .pipe(banner(comment))
-    .pipe(gulp.dest(src.jsDest))
-    .pipe(babel({
-      presets: [babelMinify]
-    }))
-    .pipe(rename('fallback.min.js'))
-    .pipe(banner(comment))
-    .pipe(gulp.dest(src.jsDest));
-});
 
 gulp.task('vendor', () => {
   return gulp.src([
       'node_modules/jquery/dist/jquery*',
-      'node_modules/promise-polyfill/promise.*',
+      'node_modules/promise-polyfill/dist/promise.*',
       'node_modules/objectFitPolyfill/dist/*',
       'node_modules/intersection-observer/intersection-observer.js',
     ])
@@ -266,53 +271,33 @@ gulp.task('modernizr', () => {
     .pipe(gulp.dest(`${src.jsDest}/vendor`));
 });
 
-gulp.task('manifest', () => {
-  return gulp.src(['./**/*.*'])
-    .pipe(manifest({
-      hash: true,
-      preferOnline: true,
-      network: ['*'],
-      filename: 'manifest.appcache',
-      exclude: [
-        '*.appcache',
-        '**/*.json',
-        '**/_src/**/*.*',
-        'webpack.config.js',
-        'gulpfile.js',
-        'bower_components/**/*.*',
-        'node_modules/**/*.*',
-      ]
-     }))
-    .pipe(gulp.dest('./'));
-});
-
 gulp.task('imagemin', () => {
   return gulp.src('assets/img/**/*')
     .pipe(imagemin())
     .pipe(gulp.dest('assets/img'));
 });
 
-gulp.task('htmlmin', ['public'], () => {
+gulp.task('public', () => {
+  return gulp.src([
+    '**/.htaccess',
+    '*.png',
+    '*.ico',
+    '*.txt',
+    '*.appcache',
+    'assets/**/*.*',
+    '!assets/**/_src/*',
+  ])
+  .pipe(gulp.dest('./public'));
+});
+
+gulp.task('htmlmin', gulp.series('public', () => {
   return gulp.src('*.html')
     .pipe(htmlmin())
     .pipe(gulp.dest('./public'));
-});
-
-gulp.task('public', () => {
-  return gulp.src([
-      '**/.htaccess',
-      '*.png',
-      '*.ico',
-      '*.txt',
-      '*.appcache',
-      'assets/**/*.*',
-      '!assets/**/_src/*',
-    ])
-    .pipe(gulp.dest('./public'));
-});
+}));
 
 gulp.task('iconfont', () => {
-  gulp.src(src.iconsAll)
+  return gulp.src(src.iconsAll)
     .pipe(iconfont({
       fontName: 'icons',
       prependUnicode: false,
@@ -322,10 +307,11 @@ gulp.task('iconfont', () => {
       fontHeight: 1000 // IMPORTANT
     }))
     .on('glyphs', (glyphs, options) => {
-      glyphs = glyphs.map((glyph) => {
+      options.glyphs = glyphs.map((glyph) => {
         glyph.codepoint = glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase();
         return glyph;
       });
+
       gulp.src(src.iconsCss)
         .pipe(consolidate('lodash', Object.assign({}, options, {
           timestamp: Math.round(+new Date()/1000),
@@ -339,14 +325,14 @@ gulp.task('iconfont', () => {
     .pipe(gulp.dest(src.iconsDest));
 });
 
-gulp.task('default', ['dist', 'watch']);
+gulp.task('dev', gulp.series('iconfont', 'css', 'js', 'fallback', 'modernizr', 'watch'));
 
-gulp.task('dev', ['iconfont', 'css', 'js', 'fallback', 'modernizr', 'watch']);
-
-gulp.task('dist', ['iconfont', 'css', 'js', 'fallback', 'vendor', 'modernizr', 'manifest', 'imagemin'], () => {
+gulp.task('dist', gulp.series('iconfont', 'css', 'js', 'fallback', 'vendor', 'modernizr', 'imagemin'), () => {
   return gulp.src('./')
     .pipe(notify('dist done'));
 });
+
+gulp.task('default', gulp.series('dist', 'watch'));
 
 // generic error handler
 function onError(err) {

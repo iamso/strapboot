@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
-const pkg = require('../package.json');
+const Visualizer = require('webpack-visualizer-plugin');
+const pkg = require('./package.json');
 
 let include = [
   /assets/,
@@ -39,6 +40,7 @@ module.exports = {
       // jQuery: 'jquery',
       // 'window.jQuery': 'jquery'
     }),
+    new Visualizer(),
   ],
 
   module: {
