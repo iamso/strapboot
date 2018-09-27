@@ -1,5 +1,5 @@
 # strapboot
-An interactive, customizable project template.
+An interactive project template.
 
 ## Install
 You can install it via NPM:
@@ -19,16 +19,15 @@ strapboot
 
 After that run `npm install` to install all dependencies.
 
-### Gulp / Grunt
-During the setup, you can choose if you want Gulp or Grunt as taskrunner. Whatever you choose, you can start the main tasks with the following commands:
+### Gulp
+You can start the main tasks with the following commands:
 
 | Task | Description |
 | ---- | ----------  |
-| `npm start` | Runs the `dist` task and starts `watch`. |
-| `npm run dev` | This is a stripped down version of the `dist` task and also includes the `watch` task. |
-| `npm run dist` | Runs only the `dist` task without `watch`. |
+| `gulp` / `gulp dev` | Runs the `dev` task. This also includes the `watch` task. |
+| `gulp dist` | Runs the `dist` task. |
 
-Check the gulpfile / grunt configs for further information.
+Check the gulpfile for further information.
 
 ## License
 
