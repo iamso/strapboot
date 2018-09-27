@@ -295,7 +295,7 @@ gulp.task('dist', gulp.series('webpack-prod', 'iconfont', 'css', 'js', 'fallback
     .pipe(notify('dist done'));
 });
 
-gulp.task('default', gulp.series('dev', 'webpack-dev', 'watch'));
+gulp.task('default', gulp.series('dev'));
 
 // generic error handler
 function onError(err) {
