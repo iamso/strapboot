@@ -41,14 +41,14 @@
         return `${answers.name}.com`;
       },
     },
-    {
-      type: 'input',
-      name: 'local',
-      message: 'local url:',
-      default: (answers) => {
-        return `${answers.homepage}.local`;
-      },
-    },
+    // {
+    //   type: 'input',
+    //   name: 'local',
+    //   message: 'local url:',
+    //   default: (answers) => {
+    //     return `${answers.homepage}.local`;
+    //   },
+    // },
     {
       type: 'input',
       name: 'description',

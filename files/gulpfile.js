@@ -86,7 +86,11 @@ let webpackMode = 'none';
 
 gulp.task('watch', (done) => {
   browserSync.init(['**/*.html', '**/*.php'], {
-    proxy: '{%= local %}',
+    /* use proxy when using something like php */
+    // proxy: 'local domain here',
+    server: {
+      baseDir: './',
+    },
     port: 3000,
     open: true,
     notify: false,
