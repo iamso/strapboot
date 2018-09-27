@@ -87,49 +87,6 @@
         return `git://github.com/${gitUser.name}/${answers.name}.git`;
       },
     },
-    {
-      type: "list",
-      name: "taskrunner",
-      message: "taskrunner:",
-      choices: [
-        "gulp",
-        "grunt",
-        // "webpack",
-      ]
-    },
-    {
-      when: (response) => {
-        return response.taskrunner === 'gulp' || response.taskrunner === 'webpack';
-      },
-      type: 'list',
-      name: 'styles',
-      message: "styles:",
-      choices: [
-        "css",
-        "scss",
-      ]
-    },
-    {
-      when: (response) => {
-        return response.taskrunner === 'gulp';
-      },
-      type: 'list',
-      name: 'scripts',
-      message: "scripts:",
-      choices: [
-        "webpack",
-        "concat",
-      ]
-    },
-    {
-      type: "list",
-      name: "packagemanager",
-      message: "package manager:",
-      choices: [
-        "yarn",
-        "npm",
-      ]
-    },
   ];
 
   if (globule.find(`${dir}/{.,}*`, `!${dir}/**/.DS_Store`).length) {

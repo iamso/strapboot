@@ -1,0 +1,15 @@
+.collapsible {
+
+}
+
+.collapsible-trigger {
+
+}
+
+.collapsible-content {
+  overflow: hidden;
+  transition: 0.3s var(--easeOutQuad);
+  .collapsible.collapsed & {
+    max-height: 0 !important;
+  }
+}

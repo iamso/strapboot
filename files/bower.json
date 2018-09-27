@@ -1,0 +1,21 @@
+{
+  "name": "{%= name %}",
+  "version": "{%= version %}",
+  "authors": [
+    "{%= author %}"
+  ],
+  "description": "{%= description %}",
+  "license": "MIT",
+  "homepage": "{%= homepage %}",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Tetragon.js": "0.*",
+    "tooltips.scss": "0.*"
+  }
+}

@@ -1,0 +1,148 @@
+/**
+ * Viewport animation effects
+ */
+
+:root {
+  --effect-delay: 0.4s;
+}
+.fade-in {
+  &[data-insicht] {
+    opacity: 0;
+    .no-js &,
+    .site-ready &.sichtbar {
+      opacity: 1;
+      transition: opacity 2s var(--effect-delay, 0.4s) var(--easeOutQuad);
+      &.fast {
+        transition-duration: 1s;
+      }
+    }
+  }
+}
+
+.fade-up {
+  &[data-insicht] {
+    opacity: 0;
+    transform: translate3d(0, 2rem, 0);
+    .no-js &,
+    .site-ready &.sichtbar {
+      opacity: 1;
+      transform: none;
+      transition: opacity 2s var(--effect-delay, 0.4s) var(--easeOutQuad), transform 2.4s var(--effect-delay, 0.4s) var(--easeOutExpo);
+      &.fast {
+        transition-duration: 1s, 1.2s;
+      }
+    }
+  }
+}
+
+.fade-down {
+  &[data-insicht] {
+    opacity: 0;
+    transform: translate3d(0, -2rem, 0);
+    .no-js &,
+    .site-ready &.sichtbar {
+      opacity: 1;
+      transform: none;
+      transition: opacity 2s var(--effect-delay, 0.4s) var(--easeOutQuad), transform 2.4s var(--effect-delay, 0.4s) var(--easeOutExpo);
+      &.fast {
+        transition-duration: 1s, 1.2s;
+      }
+    }
+  }
+}
+
+.fade-left {
+  &[data-insicht] {
+    opacity: 0;
+    transform: translate3d(-2rem, 0, 0);
+    .no-js &,
+    .site-ready &.sichtbar {
+      opacity: 1;
+      transform: none;
+      transition: opacity 2s var(--effect-delay, 0.4s) var(--easeOutQuad), transform 2.4s var(--effect-delay, 0.4s) var(--easeOutExpo);
+      &.fast {
+        transition-duration: 1s, 1.2s;
+      }
+    }
+  }
+}
+
+.fade-right {
+  &[data-insicht] {
+    opacity: 0;
+    transform: translate3d(2rem, 0, 0);
+    .no-js &,
+    .site-ready &.sichtbar {
+      opacity: 1;
+      transform: none;
+      transition: opacity 2s var(--effect-delay, 0.4s) var(--easeOutQuad), transform 2.4s var(--effect-delay, 0.4s) var(--easeOutExpo);
+      &.fast {
+        transition-duration: 1s, 1.2s;
+      }
+    }
+  }
+}
+
+.scale-up {
+  &[data-insicht] {
+    opacity: 0;
+    transform: scale(0);
+    .no-js &,
+    .site-ready &.sichtbar {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0s var(--effect-delay, 0.4s), transform 2.4s var(--effect-delay, 0.4s) var(--easeOutExpo);
+      &.fast {
+        transition-duration: 0s, 0.6s;
+      }
+    }
+  }
+}
+
+.scale-down {
+  &[data-insicht] {
+    opacity: 0;
+    transform: scale(2);
+    .no-js &,
+    .site-ready &.sichtbar {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0s var(--effect-delay, 0.4s), transform 2.4s var(--effect-delay, 0.4s) var(--easeOutExpo);
+      &.fast {
+        transition-duration: 0s, 0.6s;
+      }
+    }
+  }
+}
+
+.scale-fade-up {
+  &[data-insicht] {
+    opacity: 0;
+    transform: scale(0);
+    .no-js &,
+    .site-ready &.sichtbar {
+      opacity: 1;
+      transform: none;
+      transition: opacity 2s var(--effect-delay, 0.4s) var(--easeOutQuad), transform 2.4s var(--effect-delay, 0.4s) var(--easeOutExpo);
+      &.fast {
+        transition-duration: 1s, 0.6s;
+      }
+    }
+  }
+}
+
+.scale-fade-down {
+  &[data-insicht] {
+    opacity: 0;
+    transform: scale(2);
+    .no-js &,
+    .site-ready &.sichtbar {
+      opacity: 1;
+      transform: none;
+      transition: opacity 2s var(--effect-delay, 0.4s) var(--easeOutQuad), transform 2.4s var(--effect-delay, 0.4s) var(--easeOutExpo);
+      &.fast {
+        transition-duration: 1s, 0.6s;
+      }
+    }
+  }
+}

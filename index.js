@@ -24,59 +24,27 @@
 
   module.exports = (answers, dir) => {
 
-    let files = {
-      general: vfs.src([
-        `${base}/files/general/{.,}**/{.,}*`,
-        `!${base}/files/**/.DS_Store`
-      ]),
-      gulp: vfs.src([
-        `${base}/files/gulp/{.,}**/{.,}*`,
-        `!${base}/files/gulp/package.json`,
-        `!${base}/files/**/.DS_Store`
-      ]),
-      grunt: vfs.src([
-        `${base}/files/grunt/{.,}**/{.,}*`,
-        `!${base}/files/grunt/package.json`,
-        `!${base}/files/**/.DS_Store`
-      ]),
-      css: vfs.src([
-        `${base}/files/css/{.,}**/{.,}*`,
-        `!${base}/files/**/.DS_Store`
-      ]),
-      scss: vfs.src([
-        `${base}/files/scss/{.,}**/{.,}*`,
-        `!${base}/files/**/.DS_Store`
-      ]),
-      webpack: vfs.src([
-        `${base}/files/js/webpack/{.,}**/{.,}*`,
-        `!${base}/files/**/.DS_Store`
-      ]),
-      concat: vfs.src([
-        `${base}/files/js/concat/{.,}**/{.,}*`,
-        `!${base}/files/**/.DS_Store`
-      ]),
-    };
+    let files = vfs.src([
+      `${base}/files/{.,}**/{.,}*`,
+      `!${base}/files/**/.DS_Store`
+    ]);
 
     return new Promise((resolveAll) => {
       answers.year = (new Date()).getFullYear();
       answers.taskrunner = answers.taskrunner || 'gulp';
       answers.styles = answers.styles || 'css';
       answers.scripts = answers.scripts || 'webpack';
-      answers.packagemanager = answers.packagemanager || 'yarn';
-      answers.dependencies = fs.readFileSync(`${base}/files/${answers.taskrunner}/package.json`, 'utf-8');
+      answers.packagemanager = answers.packagemanager || 'npm';
 
       // console.log(answers);
 
-      writeGeneral()
-        .then(writeTaskrunner)
-        .then(writeStyles)
-        .then(writeScripts)
+      writeFiles()
         .then(writeInstructions);;
 
-      function writeGeneral() {
+      function writeFiles() {
         return new Promise((resolve) => {
-          console.log(colors.bold(`\nWriting general files:`));
-          files.general
+          console.log(colors.bold(`\nWriting files:`));
+          files
             .pipe(sort())
             .pipe(map(process))
             .pipe(vfs.dest(dir))
@@ -85,42 +53,7 @@
             });
         });
       }
-      function writeTaskrunner() {
-        return new Promise((resolve) => {
-          console.log(colors.bold(`\nWriting ${answers.taskrunner} files:`));
-          files[answers.taskrunner]
-            .pipe(sort())
-            .pipe(map(process))
-            .pipe(vfs.dest(dir))
-            .on('end', () => {
-              resolve();
-            });
-        });
-      }
-      function writeStyles() {
-        return new Promise((resolve) => {
-          console.log(colors.bold(`\nWriting ${answers.styles} files:`));
-          files[answers.styles]
-            .pipe(sort())
-            .pipe(map(process))
-            .pipe(vfs.dest(`${dir}/assets/css/_src`))
-            .on('end', () => {
-              resolve();
-            });
-        });
-      }
-      function writeScripts() {
-        return new Promise((resolve) => {
-          console.log(colors.bold(`\nWriting javascript files:`));
-          files[answers.scripts]
-            .pipe(sort())
-            .pipe(map(process))
-            .pipe(vfs.dest(`${dir}/assets/js/_src`))
-            .on('end', () => {
-              resolve();
-            });
-        });
-      }
+
       function writeInstructions(cb) {
         console.log(`
 ${colors.bold('Instructions:')}
@@ -131,7 +64,6 @@ ${colors.green('Done.')}`);
 
         resolveAll();
       }
-
 
       function sort() {
         let files = [];
@@ -160,11 +92,7 @@ ${colors.green('Done.')}`);
           }
         }
         filepath = file.path;
-        filepath = filepath.replace(new RegExp(`${base}/files/general/`), '');
-        filepath = filepath.replace(new RegExp(`${base}/files/gulp/`), '');
-        filepath = filepath.replace(new RegExp(`${base}/files/grunt/`), '');
-        filepath = filepath.replace(new RegExp(`${base}/files/css/`), 'assets/css/_src/');
-        filepath = filepath.replace(new RegExp(`${base}/files/scss/`), 'assets/css/_src/');
+        filepath = filepath.replace(new RegExp(`${base}/files/`), '');
         console.log(`Writing ${filepath}...${colors.green('OK')}`);
         cb(null, file);
       }
