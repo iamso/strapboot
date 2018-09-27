@@ -54,7 +54,7 @@
       name: 'description',
       message: 'description:',
       default: (answers) => {
-        return `${answers.name} description`;
+        return `Most awesomest project ever!`;
       },
     },
     {
