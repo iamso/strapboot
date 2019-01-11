@@ -29,9 +29,9 @@ app.regInit(() => {
           img.style.transform = `translate3d(0, -${diff}px, 0)`;
         }
         else {
-          img.style.transform = `translate3d(0, 0, 0)`;
+          img.style.transform = 'translate3d(0, 0, 0)';
         }
-      }
+      };
 
       window.addEventListener('scroll', this.updateParallax);
       window.addEventListener('resize', this.updateParallax);

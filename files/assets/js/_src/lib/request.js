@@ -2,13 +2,13 @@ import http from 'httprom';
 import Cacherrr from 'cacherrr';
 
 export default class Request {
-  constructor(cacheTime = 15*60*1000) {
+  constructor(cacheTime = 15 * 60 * 1000) {
     this.cacheTime = cacheTime;
     this.cache = new Cacherrr(cacheTime);
 
     try {
       if (localStorage.requestCache) {
-        const entries = JSON.parse(localStorage.requestCache)
+        const entries = JSON.parse(localStorage.requestCache);
         this.cache.entries = entries;
       }
     }

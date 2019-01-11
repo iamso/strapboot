@@ -29,7 +29,7 @@ app.regInit(() => {
         let shareUrl = shareUrls[share] + encodeURIComponent(url);
 
         if (share === 'whatsapp') {
-          shareUrl = shareUrls[share] + text + encodeURIComponent('\n' + url)
+          shareUrl = shareUrls[share] + text + encodeURIComponent('\n' + url);
         }
         else if (share === 'pinterest') {
           shareUrl += `&description=${text}`;

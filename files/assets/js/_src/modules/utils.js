@@ -39,7 +39,7 @@ export function em2px(em) {
 
 export function px2em(px) {
   const fontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-  return px/fontSize;
+  return px / fontSize;
 }
 
 // breakpoints in rem
@@ -75,7 +75,7 @@ export function getBreakpointIndex(breakpoint) {
 
 export function sortBreakpoints(obj = {}) {
   const arr = [];
-  for (let breakpoint of breakpointOrder) {
+  for (const breakpoint of breakpointOrder) {
     if (obj[breakpoint]) {
       arr.push({
         breakpoint: breakpoint,
@@ -142,29 +142,29 @@ export function tmpl(str, data) {
   // Figure out if we're getting a template, or if we need to
   // load the template - and be sure to cache the result.
   const fn = !/<%?.*%?>/.test(str) ?
-  tmplCache[str] = tmplCache[str] ||
-  tmpl(document.querySelector(str).innerHTML) :
+    tmplCache[str] = tmplCache[str] ||
+    tmpl(document.querySelector(str).innerHTML) :
 
-  // Generate a reusable function that will serve as a template
-  // generator (and which will be cached).
-  /* eslint-disable no-new-func */
-  new Function('obj',
-    'var p=[],print=function(){p.push.apply(p,arguments);};' +
+    // Generate a reusable function that will serve as a template
+    // generator (and which will be cached).
+    /* eslint-disable no-new-func */
+    new Function('obj',
+      'var p=[],print=function(){p.push.apply(p,arguments);};' +
 
-    // Introduce the data as local variables using with(){}
-    'with(obj){p.push(\'' +
+      // Introduce the data as local variables using with(){}
+      'with(obj){p.push(\'' +
 
-    // Convert the template into pure JavaScript
-    str
-      .replace(/[\r\t\n]/g, ' ')
-      .split('<%').join('\t')
-      .replace(/((^|%>)[^\t]*)'/g, '$1\r')
-      .replace(/\t=(.*?)%>/g, '\',$1,\'')
-      .split('\t').join('\');')
-      .split('%>').join('p.push(\'')
-      .split('\r').join('\\\'')
-      .replace(/@([\w_]+)/g, '(typeof ($1) !== \'undefined\' && ($1))') +
-    '\');}return p.join(\'\');');
+      // Convert the template into pure JavaScript
+      str
+        .replace(/[\r\t\n]/g, ' ')
+        .split('<%').join('\t')
+        .replace(/((^|%>)[^\t]*)'/g, '$1\r')
+        .replace(/\t=(.*?)%>/g, '\',$1,\'')
+        .split('\t').join('\');')
+        .split('%>').join('p.push(\'')
+        .split('\r').join('\\\'')
+        .replace(/@([\w_]+)/g, '(typeof ($1) !== \'undefined\' && ($1))') +
+      '\');}return p.join(\'\');');
 
   // Provide some basic currying to the user
   return data ? fn(data) : fn;
@@ -206,24 +206,25 @@ export function throttle(fn, threshhold = 250, scope) {
 
 export function formatNumber(num = 0, userOpts = {}) {
   const defaults = {
-      decimals: 2,
-      prefix: '',
-      suffix: '',
-      decimal: '.',
-      thousand: '’',
-      minLength: 3,
-    }
+    decimals: 2,
+    prefix: '',
+    suffix: '',
+    decimal: '.',
+    thousand: '’',
+    minLength: 3,
+  };
   const opts = Object.assign({}, defaults, userOpts);
-  let length;
 
   // Cast the string to a number
-  if (typeof(num) === 'string') {
-    num = 1 * num;
+  if (num === num + '') {
+    num *= 1;
   }
+
   if (!isFinite(num)) {
     return false;
   }
-  length = num.toFixed(0).length;
+
+  const length = num.toFixed(0).length;
   num = num.toFixed(opts.decimals);
 
   // Replace the dot
@@ -233,6 +234,7 @@ export function formatNumber(num = 0, userOpts = {}) {
   if (length > opts.minLength) {
     num = num.replace(/\B(?=(\d{3})+(?!\d))/g, opts.thousand);
   }
+
   num = `${opts.prefix}${num}${opts.suffix}`;
 
   return num;

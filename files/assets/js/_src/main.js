@@ -29,7 +29,7 @@ window.addEventListener('pageshow', e => {
   }
 });
 
-window.addEventListener('load', e => {
+window.addEventListener('load', () => {
   try {
     app.loader.hide();
   }
@@ -55,6 +55,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const event = document.createEvent('Event');
   event.initEvent('site-init', true, true);
   window.dispatchEvent(event);
+});
+
+window.addEventListener('site-init', () => {
+  console.log('all done');
 });
 
 window.app = app;

@@ -125,7 +125,7 @@ app.regInit(() => {
         const srcset = utils.sortBreakpoints(JSON.parse(data.loadSrcset || data.loadBgSrcset || data.loadVideoSrcset));
         const resize = () => {
           let src = srcset[0].value;
-          for (let s of srcset) {
+          for (const s of srcset) {
             if (utils.breakpointMatch(s.breakpoint)) {
               src = s.value;
             }
@@ -196,7 +196,7 @@ app.regInit(() => {
           const srcset = utils.sortBreakpoints(JSON.parse(data.imgSrcset || data.bbgSrcset || data.videoSrcset));
           const resize = () => {
             let src = srcset[0].value;
-            for (let s of srcset) {
+            for (const s of srcset) {
               if (utils.breakpointMatch(s.breakpoint)) {
                 src = s.value;
               }

@@ -18,7 +18,7 @@ app.regInit(() => {
           ]).then(([l, data]) => {
             return new Promise(async (resolve, reject) => {
               const parser = new DOMParser();
-              const doc = parser.parseFromString(data, "text/html");
+              const doc = parser.parseFromString(data, 'text/html');
               const main = doc.querySelector('#site-content');
 
               if (main) {

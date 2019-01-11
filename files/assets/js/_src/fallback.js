@@ -1,4 +1,4 @@
-(function(window, document){
+(function(window, document) {
 
   // current script src dir
   const src = [].slice.call(document.querySelectorAll('script'), 0).pop().src.replace(/\/[^\/]+$/, '');
