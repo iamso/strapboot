@@ -12,7 +12,8 @@
   // !!window.jQuery || document.write(`<script src="${src}/vendor/jquery.min.js"><\/script>`);
 
   // check for Promise support
-  !!window.Promise || document.write(`<script src="${src}/vendor/promise.min.js"><\/script>`);
+  // !!window.Promise || document.write(`<script src="${src}/vendor/promise.min.js"><\/script>`);
+  !!window.Promise || document.write(`<script src="${src}/vendor/polyfill.min.js"><\/script>`);
 
   // check for object-fit support
   // !!('objectFit' in html.style) || (html.classList.add('no-objectfit'), document.write(`<script src="${src}/vendor/objectFitPolyfill.basic.min.js"><\/script>`));
