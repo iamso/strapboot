@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import 'cssevents';
 import 'autocreate.js';
 import app from './modules/app';
