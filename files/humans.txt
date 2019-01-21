@@ -12,5 +12,5 @@
 # SITE
   Project: {%= name %}
   Standard: HTML5, CSS3, ES6
-  Components: Modernizr, JSON, u.js, jQuery
-  Software: Sublime Text, Git, Gulp, CSS
+  Components: Normalize, Flexbox Grid, JSON
+  Software: Sublime Text, Git, Gulp, Webpack, PostCSS
