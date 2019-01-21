@@ -21,6 +21,12 @@ There are 2 main gulp tasks to run:
 | `gulp` (default) | Runs the distribution tasks and then starts the watch task, that listens for changes to `.js` and `.css` files. |
 | `gulp dist` | Runs only the distribution tasks and then stops. |
 
+## Credits
+
+This project has been bootstrapped with [strapboot](https://www.npmjs.com/package/strapboot).
+
+[![NPM](https://nodei.co/npm/strapboot.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/strapboot)
+
 ## License
 
 [MIT License](LICENSE)
