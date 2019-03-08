@@ -13,4 +13,4 @@
   Project: {%= name %}
   Standard: HTML5, CSS3, ES6
   Components: Normalize, Flexbox Grid, JSON
-  Software: Sublime Text, Git, Gulp, Webpack, PostCSS
+  Software: Sublime Text, Visual Studio Code, Git, Gulp, Webpack, PostCSS

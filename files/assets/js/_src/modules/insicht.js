@@ -7,7 +7,7 @@ export default InSicht;
 
 app.on('init', () => {
 
-  const insicht = new InSicht({
+  app.insicht = new InSicht({
     container: document.documentElement,
     selector: '[data-insicht]',
     visibleClass: 'sichtbar',

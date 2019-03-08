@@ -19,7 +19,6 @@ app.on('init', () => {
   app.el = {
     win: window,
     doc: document,
-    docEl: document.documentElement,
     html: document.documentElement,
     body: document.body,
     header: app.$('#site-header'),

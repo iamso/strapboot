@@ -1,17 +1,17 @@
 
 @-ms-viewport { width: device-width; }
 
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 html {
   box-sizing: border-box;
   font-size: var(--font-size-root);
   -ms-overflow-style: scrollbar;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
 }
 
 html,
@@ -38,8 +38,8 @@ body {
   -ms-text-rendering: optimizeLegibility;
   -o-text-rendering: optimizeLegibility;
   text-rendering: optimizeLegibility;
-  -moz-osx-font-smoothing : grayscale;
-  text-size-adjust : none;
+  -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -56,7 +56,7 @@ a {
   color: var(--link-color);
   text-decoration: var(--link-decoration);
   transition: var(--link-transition);
-  @nest .no-touchevents & {
+  .no-touchevents & {
     &:hover {
       color: var(--link-hover-color);
       text-decoration: var(--link-hover-decoration);
