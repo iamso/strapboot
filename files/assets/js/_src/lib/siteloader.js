@@ -1,5 +1,3 @@
-/* global animationEnd, transitionEnd */
-
 const defaults = {
   loaded: 'site-loaded',
   ready: 'site-ready',
@@ -30,10 +28,10 @@ export default class SiteLoader {
         return;
       }
       const listener = e => {
-        this.el.removeEventListener(transitionEnd, listener);
+        this.el.removeEventListener('transitionend', listener);
         resolve(this);
       };
-      this.el.addEventListener(transitionEnd, listener);
+      this.el.addEventListener('transitionend', listener);
       if (!this.html.classList.contains(this.options.loaded) || !this.html.classList.contains(this.options.ready)) {
         resolve(this);
       }
@@ -48,11 +46,11 @@ export default class SiteLoader {
         return;
       }
       const listener = e => {
-        this.el.removeEventListener(transitionEnd, listener);
+        this.el.removeEventListener('transitionend', listener);
         resolve(this);
         this.html.classList.add(this.options.ready);
       };
-      this.el.addEventListener(transitionEnd, listener);
+      this.el.addEventListener('transitionend', listener);
       this.html.classList.remove(this.options.init);
       this.html.classList.add(this.options.loaded);
     });

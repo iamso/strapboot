@@ -1,4 +1,4 @@
-/* global animationEnd, transitionEnd, autocreate */
+/* global autocreate */
 
 // import autocreate from 'autocreate.js';
 import app from './app';
@@ -12,15 +12,15 @@ app.regInit(() => {
       const trigger = element.querySelector('.collapsible-trigger');
       const content = element.querySelector('.collapsible-content');
       const contentTransition = e => {
-        content.removeEventListener(transitionEnd, contentTransition);
+        content.removeEventListener('transitionend', contentTransition);
         content.style.maxHeight = '';
       };
 
       trigger && content && trigger.addEventListener('click', e => {
         e.preventDefault;
 
-        content.removeEventListener(transitionEnd, contentTransition);
-        content.addEventListener(transitionEnd, contentTransition);
+        content.removeEventListener('transitionend', contentTransition);
+        content.addEventListener('transitionend', contentTransition);
 
         content.style.maxHeight = `${content.scrollHeight}px`;
 
