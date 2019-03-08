@@ -2,7 +2,7 @@
 
 import app from './app';
 
-app.regInit(() => {
+app.on('init', () => {
   // Google+
   //
   window.___gcfg = {lang: app.lang};

@@ -5,7 +5,7 @@ import * as utils from './utils';
 
 export default InSicht;
 
-app.regInit(() => {
+app.on('init', () => {
 
   const insicht = new InSicht({
     container: document.documentElement,

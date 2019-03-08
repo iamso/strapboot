@@ -54,8 +54,8 @@ export default class App {
       svg.parentNode.removeChild(svg);
       return result;
     })();
-    this._initFn = [];
-    this._pageInitFn = [];
+
+    this._events = {};
   }
 
   $(selector) {
@@ -66,45 +66,42 @@ export default class App {
     return [].slice.call(document.querySelectorAll(selector), 0);
   }
 
-  // register init function
-  regInit(fn) {
-    return this._initFn.push(fn) - 1;
-  }
-
-  // unregister init function
-  unregInit(i) {
-    /^f/.test(typeof i) ?
-      (i = this._initFn.indexOf(i)) > -1 && this._initFn.splice(i, 1) :
-      this._initFn.splice(i, 1);
-  }
-
-  // run registered init functions
-  init() {
-    let p = Promise.resolve();
-    for (const fn of this._initFn) {
-      p = p.then(() => Promise.resolve(fn()));
+  on(event, listener) {
+    if (!Array.isArray(this._events[event])) {
+      this._events[event] = [];
     }
-    return p;
+
+    this._events[event].push(listener);
   }
 
-  // register pageInit function
-  regPageInit(fn) {
-    return this._pageInitFn.push(fn) - 1;
-  }
-
-  // unregister pageInit function
-  unregPageInit(i) {
-    /^f/.test(typeof i) ?
-      (i = this._pageInitFn.indexOf(i)) > -1 && this._pageInitFn.splice(i, 1) :
-      this._pageInitFn.splice(i, 1);
-  }
-
-  // run registered init functions
-  pageInit() {
-    let p = Promise.resolve();
-    for (const fn of this._pageInitFn) {
-      p = p.then(() => Promise.resolve(fn()));
+  off(event, listener) {
+    if (!Array.isArray(this._events[event])) {
+      return;
     }
-    return p;
+
+    const index = this._events[event].indexOf(listener);
+
+    if (index > -1) {
+      this._events.splice(index, 1);
+    }
+  }
+
+  emit(event, data, sequential) {
+    if (!Array.isArray(this._events[event])) {
+      return;
+    }
+
+    if (sequential) {
+      let p = Promise.resolve();
+      for (const listener of this._events[event]) {
+        p = p.then(() => Promise.resolve(listener(data)));
+      }
+      return p;
+    }
+    else {
+      for (const listener of this._events[event]) {
+        listener(data);
+      }
+    }
   }
 }

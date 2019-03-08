@@ -14,7 +14,7 @@ const shareUrls = {
   email: '',
 };
 
-app.regInit(() => {
+app.on('init', () => {
   autocreate({
     selector: '[data-share]',
     create: function(element) {

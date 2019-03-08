@@ -5,7 +5,7 @@ import app from './app';
 
 import * as utils from './utils';
 
-app.regInit(() => {
+app.on('init', () => {
   autocreate({
     selector: 'a[href]:not(.ignore-link):not([target="_blank"])',
     create: function(element) {

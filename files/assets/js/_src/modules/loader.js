@@ -3,6 +3,6 @@ import SiteLoader from '../lib/siteloader.js';
 
 import * as utils from './utils';
 
-app.regInit(() => {
+app.on('init', () => {
   app.loader = new SiteLoader();
 });

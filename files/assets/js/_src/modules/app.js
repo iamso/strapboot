@@ -15,7 +15,7 @@ app.scroll = Scrrroll;
 app.scroll.duration = 800;
 app.scroll.easing = easeInOutQuad;
 
-app.regInit(() => {
+app.on('init', () => {
   app.el = {
     win: window,
     doc: document,

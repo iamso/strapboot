@@ -1,7 +1,7 @@
 
 import app from './app';
 
-app.regInit(() => {
+app.on('init', () => {
   const c = console;
   !app.isEdge && !app.isIE && c && c.log(
     '%cMade with %c❤ %cin Switzerland.',

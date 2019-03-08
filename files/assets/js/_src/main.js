@@ -35,15 +35,15 @@ window.addEventListener('load', () => {
   catch(err) {}
 });
 
-app.regInit(async () => {
+app.on('init', async () => {
   // request example
   const data = await app.request.get('https://req.dev.so');
   console.log(data);
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
-  await app.init();
-  await app.pageInit();
+  await app.emit('init', null, true);
+  await app.emit('init:page', null, true);
   app.initialized = true;
   if (document.readyState === 'complete') {
     try {

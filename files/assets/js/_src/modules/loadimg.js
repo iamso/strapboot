@@ -3,7 +3,7 @@ import InSicht from './insicht';
 import app from './app';
 import * as utils from './utils';
 
-app.regInit(() => {
+app.on('init', () => {
 
   const loadImg = new InSicht({
     container: document.documentElement,

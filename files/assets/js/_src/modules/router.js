@@ -3,7 +3,7 @@ import app from './app';
 
 import * as utils from './utils';
 
-app.regInit(() => {
+app.on('init', () => {
   const routrrr = app.router = new Routrrr();
 
   let p = Promise.resolve();
