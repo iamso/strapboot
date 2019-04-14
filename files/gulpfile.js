@@ -15,6 +15,7 @@ const postcssComments = require('postcss-discard-comments');
 const postcssNested   = require('postcss-nested');
 const postcssEach     = require('postcss-each');
 const postcssGradient = require('postcss-easing-gradients');
+const postcssColor    = require('postcss-color-function');
 const postcssFor      = require('postcss-for');
 const postcssCond     = require('postcss-conditionals');
 const postcssSimple   = require('postcss-simple-vars');
@@ -124,6 +125,7 @@ gulp.task('css', (done) => {
       }),
       postcssNested,
       postcssCalc,
+      postcssColor({preserveCustomProps: false}),
       postcssComments({removeAll: true}),
       postcssReporter({ clearMessages: true }),
     ]))
