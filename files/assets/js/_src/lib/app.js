@@ -2,6 +2,7 @@ export default class App {
   constructor() {
     this.isMobile = false;
     this.isTouch = (('ontouchstart' in window) || (window.DocumentTouch && document instanceof window.DocumentTouch) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+    this.hasServiceWorker = ('serviceWorker' in navigator);
 
     this.isIos = /iP(hone|od|ad)/g.test(navigator.platform);
     this.isIos9 = /iP(hone|od|ad)/g.test(navigator.platform) && +(navigator.appVersion).match(/OS (\d+)?/)[1] <= 9;

@@ -12,5 +12,5 @@
 # SITE
   Project: {%= name %}
   Standard: HTML5, CSS3, ES6
-  Components: Normalize, Flexbox Grid, JSON
+  Components: Normalize, Flexbox Grid, JSON, Service Worker
   Software: Sublime Text, Visual Studio Code, Git, Gulp, Webpack, PostCSS

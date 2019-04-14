@@ -149,13 +149,20 @@ gulp.task('eslint', () => {
     .pipe(eslint.failAfterError());
 });
 
+gulp.task('serviceworker', () =>  {
+  return gulp.src('assets/js/_src/sw.js')
+    .pipe(babel({
+      presets: ['@babel/env', {comments: false}],
+    }))
+    .pipe(gulpif(webpackMode === 'production', babel({
+      presets: [babelMinify, {comments: false}]
+    })))
+    .pipe(banner(comment))
+    .pipe(gulp.dest('./'));
+});
+
 gulp.task('fallback', () =>  {
   return gulp.src('assets/js/_src/fallback.js')
-    .pipe(babel({
-      presets: ['@babel/preset-env', {comments: false}],
-    }))
-    .pipe(banner(comment))
-    .pipe(gulp.dest(src.jsDest))
     .pipe(babel({
       presets: ['@babel/env', {comments: false}],
     }))
@@ -166,7 +173,7 @@ gulp.task('fallback', () =>  {
     .pipe(gulp.dest(src.jsDest));
 });
 
-gulp.task('js', gulp.series('eslint', 'fallback', () => {
+gulp.task('js', gulp.series('eslint', 'serviceworker', 'fallback', () => {
   webpackConfig.mode = webpackMode;
   return gulp.src(src.jsMain)
     .pipe(webpack(webpackConfig)).on('error', onError)
