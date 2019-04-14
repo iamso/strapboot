@@ -8,7 +8,7 @@ import {easeInOutQuad} from 'easings.js';
 
 const app = new App();
 
-app.src = document.currentScript;
+app.src = document.currentScript.src.substr(0, document.currentScript.src.lastIndexOf('/') + 1);
 
 app.get = get;
 app.scroll = Scrrroll;
