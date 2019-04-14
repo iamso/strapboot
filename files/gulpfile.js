@@ -22,12 +22,10 @@ const postcssSimple   = require('postcss-simple-vars');
 const postcssProps    = require('postcss-custom-properties');
 const postcssReporter = require('postcss-reporter');
 
-const sourcemaps      = require('gulp-sourcemaps');
 const cssnano         = require('gulp-cssnano');
 const rename          = require('gulp-rename');
 const eslint          = require('gulp-eslint');
 const banner          = require('gulp-banner');
-const modernizr       = require('gulp-modernizr');
 const imagemin        = require('gulp-imagemin');
 const htmlmin         = require('gulp-htmlmin');
 const notify          = require('gulp-notify');
@@ -106,7 +104,6 @@ gulp.task('watch', (done) => {
 
 gulp.task('css', (done) => {
   return gulp.src(src.cssMain)
-    // .pipe(sourcemaps.init())
     .pipe(postcss([
       postcssImport,
       postcssMixins,
@@ -131,7 +128,6 @@ gulp.task('css', (done) => {
       postcssReporter({ clearMessages: true }),
     ]))
     .on('error', done)
-    // .pipe(sourcemaps.write())
     .pipe(rename('bundle.css'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.cssDest))
@@ -197,39 +193,6 @@ gulp.task('vendor', () => {
       'node_modules/intersection-observer/intersection-observer.js',
     ])
     .pipe(gulp.dest('assets/js/vendor'));
-});
-
-gulp.task('modernizr', () => {
-  return gulp.src([`${src.cssDest}/*.css`, `${src.jsDest}/*.js`])
-    .pipe(modernizr({
-      "cache": false,
-      "extra" : {
-        "shiv" : true,
-        "printshiv" : true,
-        "load" : true,
-        "mq" : true,
-        "cssclasses" : true
-      },
-      "options" : [
-        "setClasses",
-        "addTest",
-        "html5printshiv",
-        "testProp",
-        "fnBind",
-        "mq"
-      ],
-      "excludeTests": [
-        "hidden"
-      ],
-      "parseFiles" : true,
-      "crawl" : true,
-      "uglify" : true,
-      "matchCommunityTests" : true,
-    }))
-    .pipe(babel({
-      presets: [babelMinify]
-    }))
-    .pipe(gulp.dest(`${src.jsDest}/vendor`));
 });
 
 gulp.task('imagemin', () => {
