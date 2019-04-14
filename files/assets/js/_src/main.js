@@ -37,7 +37,7 @@ window.addEventListener('load', () => {
 
 app.on('init', async () => {
   // request example
-  const data = await app.request.get('https://req.dev.so');
+  const data = await app.get('https://req.dev.so');
   console.log(data);
 });
 

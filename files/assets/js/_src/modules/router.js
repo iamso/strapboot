@@ -14,7 +14,7 @@ app.on('init', () => {
         p = p.then(async () => {
           return Promise.all([
             app.loader.show(),
-            app.request.get(req.pathname)
+            app.get(req.pathname)
           ]).then(([l, data]) => {
             return new Promise(async (resolve, reject) => {
               const parser = new DOMParser();
