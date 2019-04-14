@@ -3,8 +3,6 @@
 // import autocreate from 'autocreate.js';
 import app from './app';
 
-import * as utils from './utils';
-
 app.on('init', () => {
   autocreate({
     selector: 'a[href]:not(.ignore-link):not([target="_blank"])',

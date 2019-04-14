@@ -1,7 +1,6 @@
 import InSicht from 'insicht';
 
 import app from './app';
-import * as utils from './utils';
 
 export default InSicht;
 

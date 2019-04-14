@@ -1,7 +1,10 @@
 import InSicht from './insicht';
 
 import app from './app';
-import * as utils from './utils';
+
+import sortBreakpoints from './utils/sortbreakpoints';
+import breakpointMatch from './utils/breakpointmatch';
+import throttle from './utils/throttle';
 
 app.on('init', () => {
 
@@ -122,11 +125,11 @@ app.on('init', () => {
       const isVideo = !!data.loadVideoSrcset;
 
       try {
-        const srcset = utils.sortBreakpoints(JSON.parse(data.loadSrcset || data.loadBgSrcset || data.loadVideoSrcset));
+        const srcset = sortBreakpoints(JSON.parse(data.loadSrcset || data.loadBgSrcset || data.loadVideoSrcset));
         const resize = () => {
           let src = srcset[0].value;
           for (const s of srcset) {
-            if (utils.breakpointMatch(s.breakpoint)) {
+            if (breakpointMatch(s.breakpoint)) {
               src = s.value;
             }
           }
@@ -166,7 +169,7 @@ app.on('init', () => {
           catch(er) {}
         };
 
-        window.addEventListener('resize', utils.throttle(resize, 50));
+        window.addEventListener('resize', throttle(resize, 50));
         resize();
       }
       catch(e) {
@@ -193,11 +196,11 @@ app.on('init', () => {
         const isVideo = !!data.videoSrcset;
 
         try {
-          const srcset = utils.sortBreakpoints(JSON.parse(data.imgSrcset || data.bbgSrcset || data.videoSrcset));
+          const srcset = sortBreakpoints(JSON.parse(data.imgSrcset || data.bbgSrcset || data.videoSrcset));
           const resize = () => {
             let src = srcset[0].value;
             for (const s of srcset) {
-              if (utils.breakpointMatch(s.breakpoint)) {
+              if (breakpointMatch(s.breakpoint)) {
                 src = s.value;
               }
             }
@@ -237,7 +240,7 @@ app.on('init', () => {
             catch(er) {}
           };
 
-          window.addEventListener('resize', utils.throttle(resize, 50));
+          window.addEventListener('resize', throttle(resize, 50));
           resize();
         }
         catch(e) {

@@ -1,8 +1,6 @@
 import Routrrr from 'routrrr';
 import app from './app';
 
-import * as utils from './utils';
-
 app.on('init', () => {
   const routrrr = app.router = new Routrrr();
 

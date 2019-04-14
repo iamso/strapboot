@@ -1,9 +1,7 @@
 /* global autocreate */
 
 // import autocreate from 'autocreate.js';
-
 import app from './app';
-import * as utils from './utils';
 
 const shareUrls = {
   facebook: 'https://www.facebook.com/sharer/sharer.php?u=',

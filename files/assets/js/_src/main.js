@@ -14,12 +14,12 @@ import './modules/log';
 import './modules/links';
 // import './modules/social';
 
-import * as utils from './modules/utils';
+import breakpointMatch from './modules/utils/breakpointmatch';
 
 // use a getter for isMobile
 delete app.isMobile;
 Object.defineProperty(app, 'isMobile', {
-  get: () => utils.breakpointMatch('xs', 'max')
+  get: () => breakpointMatch('xs', 'max')
 });
 
 window.addEventListener('pageshow', e => {

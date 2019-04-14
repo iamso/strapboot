@@ -3,7 +3,7 @@
 // import autocreate from 'autocreate.js';
 import app from './app';
 
-import * as utils from './utils';
+import throttle from './utils/throttle';
 
 app.on('init', () => {
   autocreate({
@@ -27,7 +27,7 @@ app.on('init', () => {
           el.style.height = `${height * factor}px`;
         };
 
-        this.throttled = utils.throttle(this.resize);
+        this.throttled = throttle(this.resize);
 
         window.addEventListener('resize', this.throttled);
         window.addEventListener('load', this.resize);
