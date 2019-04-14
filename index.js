@@ -88,7 +88,7 @@ ${colors.green('Done.')}`);
           if (isText('', file.contents)) {
             let content = file.contents.toString();
             content = _.template(content, null, _.templateSettings)(answers);
-            file.contents = new Buffer(content);
+            file.contents = Buffer.from(content);
           }
         }
         filepath = file.path;
