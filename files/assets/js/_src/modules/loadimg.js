@@ -6,6 +6,8 @@ import sortBreakpoints from './utils/sortbreakpoints';
 import breakpointMatch from './utils/breakpointmatch';
 import throttle from './utils/throttle';
 
+const loadedClass = 'media--loaded';
+
 app.on('init', () => {
 
   const loadImg = new InSicht({
@@ -34,7 +36,7 @@ app.on('init', () => {
         video.setAttribute('playsinline', true);
         video.oncanplay = () => {
           item.src = video.src;
-          item.classList.add('loaded');
+          item.classList.add(loadedClass);
         };
         video.src = src;
       }
@@ -48,7 +50,7 @@ app.on('init', () => {
             else {
               item.src = img.src;
             }
-            item.classList.add('loaded');
+            item.classList.add(loadedClass);
           }
           catch(e) {}
         };
@@ -86,7 +88,7 @@ app.on('init', () => {
           video.setAttribute('playsinline', true);
           video.oncanplay = () => {
             el.src = video.src;
-            el.classList.add('loaded');
+            el.classList.add(loadedClass);
           };
           video.src = src;
         }
@@ -100,7 +102,7 @@ app.on('init', () => {
               else {
                 el.src = img.src;
               }
-              el.classList.add('loaded');
+              el.classList.add(loadedClass);
             }
             catch(e) {}
           };
@@ -124,6 +126,8 @@ app.on('init', () => {
       const isBg = !!data.loadBgSrcset;
       const isVideo = !!data.loadVideoSrcset;
 
+      item.dataset.currentSrc = thumb;
+
       try {
         const srcset = sortBreakpoints(JSON.parse(data.loadSrcset || data.loadBgSrcset || data.loadVideoSrcset));
         const resize = () => {
@@ -134,39 +138,41 @@ app.on('init', () => {
             }
           }
 
-          try {
-            if (isVideo) {
-              const video = document.createElement('video');
-              video.muted = true;
-              video.autoplay = true;
-              video.loop = true;
-              video.setAttribute('playsinline', true);
-              video.oncanplay = () => {
-                if (item.src !== video.src) {
+          if (src && src !== item.dataset.currentSrc) {
+            try {
+              if (isVideo) {
+                const video = document.createElement('video');
+                video.muted = true;
+                video.autoplay = true;
+                video.loop = true;
+                video.setAttribute('playsinline', true);
+                video.oncanplay = () => {
                   item.src = video.src;
-                }
-                item.classList.add('loaded');
-              };
-              video.src = src ? src : item.src;
-            }
-            else {
-              const img = new Image();
-              img.onload = () => {
-                try {
-                  if (isBg) {
-                    item.style.backgroundImage = `url(${img.src})`;
+                  item.dataset.currentSrc = src
+                  item.classList.add(loadedClass);
+                };
+                video.src = src;
+              }
+              else {
+                const img = new Image();
+                img.onload = () => {
+                  try {
+                    if (isBg) {
+                      item.style.backgroundImage = `url(${img.src})`;
+                    }
+                    else {
+                      item.src = img.src;
+                    }
+                    item.dataset.currentSrc = src;
+                    item.classList.add(loadedClass);
                   }
-                  else {
-                    item.src = img.src;
-                  }
-                  item.classList.add('loaded');
-                }
-                catch(e) {}
-              };
-              img.src = src ? src : item.src;
+                  catch(e) {}
+                };
+                img.src = src;
+              }
             }
+            catch(er) {}
           }
-          catch(er) {}
         };
 
         window.addEventListener('resize', throttle(resize, 50));
@@ -195,6 +201,8 @@ app.on('init', () => {
         const isBg = !!data.bgSrcset;
         const isVideo = !!data.videoSrcset;
 
+        el.dataset.currentSrc = thumb;
+
         try {
           const srcset = sortBreakpoints(JSON.parse(data.imgSrcset || data.bbgSrcset || data.videoSrcset));
           const resize = () => {
@@ -205,39 +213,43 @@ app.on('init', () => {
               }
             }
 
-            try {
-              if (isVideo) {
-                const video = document.createElement('video');
-                video.muted = true;
-                video.autoplay = true;
-                video.loop = true;
-                video.setAttribute('playsinline', true);
-                video.oncanplay = () => {
-                  if (el.src !== video.src) {
-                    el.src = video.src;
-                  }
-                  el.classList.add('loaded');
-                };
-                video.src = src ? src : el.src;
-              }
-              else {
-                const img = new Image();
-                img.onload = () => {
-                  try {
-                    if (isBg) {
-                      el.style.backgroundImage = `url(${img.src})`;
+            if (src && src !== el.dataset.currentSrc) {
+              try {
+                if (isVideo) {
+                  const video = document.createElement('video');
+                  video.muted = true;
+                  video.autoplay = true;
+                  video.loop = true;
+                  video.setAttribute('playsinline', true);
+                  video.oncanplay = () => {
+                    if (el.src !== video.src) {
+                      el.src = video.src;
                     }
-                    else {
-                      el.src = img.src;
+                    el.dataset.currentSrc = src;
+                    el.classList.add(loadedClass);
+                  };
+                  video.src = src;
+                }
+                else {
+                  const img = new Image();
+                  img.onload = () => {
+                    try {
+                      if (isBg) {
+                        el.style.backgroundImage = `url(${img.src})`;
+                      }
+                      else {
+                        el.src = img.src;
+                      }
+                      el.dataset.currentSrc = src;
+                      el.classList.add(loadedClass);
                     }
-                    el.classList.add('loaded');
-                  }
-                  catch(e) {}
-                };
-                img.src = src ? src : el.src;
+                    catch(e) {}
+                  };
+                  img.src = src;
+                }
               }
+              catch(er) {}
             }
-            catch(er) {}
           };
 
           window.addEventListener('resize', throttle(resize, 50));

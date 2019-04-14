@@ -10,7 +10,7 @@
   filter: blur(60px);
   transition: filter 0.5s var(--easeOutQuad);
 
-  &.loaded {
+  &.media--loaded {
     filter: none;
   }
 }
