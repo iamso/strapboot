@@ -1,4 +1,4 @@
-/* global autocreate */
+/* global autocreate, requestAnimationFrame */
 
 // import autocreate from 'autocreate.js';
 import app from './app';
@@ -9,26 +9,28 @@ app.on('init', () => {
     create: function(el) {
 
       this.updateParallax = () => {
-        const rect = el.getBoundingClientRect();
-        const img = el.firstElementChild;
-        const diff = img.clientHeight - rect.height;
+        requestAnimationFrame(() => {
+          const rect = el.getBoundingClientRect();
+          const img = el.firstElementChild;
+          const diff = img.clientHeight - rect.height;
 
-        const position = rect.bottom;
-        const top = 0;
-        const bottom = window.innerHeight + rect.height;
-        const range = bottom;
+          const position = rect.bottom;
+          const top = 0;
+          const bottom = window.innerHeight + rect.height;
+          const range = bottom;
 
-        if (position <= bottom && position >= top) {
-          const factor = position / range;
-          const move = Math.round(factor * diff);
-          img.style.transform = `translate3d(0, -${move}px, 0)`;
-        }
-        else if (position > bottom) {
-          img.style.transform = `translate3d(0, -${diff}px, 0)`;
-        }
-        else {
-          img.style.transform = 'translate3d(0, 0, 0)';
-        }
+          if (position <= bottom && position >= top) {
+            const factor = position / range;
+            const move = Math.round(factor * diff);
+            img.style.transform = `translate3d(0, -${move}px, 0)`;
+          }
+          else if (position > bottom) {
+            img.style.transform = `translate3d(0, -${diff}px, 0)`;
+          }
+          else {
+            img.style.transform = 'translate3d(0, 0, 0)';
+          }
+        });
       };
 
       window.addEventListener('scroll', this.updateParallax);
