@@ -2,7 +2,6 @@ import 'autocreate.js';
 import app from './modules/app';
 import './modules/loader';
 import './modules/router';
-import './modules/objectfit';
 import './modules/collapsible';
 import './modules/scrolltotop';
 import './modules/scrollto';
