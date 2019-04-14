@@ -95,6 +95,7 @@ gulp.task('watch', (done) => {
     port: 3000,
     open: true,
     notify: false,
+    injectChanges: true,
   });
 
   gulp.watch(src.cssAll, gulp.series('css'));
@@ -143,7 +144,7 @@ gulp.task('css', (done) => {
     .pipe(rename('bundle.min.css'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.cssDest))
-    .pipe(reload({stream: true}))
+    .pipe(browserSync.stream())
     .pipe(notify('css done'));
 });
 
