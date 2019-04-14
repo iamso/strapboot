@@ -190,7 +190,6 @@ gulp.task('js', gulp.series('eslint', 'serviceworker', 'fallback', () => {
 
 gulp.task('vendor', () => {
   return gulp.src([
-      'node_modules/jquery/dist/jquery*',
       // 'node_modules/promise-polyfill/dist/promise.*',
       'node_modules/promise-polyfill/dist/*',
       'node_modules/objectFitPolyfill/dist/*',

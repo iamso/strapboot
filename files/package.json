@@ -70,7 +70,6 @@
     "httprom": "0.*",
     "insicht": "0.*",
     "intersection-observer": "^0.5.1",
-    "jquery": "^3.4.0",
     "objectFitPolyfill": "^2.2.0",
     "promise-polyfill": "^8.1.0",
     "routrrr": "0.*",
