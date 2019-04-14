@@ -80,7 +80,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
-    "postinstall": "[ -z \"$npm_config_production\" ] && ./node_modules/.bin/bower install",
+    "postinstall": "bower install",
     "dev": "gulp dev",
     "dist": "gulp dist"
   },
