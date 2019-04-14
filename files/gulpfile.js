@@ -190,9 +190,8 @@ gulp.task('js', gulp.series('eslint', 'serviceworker', 'fallback', () => {
 
 gulp.task('vendor', () => {
   return gulp.src([
-      // 'node_modules/promise-polyfill/dist/promise.*',
-      'node_modules/promise-polyfill/dist/*',
-      'node_modules/objectFitPolyfill/dist/*',
+      // 'node_modules/promise-polyfill/dist/*',
+      // 'node_modules/objectFitPolyfill/dist/*',
       'node_modules/intersection-observer/intersection-observer.js',
     ])
     .pipe(gulp.dest('assets/js/vendor'));
