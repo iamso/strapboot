@@ -1,15 +1,18 @@
 .collapsible {
 
-}
+  &__trigger {
 
-.collapsible-trigger {
+    .collapsible.collapsible--collapsed & {
 
-}
+    }
+  }
 
-.collapsible-content {
-  overflow: hidden;
-  transition: 0.3s var(--easeOutQuad);
-  .collapsible.collapsed & {
-    max-height: 0 !important;
+  &__content {
+    overflow: hidden;
+    transition: 0.3s var(--easeOutQuad);
+
+    .collapsible.collapsible--collapsed & {
+      max-height: 0 !important;
+    }
   }
 }

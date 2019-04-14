@@ -3,20 +3,21 @@
 // import autocreate from 'autocreate.js';
 import app from './app';
 
+const baseClass = 'collapsible';
 
 app.on('init', () => {
   autocreate({
-    selector: '.collapsible',
+    selector: `.${baseClass}`,
     create: function(element) {
-      const trigger = element.querySelector('.collapsible-trigger');
-      const content = element.querySelector('.collapsible-content');
+      const trigger = element.querySelector(`.${baseClass}__trigger`);
+      const content = element.querySelector(`.${baseClass}__content`);
       const contentTransition = e => {
         content.removeEventListener('transitionend', contentTransition);
         content.style.maxHeight = '';
       };
 
       trigger && content && trigger.addEventListener('click', e => {
-        e.preventDefault;
+        e.preventDefault();
 
         content.removeEventListener('transitionend', contentTransition);
         content.addEventListener('transitionend', contentTransition);
@@ -24,7 +25,7 @@ app.on('init', () => {
         content.style.maxHeight = `${content.scrollHeight}px`;
 
         setTimeout(() => {
-          element.classList.toggle('collapsed');
+          element.classList.toggle(`${baseClass}--collapsed`);
         }, 25);
 
         return false;

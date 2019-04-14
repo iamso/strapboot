@@ -1,6 +1,6 @@
 const defaults = {
-  loaded: 'site-loaded',
-  ready: 'site-ready',
+  loaded: 'site--loaded',
+  ready: 'site--ready',
   el: '.site-loader',
 };
 

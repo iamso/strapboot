@@ -5,33 +5,33 @@
   overflow: hidden;
   position: relative;
   &,
-  &-square,
-  &-ratio-1-1,
-  &-xs-square,
-  &-xs-ratio-1-1 {
+  &--square,
+  &--ratio-1-1,
+  &--xs-square,
+  &--xs-ratio-1-1 {
     padding-bottom: var(--ratio-square);
   }
-  &-portrait,
-  &-ratio-3-4,
-  &-xs-portrait,
-  &-xs-ratio-3-4 {
+  &--portrait,
+  &--ratio-3-4,
+  &--xs-portrait,
+  &--xs-ratio-3-4 {
     padding-bottom: var(--ratio-portrait);
   }
-  &-ratio-4-3,
-  &-xs-ratio-4-3 {
+  &--ratio-4-3,
+  &--xs-ratio-4-3 {
     padding-bottom: var(--ratio-4-3);
   }
-  &-landscape,
-  &-ratio-16-9,
-  &-xs-landscape,
-  &-xs-ratio-16-9 {
+  &--landscape,
+  &--ratio-16-9,
+  &--xs-landscape,
+  &--xs-ratio-16-9 {
     padding-bottom: var(--ratio-landscape);
   }
 
-  &-placeholder {
+  &__placeholder {
     background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 {{w}} {{h}}'><defs><symbol id='a' viewBox='0 0 90 66' opacity='0.3'><path d='M85 5v56H5V5h80m5-5H0v66h90V0z'/><circle cx='18' cy='20' r='6'/><path d='M56 14L37 39l-8-6-17 23h67z'/></symbol></defs><use xlink:href='#a' width='30%' x='35%'/></svg>") no-repeat;
 
-    &-mobile-only {
+    &--mobile-only {
       @media (--media-md-min) {
         background: none;
       }
@@ -39,109 +39,109 @@
   }
 
   @media (--media-sm-min) {
-    &-sm-square,
-    &-sm-ratio-1-1 {
+    &--sm-square,
+    &--sm-ratio-1-1 {
       padding-bottom: var(--ratio-square);
     }
-    &-sm-portrait,
-    &-sm-ratio-3-4 {
+    &--sm-portrait,
+    &--sm-ratio-3-4 {
       padding-bottom: var(--ratio-portrait);
     }
-    &-sm-ratio-4-3 {
+    &--sm-ratio-4-3 {
       padding-bottom: var(--ratio-4-3);
     }
-    &-sm-landscape,
-    &-sm-ratio-16-9 {
+    &--sm-landscape,
+    &--sm-ratio-16-9 {
       padding-bottom: var(--ratio-landscape);
     }
   }
 
   @media (--media-md-min) {
-    &-md-square,
-    &-md-ratio-1-1 {
+    &--md-square,
+    &--md-ratio-1-1 {
       padding-bottom: var(--ratio-square);
     }
-    &-md-portrait,
-    &-md-ratio-3-4 {
+    &--md-portrait,
+    &--md-ratio-3-4 {
       padding-bottom: var(--ratio-portrait);
     }
-    &-md-ratio-4-3 {
+    &--md-ratio-4-3 {
       padding-bottom: var(--ratio-4-3);
     }
-    &-md-landscape,
-    &-md-ratio-16-9 {
+    &--md-landscape,
+    &--md-ratio-16-9 {
       padding-bottom: var(--ratio-landscape);
     }
   }
 
   @media (--media-lg-min) {
-    &-lg-square,
-    &-lg-ratio-1-1 {
+    &--lg-square,
+    &--lg-ratio-1-1 {
       padding-bottom: var(--ratio-square);
     }
-    &-lg-portrait,
-    &-lg-ratio-3-4 {
+    &--lg-portrait,
+    &--lg-ratio-3-4 {
       padding-bottom: var(--ratio-portrait);
     }
-    &-lg-ratio-4-3 {
+    &--lg-ratio-4-3 {
       padding-bottom: var(--ratio-4-3);
     }
-    &-lg-landscape,
-    &-lg-ratio-16-9 {
+    &--lg-landscape,
+    &--lg-ratio-16-9 {
       padding-bottom: var(--ratio-landscape);
     }
   }
 
   @media (--media-xl-min) {
-    &-xl-square,
-    &-xl-ratio-1-1 {
+    &--xl-square,
+    &--xl-ratio-1-1 {
       padding-bottom: var(--ratio-square);
     }
-    &-xl-portrait,
-    &-xl-ratio-3-4 {
+    &--xl-portrait,
+    &--xl-ratio-3-4 {
       padding-bottom: var(--ratio-portrait);
     }
-    &-xl-ratio-4-3 {
+    &--xl-ratio-4-3 {
       padding-bottom: var(--ratio-4-3);
     }
-    &-xl-landscape,
-    &-xl-ratio-16-9 {
+    &--xl-landscape,
+    &--xl-ratio-16-9 {
       padding-bottom: var(--ratio-landscape);
     }
   }
 
   @media (--media-xxl-min) {
-    &-xxl-square,
-    &-xxl-ratio-1-1 {
+    &--xxl-square,
+    &--xxl-ratio-1-1 {
       padding-bottom: var(--ratio-square);
     }
-    &-xxl-portrait,
-    &-xxl-ratio-3-4 {
+    &--xxl-portrait,
+    &--xxl-ratio-3-4 {
       padding-bottom: var(--ratio-portrait);
     }
-    &-xxl-ratio-4-3 {
+    &--xxl-ratio-4-3 {
       padding-bottom: var(--ratio-4-3);
     }
-    &-xxl-landscape,
-    &-xxl-ratio-16-9 {
+    &--xxl-landscape,
+    &--xxl-ratio-16-9 {
       padding-bottom: var(--ratio-landscape);
     }
   }
 
   @media (--media-xxxl-min) {
-    &-xxxl-square,
-    &-xxxl-ratio-1-1 {
+    &--xxxl-square,
+    &--xxxl-ratio-1-1 {
       padding-bottom: var(--ratio-square);
     }
-    &-xxxl-portrait,
-    &-xxxl-ratio-3-4 {
+    &--xxxl-portrait,
+    &--xxxl-ratio-3-4 {
       padding-bottom: var(--ratio-portrait);
     }
-    &-xxxl-ratio-4-3 {
+    &--xxxl-ratio-4-3 {
       padding-bottom: var(--ratio-4-3);
     }
-    &-xxxl-landscape,
-    &-xxxl-ratio-16-9 {
+    &--xxxl-landscape,
+    &--xxxl-ratio-16-9 {
       padding-bottom: var(--ratio-landscape);
     }
   }

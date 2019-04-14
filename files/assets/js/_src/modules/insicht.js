@@ -8,8 +8,8 @@ app.on('init', () => {
 
   app.insicht = new InSicht({
     container: document.documentElement,
-    selector: '[data-insicht]',
-    visibleClass: 'sichtbar',
+    selector: '.insicht',
+    visibleClass: 'insicht--sichtbar',
     stagger: 200,
     threshold: 0,
     autoRefresh: true,

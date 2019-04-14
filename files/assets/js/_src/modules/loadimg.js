@@ -11,7 +11,7 @@ app.on('init', () => {
   const loadImg = new InSicht({
     container: document.documentElement,
     selector: '[data-load-img], [data-load-bg], [data-load-video]',
-    visibleClass: 'sichtbar',
+    visibleClass: 'insicht--sichtbar',
     stagger: 100,
     threshold: 0,
     autoRefresh: true,
@@ -60,7 +60,7 @@ app.on('init', () => {
   const loadMediaInside = new InSicht({
     container: document.documentElement,
     selector: '[data-load-media-inside]',
-    visibleClass: 'sichtbar',
+    visibleClass: 'insicht--sichtbar',
     stagger: 100,
     threshold: 0,
     autoRefresh: true,
@@ -113,7 +113,7 @@ app.on('init', () => {
   const loadSrcset = new InSicht({
     container: document.documentElement,
     selector: '[data-load-srcset], [data-load-bg-srcset], [data-load-video-srcset]',
-    visibleClass: 'sichtbar',
+    visibleClass: 'insicht--sichtbar',
     stagger: 100,
     threshold: 0,
     autoRefresh: true,
@@ -181,7 +181,7 @@ app.on('init', () => {
   const loadSrcsetInside = new InSicht({
     container: document.documentElement,
     selector: '[data-load-srcset-inside]',
-    visibleClass: 'sichtbar',
+    visibleClass: 'insicht--sichtbar',
     stagger: 100,
     threshold: 0,
     autoRefresh: true,

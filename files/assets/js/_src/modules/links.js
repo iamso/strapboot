@@ -5,7 +5,7 @@ import app from './app';
 
 app.on('init', () => {
   autocreate({
-    selector: 'a[href]:not(.ignore-link):not([target="_blank"])',
+    selector: 'a[href]:not(.link--no-routing):not([target="_blank"])',
     create: function(element) {
       element.addEventListener('click', async e => {
         const href = element.href;

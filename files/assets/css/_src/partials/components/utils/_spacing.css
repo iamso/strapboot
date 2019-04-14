@@ -1,47 +1,47 @@
 /* Spacing */
-.spacing-top-1 {
+.spacing__top--1 {
   @mixin spacing top, 1rem;
 }
 
-.spacing-top-2 {
+.spacing__top--2 {
   @mixin spacing top, 2rem;
 }
 
-.spacing-top-3 {
+.spacing__top--3 {
   @mixin spacing top, 3rem;
 }
 
-.spacing-top-4 {
+.spacing__top--4 {
   @mixin spacing top, 4rem;
 }
 
-.spacing-top-5 {
+.spacing__top--5 {
   @mixin spacing top, 5rem;
 }
 
-.spacing-top-6 {
+.spacing__top--6 {
   @mixin spacing top, 6rem;
 }
 
-.spacing-bottom-1 {
+.spacing__bottom--1 {
   @mixin spacing bottom, 1rem;
 }
 
-.spacing-bottom-2 {
+.spacing__bottom--2 {
   @mixin spacing bottom, 2rem;
 }
 
-.spacing-bottom-3 {
+.spacing__bottom--3 {
   @mixin spacing bottom, 3rem;
 }
 
-.spacing-bottom-4 {
+.spacing__bottom--4 {
   @mixin spacing bottom, 4rem;
 }
 
-.spacing-bottom-5 {
+.spacing__bottom--5 {
   @mixin spacing bottom, 5rem;
 }
-.spacing-bottom-6 {
+.spacing__bottom--6 {
   @mixin spacing bottom, 6rem;
 }
