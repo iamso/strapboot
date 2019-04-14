@@ -1,5 +1,6 @@
 const gulp            = require('gulp');
 const gutil           = require("gulp-util");
+const gulpif          = require('gulp-if');
 const path            = require('path');
 
 const babel           = require('gulp-babel');
@@ -128,16 +129,13 @@ gulp.task('css', (done) => {
       postcssReporter({ clearMessages: true }),
     ]))
     .on('error', done)
-    .pipe(rename('bundle.css'))
-    .pipe(banner(comment))
-    .pipe(gulp.dest(src.cssDest))
-    .pipe(cssnano({
+    .pipe(gulpif(webpackMode === 'production', cssnano({
       discardComments: {
         removeAll: true
       },
       zindex:  false,
-    }))
-    .pipe(rename('bundle.min.css'))
+    })))
+    .pipe(rename('bundle.css'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.cssDest))
     .pipe(browserSync.stream())
@@ -159,9 +157,11 @@ gulp.task('fallback', () =>  {
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
     .pipe(babel({
-      presets: [babelMinify, {comments: false}]
+      presets: ['@babel/env', {comments: false}],
     }))
-    .pipe(rename('fallback.min.js'))
+    .pipe(gulpif(webpackMode === 'production', babel({
+      presets: [babelMinify, {comments: false}]
+    })))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest));
 });
@@ -170,14 +170,11 @@ gulp.task('js', gulp.series('eslint', 'fallback', () => {
   webpackConfig.mode = webpackMode;
   return gulp.src(src.jsMain)
     .pipe(webpack(webpackConfig)).on('error', onError)
-    .pipe(rename('bundle.js'))
-    .pipe(banner(comment))
-    .pipe(gulp.dest(src.jsDest))
-    .pipe(replace(/window\.app\s\=.*/, ''))
-    .pipe(babel({
+    .pipe(gulpif(webpackMode === 'production', replace(/window\.app\s\=.*/, '')))
+    .pipe(gulpif(webpackMode === 'production', babel({
       presets: [babelMinify, {comments: false}]
-    }))
-    .pipe(rename('bundle.min.js'))
+    })))
+    .pipe(rename('bundle.js'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
     .pipe(reload({stream: true}))

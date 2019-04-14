@@ -53,7 +53,7 @@ module.exports = {
           options: {
             plugins: ['@babel/plugin-transform-runtime'],
             presets: [
-              ['@babel/preset-env', {
+              ['@babel/env', {
                 modules: false,
                 // useBuiltIns: 'usage',
               }]
