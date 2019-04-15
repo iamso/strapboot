@@ -119,12 +119,15 @@ gulp.task('css', (done) => {
         autoprefixer: prefixConfig,
         stage: 0,
         features: {
-          'nesting-rules': true
+          'nesting-rules': true,
+          'color-mod-function': {
+            unresolved: 'ignore',
+          },
         },
       }),
       postcssNested,
       postcssCalc,
-      postcssColor({preserveCustomProps: false}),
+      // postcssColor({preserveCustomProps: false}),
       postcssComments({removeAll: true}),
       postcssReporter({ clearMessages: true }),
     ]))
@@ -138,7 +141,7 @@ gulp.task('css', (done) => {
     .pipe(rename('bundle.css'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.cssDest))
-    .pipe(browserSync.stream())
+    .pipe(reload({stream: true}))
     .pipe(notify('css done'));
 });
 
