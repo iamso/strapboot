@@ -7,6 +7,10 @@ body {
   align-content: stretch;
   align-items: stretch;
 
+  html:not(.site--ready) & {
+    overflow: hidden;
+  }
+
   .debug-mode &,
   &.debug-mode {
     &:before {

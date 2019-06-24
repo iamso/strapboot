@@ -2,8 +2,8 @@
 @-ms-viewport { width: device-width; }
 
 *,
-*::before,
-*::after {
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -27,6 +27,9 @@ body {
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
 
+  overflow: auto;
+  overflow: overlay;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
   -webkit-overflow-scrolling: touch;
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
@@ -44,15 +47,17 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 p {
+  break-inside: avoid;
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-a {
+a,
+.link {
   color: var(--link-color);
   text-decoration: var(--link-decoration);
   transition: var(--link-transition);
@@ -70,7 +75,7 @@ a {
 hr {
   border: 0;
   border-bottom: 1px solid #ccc;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
 }
 
 img {
@@ -82,7 +87,7 @@ ol,
 ul,
 dl {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 ol ol,
@@ -93,7 +98,7 @@ ul ol {
 }
 
 blockquote {
-  margin: 0 0 1rem;
+  margin: 0 0 1.5rem;
 }
 
 [role="button"] {
