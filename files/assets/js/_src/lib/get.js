@@ -3,9 +3,9 @@ function get(url, progress) {
     let contentType;
     fetch(url)
       .then(response => {
-        if (!response.ok) {
-          throw Error(response.status+' '+response.statusText);
-        }
+        // if (!response.ok) {
+        //   throw Error(response.status+' '+response.statusText);
+        // }
 
         contentType = response.headers.get('Content-Type');
 
