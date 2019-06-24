@@ -10,9 +10,15 @@ app.on('init', () => {
     .use(req => {
       if (app.initialized) {
         p = p.then(async () => {
+          const request = new Request(req.pathname, {
+            headers: new Headers({
+              'accept': 'text/html'
+            })
+          });
+
           return Promise.all([
             app.loader.show(),
-            app.get(req.pathname)
+            app.get(request)
           ]).then(([l, data]) => {
             return new Promise(async (resolve, reject) => {
               const parser = new DOMParser();
