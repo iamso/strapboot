@@ -5,13 +5,19 @@ import app from './app';
 
 app.on('init', () => {
   autocreate({
-    selector: 'a[href]:not(.link--no-routing):not([target="_blank"])',
+    selector: 'a',
     create: function(element) {
       element.addEventListener('click', async e => {
         const href = element.href;
         let _href = element.getAttribute('href');
         const target = element.target;
         const regex = new RegExp('^' + location.origin);
+
+        element.blur();
+
+        if (target === '_blank' || element.classList.contains('link--no-routing')) {
+          return;
+        }
 
         if (href) {
           if (e.metaKey || e.shiftKey || e.ctrlKey || e.altKey) {
