@@ -18,11 +18,7 @@ app.on('init', () => {
   });
 
   app.el.win.addEventListener('scroll', e => {
-    if (window.pageYOffset >= 200) {
-      app.el.html.classList.add('has-scrolled');
-    }
-    else {
-      app.el.html.classList.remove('has-scrolled');
-    }
+    app.el.html.classList.toggle('site--scrolled', window.pageYOffset >= 30);
+    app.el.html.classList.toggle('site--scrolled-deep', window.pageYOffset >= 200);
   });
 });
