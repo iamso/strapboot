@@ -12,6 +12,7 @@ const postcssImport   = require('postcss-import');
 const postcssMixins   = require('postcss-mixins');
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssCalc     = require('postcss-calc');
+const postcssRandom   = require('postcss-random');
 const postcssComments = require('postcss-discard-comments');
 const postcssNested   = require('postcss-nested');
 const postcssEach     = require('postcss-each');
@@ -19,6 +20,7 @@ const postcssGradient = require('postcss-easing-gradients');
 const postcssColor    = require('postcss-color-function');
 const postcssFor      = require('postcss-for');
 const postcssCond     = require('postcss-conditionals');
+const postcssAtRoot   = require('postcss-atroot');
 const postcssSimple   = require('postcss-simple-vars');
 const postcssProps    = require('postcss-custom-properties');
 const postcssReporter = require('postcss-reporter');
@@ -37,6 +39,7 @@ const replace         = require('gulp-replace');
 const pkg             = require('./package.json');
 
 const browserSync     = require('browser-sync').create();
+const ssi             = require('browsersync-ssi');
 const reload          = browserSync.reload;
 
 const comment         = `/*!
@@ -91,6 +94,14 @@ gulp.task('watch', (done) => {
     server: {
       baseDir: './',
     },
+    // server: {
+    //   baseDir: './',
+    //   middleware: ssi({
+    //     baseDir: __dirname,
+    //     ext: '.html',
+    //     // version: '2.24.7'
+    //   })
+    // },
     port: 3000,
     open: true,
     notify: false,
@@ -126,7 +137,9 @@ gulp.task('css', (done) => {
         },
       }),
       postcssNested,
+      postcssRandom,
       postcssCalc,
+      postcssAtRoot,
       // postcssColor({preserveCustomProps: false}),
       postcssComments({removeAll: true}),
       postcssReporter({ clearMessages: true }),
