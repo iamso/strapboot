@@ -1,3 +1,5 @@
 # Browsers that we support
-last 4 versions
+last 4 version
+not IE <= 11
+not IE_mob <= 11
 
