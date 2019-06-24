@@ -1,7 +1,7 @@
 (function(window, document) {
 
   // current script src dir
-  const src = [].slice.call(document.querySelectorAll('script'), 0).pop().src.replace(/\/[^\/]+$/, '');
+  const src = document.currentScript.src.substr(0, document.currentScript.src.lastIndexOf('/') + 1);
 
   // demonstrate javascript support
   const html = document.documentElement;
