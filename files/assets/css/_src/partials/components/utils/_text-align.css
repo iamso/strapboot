@@ -10,75 +10,16 @@
 .text--xs-right {
   text-align: right !important;
 }
-
-@media (--media-sm-min) {
-  .text--sm-left {
-    text-align: left !important;
-  }
-  .text--sm-center {
-    text-align: center !important;
-  }
-  .text--sm-right {
-    text-align: right !important;
-  }
+.text--xs-justify {
+  text-align: justify !important;
 }
 
-@media (--media-md-min) {
-  .text--md-left {
-    text-align: left !important;
-  }
-  .text--md-center {
-    text-align: center !important;
-  }
-  .text--md-right {
-    text-align: right !important;
-  }
-}
-
-@media (--media-lg-min) {
-  .text--lg-left {
-    text-align: left !important;
-  }
-  .text--lg-center {
-    text-align: center !important;
-  }
-  .text--lg-right {
-    text-align: right !important;
-  }
-}
-
-@media (--media-xl-min) {
-  .text--xl-left {
-    text-align: left !important;
-  }
-  .text--xl-center {
-    text-align: center !important;
-  }
-  .text--xl-right {
-    text-align: right !important;
-  }
-}
-
-@media (--media-xxl-min) {
-  .text--xxl-left {
-    text-align: left !important;
-  }
-  .text--xxl-center {
-    text-align: center !important;
-  }
-  .text--xxl-right {
-    text-align: right !important;
-  }
-}
-
-@media (--media-xxxl-min) {
-  .text--xxxl-left {
-    text-align: left !important;
-  }
-  .text--xxxl-center {
-    text-align: center !important;
-  }
-  .text--xxxl-right {
-    text-align: right !important;
+@each $breakpoint in sm, md, lg, xl, xxl, xxxl {
+  @media (--media-$(breakpoint)-min) {
+    @each $align in left, center, right, justify {
+      .text--$(breakpoint)-$align {
+        text-align: $(align) !important;
+      }
+    }
   }
 }

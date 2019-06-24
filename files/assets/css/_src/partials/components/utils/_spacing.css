@@ -1,47 +1,74 @@
 /* Spacing */
-.spacing__top--1 {
+.spacing__top--1,
+.spacing__top--xs-1 {
   @mixin spacing top, 1rem;
 }
 
-.spacing__top--2 {
+.spacing__top--2,
+.spacing__top--xs-2 {
   @mixin spacing top, 2rem;
 }
 
-.spacing__top--3 {
+.spacing__top--3,
+.spacing__top--xs-3 {
   @mixin spacing top, 3rem;
 }
 
-.spacing__top--4 {
+.spacing__top--4,
+.spacing__top--xs-4 {
   @mixin spacing top, 4rem;
 }
 
-.spacing__top--5 {
+.spacing__top--5,
+.spacing__top--xs-5 {
   @mixin spacing top, 5rem;
 }
 
-.spacing__top--6 {
+.spacing__top--6,
+.spacing__top--xs-6 {
   @mixin spacing top, 6rem;
 }
 
-.spacing__bottom--1 {
+.spacing__bottom--1,
+.spacing__bottom--xs-1 {
   @mixin spacing bottom, 1rem;
 }
 
-.spacing__bottom--2 {
+.spacing__bottom--2,
+.spacing__bottom--xs-2 {
   @mixin spacing bottom, 2rem;
 }
 
-.spacing__bottom--3 {
+.spacing__bottom--3,
+.spacing__bottom--xs-3 {
   @mixin spacing bottom, 3rem;
 }
 
-.spacing__bottom--4 {
+.spacing__bottom--4,
+.spacing__bottom--xs-4 {
   @mixin spacing bottom, 4rem;
 }
 
-.spacing__bottom--5 {
+.spacing__bottom--5,
+.spacing__bottom--xs-5 {
   @mixin spacing bottom, 5rem;
 }
-.spacing__bottom--6 {
+
+.spacing__bottom--6,
+.spacing__bottom--xs-6 {
   @mixin spacing bottom, 6rem;
+}
+
+@each $breakpoint in sm, md, lg, xl, xxl, xxxl {
+  @media (--media-$(breakpoint)-min) {
+    @for $i from 1 to 6 {
+      .spacing__top--$(breakpoint)-$i {
+        @mixin spacing top, $(i)rem;
+      }
+
+      .spacing__bottom--$(breakpoint)-$i {
+        @mixin spacing bottom, $(i)rem;
+      }
+    }
+  }
 }
