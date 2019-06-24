@@ -3,6 +3,7 @@
 import 'fastclick';
 import App from '../lib/app';
 import get from '../lib/get';
+import SiteLoader from '../lib/siteloader';
 import Scrrroll from 'scrrroll';
 import {easeInOutQuad} from 'easings.js';
 
@@ -11,6 +12,7 @@ const app = new App();
 app.src = document.currentScript.src.substr(0, document.currentScript.src.lastIndexOf('/') + 1);
 
 app.get = get;
+app.loader = new SiteLoader();
 app.scroll = Scrrroll;
 app.scroll.duration = 800;
 app.scroll.easing = easeInOutQuad;

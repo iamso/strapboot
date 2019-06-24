@@ -1,6 +1,5 @@
 import 'autocreate.js';
 import app from './modules/app';
-import './modules/loader';
 import './modules/router';
 import './modules/collapsible';
 import './modules/scrolltotop';
@@ -28,10 +27,7 @@ window.addEventListener('pageshow', e => {
 });
 
 window.addEventListener('load', () => {
-  try {
-    app.loader.hide();
-  }
-  catch(err) {}
+  app.loader.hide();
 });
 
 app.on('init', async () => {
@@ -45,10 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await app.emit('init:page', null, true);
   app.initialized = true;
   if (document.readyState === 'complete') {
-    try {
-      app.loader.hide();
-    }
-    catch(err) {}
+    app.loader.hide();
   }
   const event = document.createEvent('Event');
   event.initEvent('site-init', true, true);
