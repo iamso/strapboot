@@ -26,20 +26,21 @@ module.exports = {
 
   resolve: {
     alias: {
+      '@': path.join(__dirname, 'assets/js/_src'),
     },
     modules: ['bower_components', 'node_modules'],
     descriptionFiles: ['bower.json', 'package.json'],
-    mainFields: ['browser', 'main'],
+    mainFields: ['browser', 'module', 'main'],
+  },
+
+  optimization: {
+    usedExports: true
   },
 
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.ProvidePlugin({
-      // $: 'jquery',
-      // jQuery: 'jquery',
-      // 'window.jQuery': 'jquery'
-    }),
+    // new webpack.ProvidePlugin({}),
     new Visualizer(),
   ],
 

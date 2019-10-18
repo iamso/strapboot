@@ -1,18 +1,18 @@
 import 'autocreate.js';
-import app from './modules/app';
-import './modules/router';
-import './modules/collapsible';
-import './modules/scrolltotop';
-import './modules/scrollto';
-import './modules/parallax';
-import './modules/insicht';
-import './modules/loadimg';
-import './modules/share';
-import './modules/log';
-import './modules/links';
-// import './modules/social';
+import app from '@/modules/app';
+import '@/modules/router';
+import '@/modules/collapsible';
+import '@/modules/scrolltotop';
+import '@/modules/scrollto';
+import '@/modules/parallax';
+import '@/modules/insicht';
+import '@/modules/loadimg';
+import '@/modules/share';
+import '@/modules/log';
+import '@/modules/links';
+// import '@/modules/social';
 
-import breakpointMatch from './modules/utils/breakpointmatch';
+import breakpointMatch from '@/modules/utils/breakpointmatch';
 
 // use a getter for isMobile
 delete app.isMobile;
@@ -64,4 +64,6 @@ if (app.hasServiceWorker) {
   });
 }
 
-window.app = app;
+if (process.env.NODE_ENV !== 'production') {
+  window.app = app;
+}

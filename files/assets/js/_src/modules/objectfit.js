@@ -1,9 +1,9 @@
 /* global autocreate */
 
 // import autocreate from 'autocreate.js';
-import app from './app';
+import app from '@/modules/app';
 
-import throttle from './utils/throttle';
+import throttle from '@/modules/utils/throttle';
 
 app.on('init', () => {
   autocreate({

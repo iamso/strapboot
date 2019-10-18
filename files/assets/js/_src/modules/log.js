@@ -1,5 +1,5 @@
 
-import app from './app';
+import app from '@/modules/app';
 
 app.on('init', () => {
   const c = console;

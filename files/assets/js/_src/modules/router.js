@@ -1,5 +1,5 @@
 import Routrrr from 'routrrr';
-import app from './app';
+import app from '@/modules/app';
 
 app.on('init', () => {
   const routrrr = app.router = new Routrrr();

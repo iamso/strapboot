@@ -1,7 +1,7 @@
 /* global autocreate */
 
 // import autocreate from 'autocreate.js';
-import app from './app';
+import app from '@/modules/app';
 
 app.on('init', () => {
   autocreate({

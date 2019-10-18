@@ -1,10 +1,10 @@
-import InSicht from './insicht';
+import InSicht from '@/modules/insicht';
 
-import app from './app';
+import app from '@/modules/app';
 
-import sortBreakpoints from './utils/sortbreakpoints';
-import breakpointMatch from './utils/breakpointmatch';
-import throttle from './utils/throttle';
+import sortBreakpoints from '@/modules/utils/sortbreakpoints';
+import breakpointMatch from '@/modules/utils/breakpointmatch';
+import throttle from '@/modules/utils/throttle';
 
 const loadedClass = 'media--loaded';
 

@@ -1,9 +1,9 @@
 /* global FastClick */
 
 import 'fastclick';
-import App from '../lib/app';
-import get from '../lib/get';
-import SiteLoader from '../lib/siteloader';
+import App from '@/lib/app';
+import get from '@/lib/get';
+import SiteLoader from '@/lib/siteloader';
 import Scrrroll from 'scrrroll';
 import {easeInOutQuad} from 'easings.js';
 
