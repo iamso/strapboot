@@ -1,0 +1,37 @@
+/**
+ * CSS Column helpers
+ */
+
+.css-cols {
+  &--1,
+  &--xs-1 {
+    columns: 1;
+  }
+
+  &--2,
+  &--xs-2 {
+    columns: 2;
+  }
+
+  &--3,
+  &--xs-3 {
+    columns: 3;
+  }
+
+  &--4,
+  &--xs-4 {
+    columns: 4;
+  }
+
+  @each $breakpoint, $screensize in $breakpoints {
+    @if ($breakpoint != 'xxs' and $breakpoint != 'xs') {
+      @include media('>=#{$breakpoint}') {
+        @for $i from 1 to 4 {
+          &--#{$breakpoint}-#{$i} {
+            columns: $i
+          }
+        }
+      }
+    }
+  }
+}

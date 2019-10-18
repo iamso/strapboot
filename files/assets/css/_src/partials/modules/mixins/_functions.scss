@@ -1,0 +1,30 @@
+// returns first element of a list
+@function first($list) {
+	@return nth($list, 1);
+}
+
+// returns last element of a list
+@function last($list) {
+	@return nth($list, length($list));
+}
+
+// helper to show size of breakpoint
+@function breakpoint($breakpoint) {
+	@return map_get($breakpoints, $breakpoint);
+}
+
+// returns unitless value
+@function strip-unit($number) {
+	@return $number / ($number * 0 + 1);
+}
+
+// replace string
+@function str-replace($string, $search, $replace: "") {
+	$index: str-index($string, $search);
+
+	@if ($index) {
+		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+	}
+
+	@return $string;
+}

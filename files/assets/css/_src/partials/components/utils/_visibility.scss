@@ -1,0 +1,36 @@
+/**
+ * Visibility helpers
+ */
+
+.hidden {
+  &,
+  &--xs-up {
+    display: none !important;
+  }
+
+  @include media('<xs') {
+    &--xs-down {
+      display: none !important;
+    }
+  }
+
+  @each $breakpoint, $screensize in $breakpoints {
+    @if ($breakpoint != 'xxs' and $breakpoint != 'xs') {
+      @include media('>=#{$breakpoint}') {
+        &--#{$breakpoint}-up {
+          display: none !important;
+        }
+      }
+
+      @include media('<#{$breakpoint}') {
+        &--#{$breakpoint}-down {
+          display: none !important;
+        }
+      }
+    }
+  }
+}
+
+.invisible {
+  visibility: hidden;
+}

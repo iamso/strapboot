@@ -1,0 +1,178 @@
+// check https://gist.github.com/coco-napky/ecc85c2115e0469602f86d49d19d1baa
+
+@mixin grid($reverse: false) {
+  @include grid-direction($reverse);
+  box-sizing: border-box;
+  display: grid;
+  flex: 1 1 auto;
+	grid-auto-flow: row dense;
+  grid-auto-rows: auto;
+	grid-template-columns: repeat($grid-columns, 1fr);
+  grid-template-rows: auto;
+  grid-gap: $grid-gutter-width;
+}
+
+@mixin grid-direction($reverse: false) {
+  @if ($reverse) {
+    direction: rtl;
+  }
+
+  @else {
+    direction: ltr;
+  }
+}
+
+@mixin grid-alignment-horizontal($alignment: 'inherit') {
+  justify-items: $alignment;
+}
+
+@mixin grid-alignment-vertical($alignment: 'start') {
+  align-items: $alignment;
+}
+
+@mixin grid-spacing-horizontal($spacing) {
+  justify-content: $spacing;
+}
+
+@mixin grid-spacing-vertical($spacing) {
+  align-content: $spacing;
+}
+
+@mixin grid-item() {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column;
+  direction: initial;
+}
+
+@mixin grid-item-span($columns-to-span: $grid-columns, $rows-to-span: $grid-columns) {
+  grid-column: span $columns-to-span;
+	grid-row: span $rows-to-span;
+}
+
+@mixin create-grid-items($key, $prefix: '') {
+  .#{$prefix}grid {
+    &--reverse-#{$key} {
+      @include grid-direction(true);
+    }
+
+    &--forward-#{$key} {
+      @include grid-direction(false);
+    }
+
+    &--start-#{$key} {
+      @include grid-alignment-horizontal('start');
+    }
+
+    &--center-#{$key} {
+      @include grid-alignment-horizontal('center');
+    }
+
+    &--end-#{$key} {
+      @include grid-alignment-horizontal('end');
+    }
+
+    &--stretch-#{$key} {
+      @include grid-alignment-horizontal('stretch');
+    }
+
+    &--top-#{$key} {
+      @include grid-alignment-vertical('start');
+    }
+
+    &--middle-#{$key} {
+      @include grid-alignment-vertical('center');
+    }
+
+    &--bottom-#{$key} {
+      @include grid-alignment-vertical('end');
+    }
+
+    &--justify {
+      &-start-#{$key} {
+        @include grid-spacing-horizontal('start');
+      }
+      &-end-#{$key} {
+        @include grid-spacing-horizontal('end');
+      }
+      &-center-#{$key} {
+        @include grid-spacing-horizontal('center');
+      }
+      &-stretch-#{$key} {
+        @include grid-spacing-horizontal('stretch');
+      }
+      &-space-around-#{$key} {
+        @include grid-spacing-horizontal('space-around');
+      }
+      &-space-between-#{$key} {
+        @include grid-spacing-horizontal('space-between');
+      }
+      &-space-evenly-#{$key} {
+        @include grid-spacing-horizontal('space-evenly');
+      }
+    }
+
+    &--align {
+      &-start-#{$key} {
+        @include grid-spacing-vertical('start');
+      }
+      &-end-#{$key} {
+        @include grid-spacing-vertical('end');
+      }
+      &-center-#{$key} {
+        @include grid-spacing-vertical('center');
+      }
+      &-stretch-#{$key} {
+        @include grid-spacing-vertical('stretch');
+      }
+      &-space-around-#{$key} {
+        @include grid-spacing-vertical('space-around');
+      }
+      &-space-between-#{$key} {
+        @include grid-spacing-vertical('space-between');
+      }
+      &-space-evenly-#{$key} {
+        @include grid-spacing-vertical('space-evenly');
+      }
+    }
+
+    &__item {
+      &--#{$key} {
+        $str: "&";
+
+        @include grid-item;
+        @include grid-item-span('auto');
+
+        @for $i from 1 through $grid-columns {
+          @for $ii from 1 through $grid-columns {
+            &-#{$i}-#{$ii} {
+              @include grid-item;
+              @include grid-item-span($i, $ii);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin create-grid($prefix: '') {
+  @if ($prefix and $prefix != '') {
+    $prefix: $prefix + '-';
+  }
+
+  .#{$prefix}grid {
+    @include grid;
+  }
+
+  @each $breakpoint, $size in $breakpoints {
+    @if ($breakpoint == 'xs') {
+      @include create-grid-items($breakpoint, $prefix);
+    }
+    @elseif ($breakpoint != 'xxs' and $breakpoint != 'xs') {
+      @include media('>=#{$breakpoint}') {
+        @include create-grid-items($breakpoint, $prefix);
+      }
+    }
+  }
+}

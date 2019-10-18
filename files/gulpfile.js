@@ -6,23 +6,12 @@ const path            = require('path');
 const babel           = require('gulp-babel');
 const webpack         = require('webpack-stream');
 
+const sass            = require('gulp-sass');
 const postcss         = require('gulp-postcss');
-const postcssApply    = require('postcss-apply');
-const postcssImport   = require('postcss-import');
-const postcssMixins   = require('postcss-mixins');
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssCalc     = require('postcss-calc');
-const postcssRandom   = require('postcss-random');
 const postcssComments = require('postcss-discard-comments');
-const postcssNested   = require('postcss-nested');
-const postcssEach     = require('postcss-each');
 const postcssGradient = require('postcss-easing-gradients');
-const postcssColor    = require('postcss-color-function');
-const postcssFor      = require('postcss-for');
-const postcssCond     = require('postcss-conditionals');
-const postcssAtRoot   = require('postcss-atroot');
-const postcssSimple   = require('postcss-simple-vars');
-const postcssProps    = require('postcss-custom-properties');
 const postcssReporter = require('postcss-reporter');
 
 const cssnano         = require('gulp-cssnano');
@@ -52,14 +41,14 @@ const comment         = `/*!
 `;
 
 const src             = {
-  cssAll:       'assets/css/_src/**/*.css',
-  cssMain:      'assets/css/_src/main.css',
+  cssAll:       'assets/css/_src/**/*.{css,scss}',
+  cssMain:      'assets/css/_src/main.{css,scss}',
   cssDest:      'assets/css',
   jsAll:        'assets/js/_src/**/*.js',
   jsMain:       'assets/js/_src/main.js',
   jsDest:       'assets/js',
   iconsAll:     'assets/icons/*.svg',
-  iconsCss:     'assets/icons/_template/_icons.css',
+  iconsCss:     'assets/icons/_template/_icons.{css,scss}',
   iconsCssDest: 'assets/css/_src/partials/modules/',
   iconsDest:    'assets/fonts',
 };
@@ -86,6 +75,8 @@ const prefixConfig    = {
 
 const webpackConfig   = require('./webpack.config');
 let webpackMode = 'none';
+
+sass.compiler = require('node-sass');
 
 gulp.task('watch', (done) => {
   browserSync.init(['**/*.html', '**/*.php'], {
@@ -116,16 +107,11 @@ gulp.task('watch', (done) => {
 
 gulp.task('css', (done) => {
   return gulp.src(src.cssMain)
+    .pipe(sass({
+      includePaths: ['node_modules']
+    }).on('error', sass.logError))
     .pipe(postcss([
-      postcssImport,
-      postcssMixins,
-      postcssProps,
-      postcssFor,
-      postcssEach,
-      postcssSimple,
-      postcssCond,
       postcssGradient,
-      postcssApply,
       postcssPresetEnv({
         autoprefixer: prefixConfig,
         stage: 0,
@@ -136,10 +122,7 @@ gulp.task('css', (done) => {
           },
         },
       }),
-      postcssNested,
-      postcssRandom,
       postcssCalc,
-      postcssAtRoot,
       // postcssColor({preserveCustomProps: false}),
       postcssComments({removeAll: true}),
       postcssReporter({ clearMessages: true }),
@@ -261,7 +244,7 @@ gulp.task('iconfont', () => {
           cssPrefix: 'icon-',
           fontPath: '../fonts/',
         })))
-        .pipe(rename('_icons.css'))
+        .pipe(rename({basename: '_icons'}))
         .pipe(gulp.dest(src.iconsCssDest));
     })
     .pipe(gulp.dest(src.iconsDest));

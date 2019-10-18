@@ -1,0 +1,18 @@
+/**
+ * Position helpers
+ */
+
+.position {
+  &--relative {
+    position: relative !important;
+  }
+  &--absolute {
+    position: absolute !important;
+  }
+  &--static {
+    position: static !important;
+  }
+  &--fixed {
+    position: fixed !important;
+  }
+}

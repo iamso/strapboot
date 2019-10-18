@@ -1,0 +1,23 @@
+//repeats a list of values to a param (e.g. font-size) and repeats this mapping for every breakpoint; Use for responsive spacing, font-sizes, margins, or whatever you want to adjust list-based
+@mixin responsify($values: (1em), $param: 'font-size', $prefix: '') {
+	@if ($prefix == '-') {
+		#{$param}: -1 * first($values);
+	} @else {
+		#{$param}: first($values);
+	}
+
+	@each $breakpoint, $size in $breakpoints {
+    $index: index(($breakpoints), ($breakpoint $size));
+
+		// loop for every breakpoint until list of values is empty
+    @include media('>=#{$breakpoint}') {
+			@if (length($values) >= $index) {
+				@if ($prefix == '-') {
+					#{$param}: -1 * nth($values, $index);
+				} @else {
+					#{$param}: nth($values, $index);
+				}
+			}
+		}
+	}
+}

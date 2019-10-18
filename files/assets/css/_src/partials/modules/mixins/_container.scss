@@ -1,0 +1,31 @@
+@mixin container() {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $container-padding;
+  padding-left: $container-padding;
+  width: 100%;
+}
+
+@mixin container-width() {
+  @include container;
+
+  @each $breakpoint, $size in $breakpoints {
+    @if ($breakpoint != 'xxs' and $breakpoint != 'xs') {
+      @include media('>=#{$breakpoint}') {
+        max-width: map-get($container-width, $breakpoint);
+      }
+    }
+  }
+}
+
+@mixin create-container($prefix: '') {
+  .#{$prefix}container-fluid {
+    @include container;
+    @content;
+  }
+
+  .#{$prefix}container {
+    @include container-width;
+    @content;
+  }
+}

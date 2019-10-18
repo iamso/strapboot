@@ -1,0 +1,213 @@
+// check https://gist.github.com/coco-napky/ecc85c2115e0469602f86d49d19d1baa
+
+@mixin flex-grid($reverse: false) {
+  @include flex-grid-direction($reverse);
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  margin-right: $grid-gutter-compensation;
+  margin-left: $grid-gutter-compensation;
+}
+
+@mixin flex-grid-direction($reverse: false) {
+  @if ($reverse) {
+    flex-direction: row-reverse;
+  }
+
+  @else {
+    flex-direction: row;
+  }
+}
+
+@mixin flex-grid-column-direction($reverse: false) {
+  @if ($reverse) {
+    flex-direction: column-reverse;
+  }
+
+  @else {
+    flex-direction: column;
+  }
+}
+
+@mixin flex-grid-alignment-horizontal($alignment) {
+  $justify: inherit;
+
+  @if ($alignment == 'center') {
+    $justify: center;
+  }
+
+  @elseif ($alignment == 'end') {
+    $justify: flex-end;
+  }
+
+  @elseif ($alignment == 'start') {
+    $justify: flex-start;
+  }
+
+  justify-content: $justify;
+}
+
+@mixin flex-grid-alignment-vertical($alignment) {
+  @if ($alignment == 'middle') {
+    align-items: center;
+  }
+
+  @else if ($alignment == 'bottom') {
+    align-items: flex-end;
+  }
+
+  @else {
+    align-items: flex-start;
+  }
+}
+
+@mixin flex-grid-spacing($spacing) {
+  justify-content: $spacing;
+}
+
+@mixin flex-grid-item($reverse: false) {
+  @include flex-grid-column-direction($reverse);
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding-right: $grid-half-gutter-width;
+  padding-left: $grid-half-gutter-width;
+  padding-bottom: $grid-gutter-width;
+}
+
+@mixin flex-grid-item-span($columns-to-span: $grid-columns, $total-columns-in-row: $grid-columns) {
+  @if ($columns-to-span == 'auto') {
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 100%;
+  }
+
+  @else {
+    $span-percentage: (100% / $total-columns-in-row * $columns-to-span);
+    flex-basis: $span-percentage;
+    max-width: $span-percentage;
+  }
+}
+
+@mixin flex-grid-item-offset($columns-to-offset, $total-columns-in-row: $grid-columns) {
+  margin-left: (100% / $total-columns-in-row * $columns-to-offset);
+}
+
+@mixin flex-grid-item-order($position) {
+  @if ($position == 'last') {
+    $position: 9999;
+  }
+
+  @else if ($position == 'first') {
+    $position: -9999;
+  }
+
+  order: $position;
+}
+
+@mixin create-flex-grid-items($key, $prefix: '') {
+  .#{$prefix}grid {
+    &--reverse-#{$key} {
+      @include flex-grid-direction(true);
+    }
+
+    &--forward-#{$key} {
+      @include flex-grid-direction(false);
+    }
+
+    &--vertical {
+      &-reverse-#{$key} {
+        @include flex-grid-column-direction(true);
+      }
+
+      &-forward-#{$key} {
+        @include flex-grid-column-direction(false);
+      }
+    }
+
+    &--start-#{$key} {
+      @include flex-grid-alignment-horizontal('start');
+    }
+
+    &--center-#{$key} {
+      @include flex-grid-alignment-horizontal('center');
+    }
+
+    &--end-#{$key} {
+      @include flex-grid-alignment-horizontal('end');
+    }
+
+    &--top-#{$key} {
+      @include flex-grid-alignment-vertical('top');
+    }
+
+    &--middle-#{$key} {
+      @include flex-grid-alignment-vertical('middle');
+    }
+
+    &--bottom-#{$key} {
+      @include flex-grid-alignment-vertical('bottom');
+    }
+
+    &--around-#{$key} {
+      @include flex-grid-spacing('space-around');
+    }
+
+    &--between-#{$key} {
+      @include flex-grid-spacing('space-between');
+    }
+
+    &__item {
+      &--#{$key} {
+        $str: "&";
+
+        @include flex-grid-item;
+        @include flex-grid-item-span('auto');
+
+        @for $i from 1 through $grid-columns {
+          &-#{$i} {
+            @include flex-grid-item;
+            @include flex-grid-item-span($i);
+          }
+
+          &-offset-#{$i} {
+            @include flex-grid-item;
+            @include flex-grid-item-offset($i);
+          }
+        }
+      }
+
+      &--first-#{$key} {
+        @include flex-grid-item-order('first');
+      }
+
+      &--last-#{$key} {
+        @include flex-grid-item-order('last');
+      }
+    }
+  }
+}
+
+@mixin create-flex-grid($prefix: '') {
+  @if ($prefix and $prefix != '') {
+    $prefix: $prefix + '-';
+  }
+
+  .#{$prefix}grid {
+    @include flex-grid;
+  }
+
+  @each $breakpoint, $size in $breakpoints {
+    @if ($breakpoint == 'xs') {
+      @include create-flex-grid-items($breakpoint, $prefix);
+    }
+    @elseif ($breakpoint != 'xxs' and $breakpoint != 'xs') {
+      @include media('>=#{$breakpoint}') {
+        @include create-flex-grid-items($breakpoint, $prefix);
+      }
+    }
+  }
+}

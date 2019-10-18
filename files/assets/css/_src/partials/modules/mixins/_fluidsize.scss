@@ -1,0 +1,19 @@
+//returns a fluid size based on vw parameters - used for fluid spacing or fluid font-sizes;
+@mixin fluidsize($min-size, $max-size, $param:'font-size') {
+	//define min-size
+	#{$param}: $min-size;
+	//define fluid size behavior on screens above minimum
+  $first-breakpoint: first(map-keys($breakpoints));
+  $last-breakpoint: first(map-keys($breakpoints));
+
+  @include media('>=#{$first-breakpoint}') {
+    $diff: strip-unit($max-size - $min-size);
+    $screendiff: strip-unit(map-get($screens, screen-xl) - map-get($screens, screen-min));
+    #{$param}: calc(#{$min-size} + #{$diff} * ((100vw - #{map-get($screens, screen-min)}) / #{$screendiff}));
+  }
+
+	//define max font sizes on biggest screen
+	@include media('>=#{$last-breakpoint}') {
+		#{$param}: $max-size;
+	}
+}

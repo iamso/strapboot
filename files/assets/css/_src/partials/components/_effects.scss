@@ -1,0 +1,129 @@
+/**
+ * Viewport animation effects
+ */
+
+$effect-delay: 0.4s;
+
+.insicht--fade-in {
+  opacity: 0;
+  .no-js &,
+  .site--ready &.insicht--sichtbar {
+    opacity: 1;
+    transition: opacity 2s $effect-delay $ease-out-quad;
+    &.insicht--fast {
+      transition-duration: 1s;
+    }
+  }
+}
+
+.insicht--fade-up {
+  opacity: 0;
+  transform: translate3d(0, 2rem, 0);
+  .no-js &,
+  .site--ready &.insicht--sichtbar {
+    opacity: 1;
+    transform: none;
+    transition: opacity 2s $effect-delay $ease-out-quad, transform 2.4s $effect-delay $ease-out-expo;
+    &.insicht--fast {
+      transition-duration: 1s, 1.2s;
+    }
+  }
+}
+
+.insicht--fade-down {
+  opacity: 0;
+  transform: translate3d(0, -2rem, 0);
+  .no-js &,
+  .site--ready &.insicht--sichtbar {
+    opacity: 1;
+    transform: none;
+    transition: opacity 2s $effect-delay $ease-out-quad, transform 2.4s $effect-delay $ease-out-expo;
+    &.insicht--fast {
+      transition-duration: 1s, 1.2s;
+    }
+  }
+}
+
+.insicht--fade-left {
+  opacity: 0;
+  transform: translate3d(-2rem, 0, 0);
+  .no-js &,
+  .site--ready &.insicht--sichtbar {
+    opacity: 1;
+    transform: none;
+    transition: opacity 2s $effect-delay $ease-out-quad, transform 2.4s $effect-delay $ease-out-expo;
+    &.insicht--fast {
+      transition-duration: 1s, 1.2s;
+    }
+  }
+}
+
+.insicht--fade-right {
+  opacity: 0;
+  transform: translate3d(2rem, 0, 0);
+  .no-js &,
+  .site--ready &.insicht--sichtbar {
+    opacity: 1;
+    transform: none;
+    transition: opacity 2s $effect-delay $ease-out-quad, transform 2.4s $effect-delay $ease-out-expo;
+    &.insicht--fast {
+      transition-duration: 1s, 1.2s;
+    }
+  }
+}
+
+.insicht--scale-up {
+  opacity: 0;
+  transform: scale(0);
+  .no-js &,
+  .site--ready &.insicht--sichtbar {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0s $effect-delay, transform 2.4s $effect-delay $ease-out-expo;
+    &.insicht--fast {
+      transition-duration: 0s, 0.6s;
+    }
+  }
+}
+
+.insicht--scale-down {
+  opacity: 0;
+  transform: scale(2);
+  .no-js &,
+  .site--ready &.insicht--sichtbar {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0s $effect-delay, transform 2.4s $effect-delay $ease-out-expo;
+    &.insicht--fast {
+      transition-duration: 0s, 0.6s;
+    }
+  }
+}
+
+.insicht--scale-fade-up {
+  opacity: 0;
+  transform: scale(0);
+  .no-js &,
+  .site--ready &.insicht--sichtbar {
+    opacity: 1;
+    transform: none;
+    transition: opacity 2s $effect-delay $ease-out-quad, transform 2.4s $effect-delay $ease-out-expo;
+    &.insicht--fast {
+      transition-duration: 1s, 0.6s;
+    }
+  }
+}
+
+.insicht--scale-fade-down {
+  opacity: 0;
+  transform: scale(2);
+  .no-js &,
+  .site--ready &.insicht--sichtbar {
+    opacity: 1;
+    transform: none;
+    transition: opacity 2s $effect-delay $ease-out-quad, transform 2.4s $effect-delay $ease-out-expo;
+    &.insicht--fast {
+      transition-duration: 1s, 0.6s;
+    }
+  }
+}

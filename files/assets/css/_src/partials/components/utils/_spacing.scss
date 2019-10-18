@@ -1,0 +1,81 @@
+/**
+ * Spacing helpers
+ */
+
+.spacing {
+  .spacing__top--1,
+  .spacing__top--xs-1 {
+    @include spacing(top, 1rem);
+  }
+
+  .spacing__top--2,
+  .spacing__top--xs-2 {
+    @include spacing(top, 2rem);
+  }
+
+  .spacing__top--3,
+  .spacing__top--xs-3 {
+    @include spacing(top, 3rem);
+  }
+
+  .spacing__top--4,
+  .spacing__top--xs-4 {
+    @include spacing(top, 4rem);
+  }
+
+  .spacing__top--5,
+  .spacing__top--xs-5 {
+    @include spacing(top, 5rem);
+  }
+
+  .spacing__top--6,
+  .spacing__top--xs-6 {
+    @include spacing(top, 6rem);
+  }
+
+  .spacing__bottom--1,
+  .spacing__bottom--xs-1 {
+    @include spacing(bottom, 1rem);
+  }
+
+  .spacing__bottom--2,
+  .spacing__bottom--xs-2 {
+    @include spacing(bottom, 2rem);
+  }
+
+  .spacing__bottom--3,
+  .spacing__bottom--xs-3 {
+    @include spacing(bottom, 3rem);
+  }
+
+  .spacing__bottom--4,
+  .spacing__bottom--xs-4 {
+    @include spacing(bottom, 4rem);
+  }
+
+  .spacing__bottom--5,
+  .spacing__bottom--xs-5 {
+    @include spacing(bottom, 5rem);
+  }
+
+  .spacing__bottom--6,
+  .spacing__bottom--xs-6 {
+    @include spacing(bottom, 6rem);
+  }
+
+  @each $breakpoint, $screensize in $breakpoints {
+    @if ($breakpoint != 'xxs' and $breakpoint != 'xs') {
+      @include media('>=#{$breakpoint}') {
+        @for $i from 1 to 6 {
+          &__top--#{$breakpoint}-#{$i} {
+            @include spacing(top, ($i * 1rem));
+          }
+
+          &__bottom--#{$breakpoint}-#{$i} {
+            @include spacing(bottom, ($i * 1rem));
+          }
+        }
+      }
+    }
+  }
+}

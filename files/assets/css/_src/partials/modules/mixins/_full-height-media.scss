@@ -1,0 +1,34 @@
+/**
+ * full height media
+ * with object-fit workaround
+ */
+
+@mixin full-height-media($fit: cover, $position: center) {
+  object-fit: $fit;
+  object-position: $position;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  &::-webkit-media-controls {
+    display: none;
+  }
+
+  /**
+   * TODO use this workaround if no object-fit polyfill is used
+   */
+  /* .no-objectfit & {
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: none;
+    max-height: none;
+    transform: translate(-50%, -50%);
+  } */
+}
