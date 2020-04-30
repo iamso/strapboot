@@ -1,6 +1,6 @@
-import breakpoints from './breakpoints';
-import breakpointOrder from './breakpointorder';
-import getBreakpointIndex from './getbreakpointindex';
+import breakpoints from '@/modules/utils/breakpoints';
+import breakpointOrder from '@/modules/utils/breakpointOrder';
+import getBreakpointIndex from '@/modules/utils/getBreakpointIndex';
 
 // check if the breakpoint matches
 export function breakpointMatch(breakpoint, type = 'min') {

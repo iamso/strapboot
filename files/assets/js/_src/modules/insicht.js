@@ -1,8 +1,5 @@
 import InSicht from 'insicht';
-
 import app from '@/modules/app';
-
-export default InSicht;
 
 app.on('init', () => {
 

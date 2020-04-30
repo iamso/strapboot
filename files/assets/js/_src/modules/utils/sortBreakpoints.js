@@ -1,4 +1,4 @@
-import breakpointOrder from './breakpointorder';
+import breakpointOrder from '@/modules/utils/breakpointOrder';
 
 export function sortBreakpoints(obj = {}) {
   const arr = [];
