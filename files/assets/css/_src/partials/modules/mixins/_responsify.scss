@@ -2,7 +2,8 @@
 @mixin responsify($values: (1em), $param: 'font-size', $prefix: '') {
 	@if ($prefix == '-') {
 		#{$param}: -1 * first($values);
-	} @else {
+  }
+  @else {
 		#{$param}: first($values);
 	}
 
@@ -14,7 +15,8 @@
 			@if (length($values) >= $index) {
 				@if ($prefix == '-') {
 					#{$param}: -1 * nth($values, $index);
-				} @else {
+        }
+        @else {
 					#{$param}: nth($values, $index);
 				}
 			}

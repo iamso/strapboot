@@ -1,0 +1,18 @@
+@mixin hover($class: null) {
+	@media (hover: hover) {
+		@content;
+	}
+
+	@if ($class) {
+		@at-root {
+			.is-ie#{$class} {
+				@content;
+			}
+		}
+	}
+	@else {
+		.is-ie & {
+			@content;
+		}
+	}
+}

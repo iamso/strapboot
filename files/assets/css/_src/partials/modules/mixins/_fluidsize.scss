@@ -1,19 +1,39 @@
-//returns a fluid size based on vw parameters - used for fluid spacing or fluid font-sizes;
-@mixin fluidsize($min-size, $max-size, $param:'font-size') {
-	//define min-size
-	#{$param}: $min-size;
-	//define fluid size behavior on screens above minimum
-  $first-breakpoint: first(map-keys($breakpoints));
-  $last-breakpoint: first(map-keys($breakpoints));
+// returns a fluid size based on vw parameters - used for fluid spacing or fluid font-sizes;
+@mixin fluidsize($values: $font-sizes-sm, $param: 'font-size') {
+	// properties
+	$minsize: first($values);
+	$maxsize: last($values);
 
-  @include media('>=#{$first-breakpoint}') {
-    $diff: strip-unit($max-size - $min-size);
-    $screendiff: strip-unit(map-get($screens, screen-xl) - map-get($screens, screen-min));
-    #{$param}: calc(#{$min-size} + #{$diff} * ((100vw - #{map-get($screens, screen-min)}) / #{$screendiff}));
-  }
+	// define min-font-size
+	#{$param}: $minsize;
 
-	//define max font sizes on biggest screen
-	@include media('>=#{$last-breakpoint}') {
-		#{$param}: $max-size;
+	@if (length($values) > 1) {
+    $breakpoint-min: first(map-keys($breakpoints));
+    $breakpoint-max: last(map-keys($breakpoints));
+
+		@if (length($values) <= length($breakpoints)) {
+			$breakpoint-max: index-to-key(length($values), $breakpoints);
+		}
+
+		$breakpoint-min-value: map-get($breakpoints, $breakpoint-min);
+		$breakpoint-max-value: map-get($breakpoints, $breakpoint-max);
+
+    // define fluid font size behavior on breakpoints above minimum
+    @include media('>=#{$breakpoint-min}') {
+			$diff: strip-unit($maxsize - $minsize);
+			$breakpointdiff: strip-unit($breakpoint-max-value - $breakpoint-min-value);
+
+			// convert em from the breakpoint to rem, to prevent influence from parent elements
+			@if (unit($breakpoint-min-value) == 'em') {
+				$breakpoint-min-value: strip-unit($breakpoint-min-value) + 'rem';
+			}
+
+			#{$param}: calc(#{$minsize} + #{$diff} * ((100vw - #{$breakpoint-min-value}) / #{$breakpointdiff}));
+		}
+
+		// define max font sizes on biggest breakpoint
+		@include media('>=#{$breakpoint-max}') {
+			#{$param}: $maxsize;
+		}
 	}
 }

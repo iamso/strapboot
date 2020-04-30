@@ -8,6 +8,13 @@
 	@return nth($list, length($list));
 }
 
+// get the map key at index
+@function index-to-key($index, $map: $breakpoints) {
+  $keys: map-keys($map); // A list of all keys in a $breakpoints map
+
+  @return nth($keys, $index);
+}
+
 // helper to show size of breakpoint
 @function breakpoint($breakpoint) {
 	@return map_get($breakpoints, $breakpoint);
@@ -22,7 +29,7 @@
 @function str-replace($string, $search, $replace: "") {
 	$index: str-index($string, $search);
 
-	@if ($index) {
+	@if $index {
 		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
 	}
 

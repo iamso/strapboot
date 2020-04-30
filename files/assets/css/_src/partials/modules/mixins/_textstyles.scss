@@ -1,0 +1,25 @@
+@mixin font($type: 'normal') {
+	// examples
+	@if ($type == 'normal') {
+		font-family: $font-family-base;
+		font-style: $font-style-normal;
+		font-weight: $font-weight-normal;
+	}
+	@elseif ($type == 'medium') {
+		font-family: $font-family-base;
+		font-style: $font-style-normal;
+		font-weight: $font-weight-medium;
+	}
+	@elseif ($type == 'bold') {
+		font-family: $font-family-base;
+		font-style: $font-style-normal;
+		font-weight: $font-weight-bold;
+	}
+	@elseif ($type == 'italic') {
+		font-family: $font-family-serif;
+		font-style: $font-style-italic;
+		font-weight: $font-weight-italic;
+		letter-spacing: 0;
+		text-transform: none;
+	}
+}

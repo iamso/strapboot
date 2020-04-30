@@ -1,0 +1,11 @@
+@mixin module-padding() {
+	$el: &;
+
+	&:not(#{$el}--no-padding):not(#{$el}--no-padding-top) {
+		@include responsify($module-padding, 'padding-top');
+	}
+
+	&:not(#{$el}--no-padding):not(#{$el}--no-padding-bottom) {
+		@include responsify($module-padding, 'padding-bottom');
+	}
+}
