@@ -21,7 +21,6 @@
     "@babel/runtime": "^7.9.6",
     "babel-loader": "^8.1.0",
     "babel-preset-minify": "^0.5.1",
-    "bower": "^1.8.8",
     "browser-sync": "^2.26.7",
     "browsersync-ssi": "^0.2.4",
     "bs-fullscreen-message": "^1.1.0",
@@ -72,7 +71,6 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
-    "postinstall": "bower install",
     "dev": "gulp dev",
     "dist": "gulp dist",
     "build": "gulp dist"

@@ -20,16 +20,14 @@ module.exports = {
     publicPath: '/',
   },
 
-  externals: {
-    'jquery': 'jQuery',
-  },
+  externals: {},
 
   resolve: {
     alias: {
       '@': path.join(__dirname, 'assets/js/_src'),
     },
-    modules: ['bower_components', 'node_modules'],
-    descriptionFiles: ['bower.json', 'package.json'],
+    modules: ['node_modules'],
+    descriptionFiles: ['package.json'],
     mainFields: ['browser', 'module', 'main'],
   },
 
