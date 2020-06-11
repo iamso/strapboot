@@ -4,3 +4,11 @@ node_modules
 
 *.sublime-project
 *.sublime-workspace
+
+# if you want to exclude build files, uncomment the following:
+# assets/css/bundle.css
+# assets/fonts/icons.*
+# assets/js/bundle.js
+# assets/js/fallback.js
+# /stats.html
+# /sw.js
