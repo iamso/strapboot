@@ -193,7 +193,7 @@ gulp.task('vendor', () => {
       // 'node_modules/objectFitPolyfill/dist/*',
       'node_modules/intersection-observer/intersection-observer.js',
     ])
-    .pipe(gulp.dest('assets/js/vendor'));
+    .pipe(gulp.dest(path.join(src.jsDest, 'vendor')));
 });
 
 gulp.task('imagemin', () => {
