@@ -1,7 +1,7 @@
 import autocreate from 'autocreate.js';
 import app from '@/modules/app';
 
-import throttle from '@/modules/utils/throttle';
+import throttle from '@/utils/throttle';
 
 app.on('init', () => {
   autocreate({

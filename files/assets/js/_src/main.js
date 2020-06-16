@@ -12,7 +12,7 @@ import '@/modules/log';
 import '@/modules/links';
 // import '@/modules/social';
 
-import breakpointMatch from '@/modules/utils/breakpointMatch';
+import breakpointMatch from '@/utils/breakpointMatch';
 
 // use a getter for isMobile
 delete app.isMobile;

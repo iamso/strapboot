@@ -1,4 +1,4 @@
-import breakpointOrder from '@/modules/utils/breakpointOrder';
+import breakpointOrder from '@/utils/breakpointOrder';
 
 export function getBreakpointIndex(breakpoint) {
   return breakpointOrder.indexOf(breakpoint);
