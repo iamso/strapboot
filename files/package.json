@@ -6,7 +6,9 @@
   "author": "{%= author %}",
   "copyright": "{%= copyright %}",
   "private": true,
-  "sideEffects": false,
+  "sideEffects": [
+    "assets/js/_src/modules/*"
+  ],
   "repository": {
     "type": "git",
     "url": "{%= repository %}"
