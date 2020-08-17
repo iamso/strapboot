@@ -7,19 +7,17 @@ Clone, fork or download the repository, run `npm install` and start coding. That
 ### NPM packages
 To install all the required NPM packages, run `npm install`.
 
-### Bower components
-The Bower components are automatically installed after `npm install`.
-
-However, if that doesn't work, for some strange reason, run `bower install`.
-
 ### Gulp
 There are 2 main gulp tasks to run:
 
-
 | Task | Description |
 |---|---|
-| `gulp` (default) | Runs the distribution tasks and then starts the watch task, that listens for changes to `.js` and `.css` files. |
-| `gulp dist` | Runs only the distribution tasks and then stops. |
+| `npm start` | Runs the `dev` task. This also includes the `watch` task. |
+| `npm run dist` | Runs the `dist` task. |
+
+## Caveat
+
+Support for IE and early Edge versions (before Chromium) has been dropped. Use at your own risk.
 
 ## Credits
 

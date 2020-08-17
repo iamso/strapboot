@@ -24,10 +24,14 @@ You can start the main tasks with the following commands:
 
 | Task | Description |
 | ---- | ----------  |
-| `gulp` / `gulp dev` | Runs the `dev` task. This also includes the `watch` task. |
-| `gulp dist` | Runs the `dist` task. |
+| `npm start` | Runs the `dev` task. This also includes the `watch` task. |
+| `npm run dist` | Runs the `dist` task. |
 
 Check the gulpfile for further information.
+
+## Caveat
+
+Support for IE and early Edge versions (before Chromium) has been dropped. Use at your own risk.
 
 ## License
 
