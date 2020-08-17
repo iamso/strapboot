@@ -6,7 +6,7 @@
   const fs        = require('fs');
   const vfs       = require('vinyl-fs');
   const map       = require('map-stream');
-  const isText    = require('istextorbinary').isTextSync;
+  const isText    = require('istextorbinary').isText;
   const colors    = require('colors');
   const through   = require('through2');
   const globule   = require('globule');
