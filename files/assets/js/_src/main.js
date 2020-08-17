@@ -12,14 +12,6 @@ import '@/modules/log';
 import '@/modules/links';
 // import '@/modules/social';
 
-import breakpointMatch from '@/utils/breakpointMatch';
-
-// use a getter for isMobile
-delete app.isMobile;
-Object.defineProperty(app, 'isMobile', {
-  get: () => breakpointMatch('xs', 'max')
-});
-
 window.addEventListener('pageshow', e => {
   if (e.persisted) {
     window.location.reload();
