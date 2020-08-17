@@ -57,7 +57,7 @@ const babelMinify = [
   'minify',
   {
     mangle: {
-      exclude: ['jQuery', '$']
+      exclude: []
     },
     deadcode: true,
     removeConsole: true,
