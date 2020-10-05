@@ -1,19 +1,11 @@
-import * as features from '@/utils/features';
 import breakpointMatch from '@/utils/breakpointMatch';
 
 export default class App {
-  constructor() {
-    this.env = process.env.NODE_ENV;
-    this.mobileBreakpoint = 'xs';
+  env = process.env.NODE_ENV;
+  mobileBreakpoint = 'xs';
+  _events = {};
 
-    for (let i in features) {
-      if (features.hasOwnProperty(i)) {
-        this[i] = features[i];
-      }
-    }
-
-    this._events = {};
-  }
+  constructor() {}
 
   get isMobile() {
     return breakpointMatch(this.mobileBreakpoint, 'max');

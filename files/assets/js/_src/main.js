@@ -12,6 +12,8 @@ import '@/modules/log';
 import '@/modules/links';
 // import '@/modules/social';
 
+import {hasServiceWorker} from '@/utils/features';
+
 window.addEventListener('pageshow', e => {
   if (e.persisted) {
     window.location.reload();
@@ -44,7 +46,7 @@ window.addEventListener('site-init', () => {
   console.log('all done');
 });
 
-if (app.hasServiceWorker) {
+if (hasServiceWorker) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').then(registration => {
       // Registration was successful

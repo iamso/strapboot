@@ -4,6 +4,7 @@ import get from '@/lib/get';
 import SiteLoader from '@/lib/SiteLoader';
 import Scrrroll from 'scrrroll';
 import {easeInOutQuad} from 'easings.js';
+import {isAndroid, isIos, isIos9, isIphone, isIpad, isSafari, isIE, isEdge, isTouch} from '@/utils/features';
 
 const app = new App();
 
@@ -32,17 +33,17 @@ app.on('init', () => {
   FastClick.attach(app.el.body);
 
   // add os specific classes
-  app.isAndroid && app.el.html.classList.add('is-android');
-  app.isIos && app.el.html.classList.add('is-ios');
-  app.isIos9 && app.el.html.classList.add('is-ios-9');
-  app.isIphone && app.el.html.classList.add('is-iphone');
-  app.isIpad && app.el.html.classList.add('is-ipad');
-  app.isSafari && app.el.html.classList.add('is-safari');
-  app.isIE && app.el.html.classList.add('is-ie');
-  app.isEdge && app.el.html.classList.add('is-edge');
+  isAndroid && app.el.html.classList.add('is-android');
+  isIos && app.el.html.classList.add('is-ios');
+  isIos9 && app.el.html.classList.add('is-ios-9');
+  isIphone && app.el.html.classList.add('is-iphone');
+  isIpad && app.el.html.classList.add('is-ipad');
+  isSafari && app.el.html.classList.add('is-safari');
+  isIE && app.el.html.classList.add('is-ie');
+  isEdge && app.el.html.classList.add('is-edge');
 
-  app.el.html.classList.add(`${app.isTouch ? '' : 'no-'}touchevents`);
-  (app.isIos9 || app.isIE || app.isEdge) && app.el.html.classList.add('no-clip-path');
+  app.el.html.classList.add(`${isTouch ? '' : 'no-'}touchevents`);
+  (isIos9 || isIE || isEdge) && app.el.html.classList.add('no-clip-path');
 });
 
 export default app;
