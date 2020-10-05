@@ -1,5 +1,5 @@
 const gulp            = require('gulp');
-const gutil           = require("gulp-util");
+const gutil           = require('gulp-util');
 const gulpif          = require('gulp-if');
 const path            = require('path');
 
@@ -67,7 +67,7 @@ const babelMinify = [
   }
 ];
 
-const prefixConfig    = {
+const prefixConfig = {
   diff: true,
   map: false,
   remove: false,
@@ -75,6 +75,7 @@ const prefixConfig    = {
 
 const webpackConfig   = require('./webpack.config');
 let webpackMode = 'none';
+let silent = false;
 
 sass.compiler = require('node-sass');
 
@@ -125,30 +126,35 @@ gulp.task('css', (done) => {
       postcssCalc,
       // postcssColor({preserveCustomProps: false}),
       postcssComments({removeAll: true}),
-      postcssReporter({ clearMessages: true }),
+      postcssReporter({clearMessages: true}),
     ]))
     .on('error', done)
     .pipe(gulpif(webpackMode === 'production', cssnano({
       discardComments: {
         removeAll: true
       },
-      zindex:  false,
+      zindex: false,
     })))
     .pipe(rename('bundle.css'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.cssDest))
     .pipe(reload({stream: true}))
-    .pipe(notify('css done'));
+    .pipe(gulpif(!silent, notify('css done')));
 });
 
-gulp.task('eslint', () => {
-  return gulp.src(src.jsAll)
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+gulp.task('eslint', (done) => {
+  if (silent) {
+    done();
+  }
+  else {
+    return gulp.src(src.jsAll)
+      .pipe(eslint())
+      .pipe(eslint.format())
+      .pipe(eslint.failAfterError());
+  }
 });
 
-gulp.task('serviceworker', () =>  {
+gulp.task('serviceworker', () => {
   return gulp.src('assets/js/_src/sw.js')
     .pipe(babel({
       presets: ['@babel/env', {comments: false}],
@@ -160,7 +166,7 @@ gulp.task('serviceworker', () =>  {
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('fallback', () =>  {
+gulp.task('fallback', () => {
   return gulp.src('assets/js/_src/fallback.js')
     .pipe(babel({
       presets: ['@babel/env', {comments: false}],
@@ -175,16 +181,16 @@ gulp.task('fallback', () =>  {
 gulp.task('js', gulp.series('eslint', 'serviceworker', 'fallback', () => {
   webpackConfig.mode = webpackMode;
   return gulp.src(src.jsMain)
-    .pipe(webpack(webpackConfig)).on('error', onError)
     .pipe(gulpif(webpackMode === 'production', replace(/window\.app\s\=.*/, '')))
-    .pipe(gulpif(webpackMode === 'production', babel({
-      presets: [babelMinify, {comments: false}]
-    })))
+    .pipe(webpack(webpackConfig)).on('error', onError)
+    // .pipe(gulpif(webpackMode === 'production', babel({
+    //   presets: [babelMinify, {comments: false}]
+    // })))
     .pipe(rename('bundle.js'))
     .pipe(banner(comment))
     .pipe(gulp.dest(src.jsDest))
     .pipe(reload({stream: true}))
-    .pipe(notify('js done'));
+    .pipe(gulpif(!silent, notify('js done')));
 }));
 
 gulp.task('vendor', () => {
@@ -261,11 +267,20 @@ gulp.task('webpack-prod', (done) => {
   done();
 });
 
+gulp.task('silent', (done) => {
+  silent = true;
+  done();
+});
+
 gulp.task('dev', gulp.series('webpack-dev', 'iconfont', 'css', 'js', 'fallback', 'vendor', 'watch'));
 
 gulp.task('dist', gulp.series('webpack-prod', 'iconfont', 'css', 'js', 'fallback', 'vendor', 'imagemin'), () => {
   return gulp.src('./')
     .pipe(notify('dist done'));
+});
+
+gulp.task('dist:silent', gulp.series('silent', 'webpack-prod', 'iconfont', 'css', 'js', 'fallback', 'vendor', 'imagemin'), () => {
+  return gulp.src('./');
 });
 
 gulp.task('default', gulp.series('dev'));

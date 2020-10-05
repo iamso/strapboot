@@ -76,6 +76,7 @@
     "start": "gulp",
     "dev": "gulp dev",
     "dist": "gulp dist",
+    "dist:silent": "gulp dist:silent",
     "build": "gulp dist"
   },
   "license": "MIT"
