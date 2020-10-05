@@ -5,7 +5,6 @@ const pkg = require('./package.json');
 
 let include = [
   /assets/,
-  /bower_components/,
 ];
 if (pkg.dependencies) {
   for (let dependency of Object.keys(pkg.dependencies)) {
