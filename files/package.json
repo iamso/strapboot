@@ -68,7 +68,8 @@
     "routrrr": "0.*",
     "scrrroll": "0.*",
     "tiny-msg-client": "0.*",
-    "ujs": "0.*"
+    "ujs": "0.*",
+    "whatwg-fetch": "^3.4.1"
   },
   "main": "gulpfile.js",
   "scripts": {
