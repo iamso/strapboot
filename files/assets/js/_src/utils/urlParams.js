@@ -2,7 +2,7 @@ export function urlParams(obj, prefix) {
   if (obj instanceof FormData) {
     const temp = {};
 
-    obj.forEach(function(value, key){
+    obj.forEach(function(value, key) {
       temp[key] = value;
     });
 
@@ -13,27 +13,27 @@ export function urlParams(obj, prefix) {
   }
 
   const str = [];
-  for (let p in obj) {
+  for (const p in obj) {
     if (obj.hasOwnProperty(p) && obj[p] !== '') {
-      const k = prefix ? prefix + "[" + p + "]" : p;
+      const k = prefix ? prefix + '[' + p + ']' : p;
       const v = obj[p];
-      str.push(typeof v === "object" ? urlParams(v, k) : encodeURIComponent(k) + "=" + encodeURIComponent(v));
+      str.push(typeof v === 'object' ? urlParams(v, k) : encodeURIComponent(k) + '=' + encodeURIComponent(v));
     }
   }
-  return str.join("&");
+  return str.join('&');
 }
 
 export function getUrlParams(queryString) {
-	const params = {};
+  const params = {};
 
-  if (!(queryString = location.search.replace('?',''))) {
+  if (!(queryString = location.search.replace('?', ''))) {
     return params;
   }
 
   const queryParams = queryString.split('&');
   const regex = /\[\]$/;
 
-  for (let param of queryParams) {
+  for (const param of queryParams) {
     let [name, value] = decodeURIComponent(param).split('=');
     value = value ? value.split('+').join(' ') : '';
     if (regex.test(name)) {

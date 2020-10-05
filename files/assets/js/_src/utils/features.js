@@ -14,22 +14,22 @@ let isChrome = navigator.userAgent.indexOf('Chrome') > -1;
 let isSafari = navigator.userAgent.indexOf('Safari') > -1;
 
 if ((isChrome) && (isSafari)) {
-	isSafari = false;
+  isSafari = false;
 }
 if ((isChrome) && (isOpera)) {
-	isChrome = false;
+  isChrome = false;
 }
 
 let supportsPassive = false;
 
 try {
-	window.addEventListener('test', null, {
-		get passive() {
-			supportsPassive = true;
-		},
-	});
+  window.addEventListener('test', null, {
+    get passive() {
+      supportsPassive = true;
+    },
+  });
 } catch (e) {
-	// do nothing
+  // do nothing
 }
 
 const supportsObjectFit = ('objectFit' in document.documentElement.style);
@@ -55,22 +55,20 @@ const cssTransformSVG = (() => {
 })();
 
 export {
-	isTouch,
-	isIos,
-	isIos9,
-	isIphone,
-	isIpad,
-	isAndroid,
-	isIE,
-	isEdge,
-	isFirefox,
-	isChrome,
-	isOpera,
-	isSafari,
-	supportsPassive,
-	supportsObjectFit,
+  isTouch,
+  isIos,
+  isIos9,
+  isIphone,
+  isIpad,
+  isAndroid,
+  isIE,
+  isEdge,
+  isFirefox,
+  isChrome,
+  isOpera,
+  isSafari,
+  supportsPassive,
+  supportsObjectFit,
   hasServiceWorker,
   cssTransformSVG
-}
-
-
+};

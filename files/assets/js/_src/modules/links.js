@@ -49,8 +49,5 @@ app.on('init', () => {
 
       });
     },
-    destroy: function(element) {
-
-    }
   });
 });

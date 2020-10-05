@@ -9,16 +9,15 @@ import throttle from '@/utils/throttle';
 const loadedClass = 'media--loaded';
 
 app.on('init', () => {
-
-  const loadImg = new InSicht({
+  /* eslint-disable no-new */
+  new InSicht({
     container: document.documentElement,
     selector: '[data-load-img], [data-load-bg], [data-load-video]',
     visibleClass: 'insicht--sichtbar',
     stagger: 100,
     threshold: 0,
     autoRefresh: true,
-    init: (item, instance) => {},
-    done: (item, instance) => {
+    done: item => {
       const data = item.dataset;
       const src = data.loadImg || data.loadBg || data.loadVideo;
       const isBg = !!data.loadBg;
@@ -52,22 +51,23 @@ app.on('init', () => {
             }
             item.classList.add(loadedClass);
           }
-          catch(e) {}
+          catch(e) {
+            // no need to do anything
+          }
         };
         img.src = src;
       }
     },
   });
 
-  const loadMediaInside = new InSicht({
+  new InSicht({
     container: document.documentElement,
     selector: '[data-load-media-inside]',
     visibleClass: 'insicht--sichtbar',
     stagger: 100,
     threshold: 0,
     autoRefresh: true,
-    init: (item, instance) => {},
-    done: (item, instance) => {
+    done: item => {
       const elements = [].slice.call(item.querySelectorAll('[data-img-src], [data-bg-src], [data-video-src]'), 0);
 
       for (const el of elements) {
@@ -104,7 +104,9 @@ app.on('init', () => {
               }
               el.classList.add(loadedClass);
             }
-            catch(e) {}
+            catch(e) {
+              // no need to do anything
+            }
           };
           img.src = src;
         }
@@ -112,15 +114,14 @@ app.on('init', () => {
     },
   });
 
-  const loadSrcset = new InSicht({
+  new InSicht({
     container: document.documentElement,
     selector: '[data-load-srcset], [data-load-bg-srcset], [data-load-video-srcset]',
     visibleClass: 'insicht--sichtbar',
     stagger: 100,
     threshold: 0,
     autoRefresh: true,
-    init: (item, instance) => {},
-    done: (item, instance) => {
+    done: item => {
       const data = item.dataset;
       const thumb = item.src;
       const isBg = !!data.loadBgSrcset;
@@ -148,7 +149,7 @@ app.on('init', () => {
                 video.setAttribute('playsinline', true);
                 video.oncanplay = () => {
                   item.src = video.src;
-                  item.dataset.currentSrc = src
+                  item.dataset.currentSrc = src;
                   item.classList.add(loadedClass);
                 };
                 video.src = src;
@@ -166,12 +167,16 @@ app.on('init', () => {
                     item.dataset.currentSrc = src;
                     item.classList.add(loadedClass);
                   }
-                  catch(e) {}
+                  catch(e) {
+                    // no need to do anything
+                  }
                 };
                 img.src = src;
               }
             }
-            catch(er) {}
+            catch(er) {
+              // no need to do anything
+            }
           }
         };
 
@@ -179,20 +184,19 @@ app.on('init', () => {
         resize();
       }
       catch(e) {
-
+        // no need to do anything
       }
     },
   });
 
-  const loadSrcsetInside = new InSicht({
+  new InSicht({
     container: document.documentElement,
     selector: '[data-load-srcset-inside]',
     visibleClass: 'insicht--sichtbar',
     stagger: 100,
     threshold: 0,
     autoRefresh: true,
-    init: (item, instance) => {},
-    done: (item, instance) => {
+    done: item => {
       const elements = [].slice.call(item.querySelectorAll('[data-img-srcset], [data-bg-srcset], [data-video-srcset]'), 0);
 
       for (const el of elements) {
@@ -243,12 +247,16 @@ app.on('init', () => {
                       el.dataset.currentSrc = src;
                       el.classList.add(loadedClass);
                     }
-                    catch(e) {}
+                    catch(e) {
+                      // no need to do anything
+                    }
                   };
                   img.src = src;
                 }
               }
-              catch(er) {}
+              catch(er) {
+                // no need to do anything
+              }
             }
           };
 
@@ -256,11 +264,10 @@ app.on('init', () => {
           resize();
         }
         catch(e) {
-
+          // no need to do anything
         }
       }
     },
   });
-
 
 });

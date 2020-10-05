@@ -12,10 +12,9 @@ app.on('init', () => {
         return false;
       });
     },
-    destroy: function(el) {}
   });
 
-  app.el.win.addEventListener('scroll', e => {
+  app.el.win.addEventListener('scroll', () => {
     app.el.html.classList.toggle('site--scrolled', window.pageYOffset >= 30);
     app.el.html.classList.toggle('site--scrolled-deep', window.pageYOffset >= 200);
   });

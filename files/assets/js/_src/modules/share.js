@@ -47,6 +47,5 @@ app.on('init', () => {
         return false;
       });
     },
-    destroy: function(element) {}
   });
 });

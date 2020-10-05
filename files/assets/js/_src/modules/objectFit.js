@@ -10,7 +10,7 @@ app.on('init', () => {
 
       if (app.el.html.hasClass('no-objectfit') && !window.objectFitPolyfill) {
 
-        this.resize = e => {
+        this.resize = () => {
           const parent = el.parentNode;
           const parentWidth = parent.clientWidth;
           const parentHeight = parent.clientHeight;
@@ -35,7 +35,7 @@ app.on('init', () => {
         this.resize();
       }
     },
-    destroy: function(el) {
+    destroy: function() {
       this.throttled && window.removeEventListener('resize', this.throttled);
       this.resize && window.removeEventListener('load', this.resize);
     }

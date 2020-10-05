@@ -8,7 +8,9 @@ export function getResponseURL(xhr = {}) {
       return xhr.getResponseHeader('X-Request-URL');
     }
   }
-  catch(e) {}
+  catch(e) {
+    // no need to do anything
+  }
   return '';
 }
 

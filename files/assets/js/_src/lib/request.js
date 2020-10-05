@@ -12,7 +12,9 @@ export default class Request {
         this.cache.entries = entries;
       }
     }
-    catch(er) {}
+    catch(er) {
+      // no need to do anything
+    }
   }
   get(url, cacheTime = this.cacheTime, onProgress) {
     return new Promise((resolve, reject) => {
@@ -24,7 +26,7 @@ export default class Request {
           console.info('from cache:', url);
           resolve(data);
         })
-        .catch(err => {
+        .catch(() => {
           const req = http(url);
 
           if (typeof onProgress === 'function') {
@@ -47,11 +49,13 @@ export default class Request {
                     localStorage.removeItem('requestCache');
                   }
                 }
-                catch(er2) {}
+                catch(er2) {
+                  // no need to do anything
+                }
                 resolve(d);
               });
             })
-            .catch(data => {
+            .catch(() => {
               console.error('not found:', url);
               reject();
             });

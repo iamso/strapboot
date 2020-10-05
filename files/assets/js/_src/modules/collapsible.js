@@ -9,7 +9,7 @@ app.on('init', () => {
     create: function(element) {
       const trigger = element.querySelector(`.${baseClass}__trigger`);
       const content = element.querySelector(`.${baseClass}__content`);
-      const contentTransition = e => {
+      const contentTransition = () => {
         content.removeEventListener('transitionend', contentTransition);
         content.style.maxHeight = '';
       };
@@ -30,6 +30,5 @@ app.on('init', () => {
       });
 
     },
-    destroy: function(element) {},
   });
 });

@@ -34,7 +34,7 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  for (let url of urlsNotToCache) {
+  for (const url of urlsNotToCache) {
     if (event.request.url.match(url)) {
       return;
     }
@@ -53,9 +53,8 @@ self.addEventListener('fetch', event => {
                event.request.headers.get('accept').includes('text/html'))) {
             return caches.match(offlineUrl);
           }
-          else {
-            return error;
-          }
+
+          return error;
         });
       });
     })
@@ -67,8 +66,9 @@ self.addEventListener('fetch', event => {
         if (response.ok) {
           cache.put(event.request, response);
         }
+
         return;
-      }).catch(error => {
+      }).catch(() => {
         return;
       });
     })

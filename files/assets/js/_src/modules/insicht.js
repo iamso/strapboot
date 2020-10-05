@@ -10,8 +10,6 @@ app.on('init', () => {
     stagger: 200,
     threshold: 0,
     autoRefresh: true,
-    init: (item, instance) => {},
-    done: (item, instance) => {},
   });
 
 });

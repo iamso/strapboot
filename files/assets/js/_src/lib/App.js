@@ -59,10 +59,9 @@ export default class App {
       }
       return p;
     }
-    else {
-      for (const listener of this._events[event]) {
-        listener(data);
-      }
+
+    for (const listener of this._events[event]) {
+      listener(data);
     }
   }
 }

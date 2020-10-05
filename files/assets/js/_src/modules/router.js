@@ -12,15 +12,15 @@ app.on('init', () => {
         p = p.then(async () => {
           const request = new Request(req.pathname, {
             headers: new Headers({
-              'accept': 'text/html'
+              accept: 'text/html'
             })
           });
 
           return Promise.all([
             app.loader.show(),
             app.get(request)
-          ]).then(([l, data]) => {
-            return new Promise(async (resolve, reject) => {
+          ]).then(([, data]) => {
+            return new Promise(async resolve => {
               const parser = new DOMParser();
               const doc = parser.parseFromString(data, 'text/html');
               const main = doc.querySelector('#site-content');
@@ -35,9 +35,6 @@ app.on('init', () => {
             });
           }).catch(() => {});
         });
-      }
-      else {
-
       }
     })
     .init();

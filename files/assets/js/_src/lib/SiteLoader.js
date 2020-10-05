@@ -22,12 +22,12 @@ export default class SiteLoader {
     return this.show();
   }
   show() {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       if (!this.el) {
         resolve();
         return;
       }
-      const listener = e => {
+      const listener = () => {
         this.el.removeEventListener('transitionend', listener);
         resolve(this);
       };
@@ -40,15 +40,15 @@ export default class SiteLoader {
     });
   }
   hide() {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       if (!this.el) {
         resolve();
         return;
       }
-      const listener = e => {
+      const listener = () => {
         this.el.removeEventListener('transitionend', listener);
-        resolve(this);
         this.html.classList.add(this.options.ready);
+        resolve(this);
       };
       this.el.addEventListener('transitionend', listener);
       this.html.classList.remove(this.options.init);

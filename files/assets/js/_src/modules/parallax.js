@@ -36,7 +36,7 @@ app.on('init', () => {
 
       this.updateParallax();
     },
-    destroy: function(el) {
+    destroy: function() {
       window.removeEventListener('scroll', this.updateParallax);
       window.removeEventListener('resize', this.updateParallax);
     }

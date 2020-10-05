@@ -14,6 +14,5 @@ app.on('init', () => {
         });
       }
     },
-    destroy: function(el) {}
   });
 });

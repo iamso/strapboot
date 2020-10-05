@@ -7,11 +7,11 @@ export function loadScript(src) {
     }
     const script = document.createElement('script');
     script.async = true;
-    script.onload = (e) => {
+    script.onload = () => {
       script.classList.add('loaded');
       resolve();
     };
-    script.onerror = (e) => {
+    script.onerror = () => {
       script.classList.add('error');
       reject();
     };

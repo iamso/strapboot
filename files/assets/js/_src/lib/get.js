@@ -39,8 +39,8 @@ function get(url, progress) {
                   controller.enqueue(value);
                   read();
                 }).catch(error => {
-                  controller.error(error)
-                })
+                  controller.error(error);
+                });
               }
               read();
             }
