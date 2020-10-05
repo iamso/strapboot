@@ -6,11 +6,11 @@ const pkg = require('./package.json');
 let include = [
   /assets/,
 ];
-if (pkg.dependencies) {
-  for (let dependency of Object.keys(pkg.dependencies)) {
-    include.push(new RegExp(`node_modules/${dependency.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}/.*`, 'gi'));
-  }
-}
+// if (pkg.dependencies) {
+//   for (let dependency of Object.keys(pkg.dependencies)) {
+//     include.push(new RegExp(`node_modules/${dependency.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}/.*`, 'gi'));
+//   }
+// }
 
 module.exports = {
   name: 'js',
@@ -49,11 +49,15 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            plugins: ['@babel/plugin-transform-runtime'],
+            plugins: [
+              '@babel/plugin-transform-runtime',
+              '@babel/plugin-proposal-class-properties',
+            ],
             presets: [
               ['@babel/env', {
-                modules: false,
-                // useBuiltIns: 'usage',
+                // modules: false,
+                useBuiltIns: 'usage',
+                corejs: 3
               }]
             ],
           }
