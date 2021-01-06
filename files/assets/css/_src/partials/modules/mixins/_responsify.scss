@@ -1,4 +1,4 @@
-//repeats a list of values to a param (e.g. font-size) and repeats this mapping for every breakpoint; Use for responsive spacing, font-sizes, margins, or whatever you want to adjust list-based
+// repeats a list of values to a param (e.g. font-size) and repeats this mapping for every breakpoint; Use for responsive spacing, font-sizes, margins, or whatever you want to adjust list-based
 @mixin responsify($values: (1em), $param: 'font-size', $prefix: '') {
 	@if ($prefix == '-') {
 		#{$param}: -1 * first($values);
