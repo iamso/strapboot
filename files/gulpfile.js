@@ -6,7 +6,7 @@ const path            = require('path');
 const babel           = require('gulp-babel');
 const webpack         = require('webpack-stream');
 
-const sass            = require('gulp-sass');
+const sass            = require('gulp-dart-sass');
 const postcss         = require('gulp-postcss');
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssCalc     = require('postcss-calc');
@@ -76,8 +76,6 @@ const prefixConfig = {
 const webpackConfig   = require('./webpack.config');
 let webpackMode = 'none';
 let silent = false;
-
-sass.compiler = require('node-sass');
 
 gulp.task('watch', (done) => {
   browserSync.init(['**/*.html', '**/*.php'], {
