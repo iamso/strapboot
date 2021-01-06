@@ -1,8 +1,6 @@
 #! /usr/bin/env node
 
-(function() {
-  'use strict';
-
+(async () => {
   const _         = require('lodash');
   const inquirer  = require("inquirer");
   const sh        = require("shelljs");
@@ -96,11 +94,7 @@
 
   console.log('\nAnswer the questions below to setup the project.\n');
 
-  inquirer.prompt(questions).then((answers) => {
-    strapboot(answers, dir).then(() => {
-      // console.log('strapboot is done');
-    });
-
-  });
+  const answers = await inquirer.prompt(questions);
+  await strapboot(answers, dir);
 
 })();

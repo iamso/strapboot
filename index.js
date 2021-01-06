@@ -1,6 +1,4 @@
-(function(module) {
-  'use strict';
-
+((module) => {
   const _         = require('lodash');
   const path      = require('path');
   const fs        = require('fs');
@@ -22,81 +20,77 @@
     escape: /\{%-(.+?)%\}/g
   };
 
-  module.exports = (answers, dir) => {
+  module.exports = async (answers, dir) => {
 
     let files = vfs.src([
       `${base}/files/{.,}**/{.,}*`,
       `!${base}/files/**/.DS_Store`
     ]);
 
-    return new Promise((resolveAll) => {
-      answers.year = (new Date()).getFullYear();
-      answers.taskrunner = answers.taskrunner || 'gulp';
-      answers.styles = answers.styles || 'css';
-      answers.scripts = answers.scripts || 'webpack';
-      answers.packagemanager = answers.packagemanager || 'npm';
+    answers.year = (new Date()).getFullYear();
+    answers.taskrunner = answers.taskrunner || 'gulp';
+    answers.styles = answers.styles || 'css';
+    answers.scripts = answers.scripts || 'webpack';
+    answers.packagemanager = answers.packagemanager || 'npm';
 
-      // console.log(answers);
+    // console.log(answers);
 
-      writeFiles()
-        .then(writeInstructions);;
+    await writeFiles();
+    await writeInstructions();
 
-      function writeFiles() {
-        return new Promise((resolve) => {
-          console.log(colors.bold(`\nWriting files:`));
-          files
-            .pipe(sort())
-            .pipe(map(process))
-            .pipe(vfs.dest(dir))
-            .on('end', () => {
-              resolve();
-            });
-        });
-      }
+    async function writeFiles() {
+      return new Promise((resolve) => {
+        console.log(colors.bold(`\nWriting files:`));
+        files
+          .pipe(sort())
+          .pipe(map(process))
+          .pipe(vfs.dest(dir))
+          .on('end', () => {
+            resolve();
+          });
+      });
+    }
 
-      function writeInstructions(cb) {
-        console.log(`
+    async function writeInstructions() {
+      console.log(`
 ${colors.bold('Instructions:')}
 You should now install project dependencies with ${colors.underline(`${answers.packagemanager} install`)}.
 After that, you may execute project tasks with ${colors.underline(answers.taskrunner)}.
 
 ${colors.green('Done.')}`);
+    }
 
-        resolveAll();
-      }
+    function sort() {
+      let files = [];
 
-      function sort() {
-        let files = [];
-
-        return through.obj(function (file, enc, cb) {
-            files.push(file);
-            cb();
-        }, function (cb) {
-            files.sort((a, b) => {
-              return a.path.localeCompare(b.path);
-            });
-            files.forEach((file) => {
-                this.push(file);
-            });
-            cb();
+      return through.obj(function (file, enc, cb) {
+        files.push(file);
+        cb();
+      }, function (cb) {
+        files.sort((a, b) => {
+          return a.path.localeCompare(b.path);
         });
-      }
+        files.forEach((file) => {
+          this.push(file);
+        });
+        cb();
+      });
+    }
 
-      function process(file, cb) {
-        let filepath;
-        if (file.isBuffer()) {
-          if (isText('', file.contents)) {
-            let content = file.contents.toString();
-            content = _.template(content, null, _.templateSettings)(answers);
-            file.contents = Buffer.from(content);
-          }
+    function process(file, cb) {
+      let filepath;
+      if (file.isBuffer()) {
+        if (isText('', file.contents)) {
+          let content = file.contents.toString();
+          content = _.template(content, null, _.templateSettings)(answers);
+          file.contents = Buffer.from(content);
         }
-        filepath = file.path;
-        filepath = filepath.replace(new RegExp(`${base}/files/`), '');
-        console.log(`Writing ${filepath}...${colors.green('OK')}`);
-        cb(null, file);
       }
-    });
+      filepath = file.path;
+      filepath = filepath.replace(new RegExp(`${base}/files/`), '');
+      console.log(`Writing ${filepath}...${colors.green('OK')}`);
+      cb(null, file);
+    }
   };
 
 })(module);
