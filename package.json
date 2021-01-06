@@ -17,6 +17,7 @@
     "map-stream": "0.0.7",
     "npm-commands": "^1.1.0",
     "shelljs": "^0.8.4",
+    "simple-git": "^2.31.0",
     "through2": "^4.0.2",
     "vinyl-fs": "^3.0.3"
   },

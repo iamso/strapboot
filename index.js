@@ -9,6 +9,7 @@
   const through   = require('through2');
   const globule   = require('globule');
   const npm       = require('npm-commands');
+  const git       = require('simple-git')();
 
   const user      = process.env.USER;
   const gitUser   = require('git-config').sync().user;
@@ -39,6 +40,7 @@
 
     await writeFiles();
     await installDependencies();
+    await createRepo();
     await writeInstructions();
 
     async function writeFiles() {
@@ -52,6 +54,18 @@
             resolve();
           });
       });
+    }
+
+    async function createRepo() {
+      console.log(colors.bold('\n\nCreating repository:'));
+      console.log('Init repository');
+      await git.init();
+      console.log(`Add remote origin ${colors.underline(answers.repository)}`);
+      await git.addRemote('origin', answers.repository);
+      console.log('Stage files');
+      await git.add(['.']);
+      console.log('Create initial commit "strapboot setup"');
+      await git.commit('strapboot setup');
     }
 
     async function installDependencies() {
