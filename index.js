@@ -8,6 +8,7 @@
   const colors    = require('colors');
   const through   = require('through2');
   const globule   = require('globule');
+  const npm       = require('npm-commands');
 
   const user      = process.env.USER;
   const gitUser   = require('git-config').sync().user;
@@ -37,6 +38,7 @@
     };
 
     await writeFiles();
+    await installDependencies();
     await writeInstructions();
 
     async function writeFiles() {
@@ -52,13 +54,16 @@
       });
     }
 
-    async function writeInstructions() {
-      console.log(`
-${colors.bold('Instructions:')}
-You should now install project dependencies with ${colors.underline(`${answers.packagemanager} install`)}.
-After that, you may execute project tasks with ${colors.underline(answers.taskrunner)}.
+    async function installDependencies() {
+        const options = require(`${dir}/package.json`);
+        console.log(colors.bold('\n\nInstalling dependencies:'));
+        npm().cwd(dir).output(true).install();
+    }
 
-${colors.green('Done.')}`);
+    async function writeInstructions() {
+      console.log(colors.bold('\n\nInstructions:'));
+      console.log(`You can now start development with ${colors.underline(`${answers.packagemanager} start`)}.`);
+      console.log(`And build with ${colors.underline(`${answers.packagemanager} run dist`)}.`);
     }
 
     function sort() {
