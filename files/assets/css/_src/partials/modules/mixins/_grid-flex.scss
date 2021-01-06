@@ -37,11 +37,11 @@
     $justify: center;
   }
 
-  @elseif ($alignment == 'end') {
+  @else if ($alignment == 'end') {
     $justify: flex-end;
   }
 
-  @elseif ($alignment == 'start') {
+  @else if ($alignment == 'start') {
     $justify: flex-start;
   }
 
@@ -204,7 +204,7 @@
     @if ($breakpoint == 'xs') {
       @include create-flex-grid-items($breakpoint, $prefix);
     }
-    @elseif ($breakpoint != 'xxs' and $breakpoint != 'xs') {
+    @else if ($breakpoint != 'xxs' and $breakpoint != 'xs') {
       @include media('>=#{$breakpoint}') {
         @include create-flex-grid-items($breakpoint, $prefix);
       }

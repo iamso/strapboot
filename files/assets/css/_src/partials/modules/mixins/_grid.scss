@@ -169,7 +169,7 @@
     @if ($breakpoint == 'xs') {
       @include create-grid-items($breakpoint, $prefix);
     }
-    @elseif ($breakpoint != 'xxs' and $breakpoint != 'xs') {
+    @else if ($breakpoint != 'xxs' and $breakpoint != 'xs') {
       @include media('>=#{$breakpoint}') {
         @include create-grid-items($breakpoint, $prefix);
       }

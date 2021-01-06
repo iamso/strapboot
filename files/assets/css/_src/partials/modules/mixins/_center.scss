@@ -1,17 +1,17 @@
 // Center - centers an element with different techniques
 @mixin center($mode: 'margin') {
-	@if ($mode = 'margin') {
+	@if ($mode == 'margin') {
 		margin: 0 auto;
 		vertical-align: center;
 	}
 
-	@if ($mode = 'transform') {
+	@if ($mode == 'transform') {
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
 
-	@if ($mode = 'flex') {
+	@if ($mode == 'flex') {
 		align-self: center;
 	}
 }
