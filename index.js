@@ -27,13 +27,14 @@
       `!${base}/files/**/.DS_Store`
     ]);
 
-    answers.year = (new Date()).getFullYear();
-    answers.taskrunner = answers.taskrunner || 'gulp';
-    answers.styles = answers.styles || 'css';
-    answers.scripts = answers.scripts || 'webpack';
-    answers.packagemanager = answers.packagemanager || 'npm';
-
-    // console.log(answers);
+    answers = {
+      year: (new Date()).getFullYear(),
+      taskrunner: 'gulp',
+      styles: 'css',
+      scripts: 'webpack',
+      packagemanger: 'npm',
+      ...answers,
+    };
 
     await writeFiles();
     await writeInstructions();
