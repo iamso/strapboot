@@ -28,12 +28,20 @@ body {
       text-align: center;
       z-index: 999999999999999999999999;
 
+      @include media('>=xxs') {
+        content: 'xxs';
+      }
+
       @include media('>=xs') {
         content: 'xs';
       }
 
       @include media('>=sm') {
         content: 'sm';
+      }
+
+      @include media('>=ms') {
+        content: 'ms';
       }
 
       @include media('>=md') {

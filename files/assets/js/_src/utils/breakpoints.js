@@ -1,13 +1,14 @@
 // breakpoints in rem
 export const breakpoints = {
-  xxs: 20,
-  xs: 30,
-  sm: 48,
-  md: 62,
-  lg: 75,
-  xl: 90,
-  xxl: 120,
-  xxxl: 140,
+  xxs: 20, // 320px
+  xs: 30, // 480px
+  sm: 48, // 768px
+  ms: 62, // 992px
+  md: 64, // 1024px
+  lg: 80, // 1280px
+  xl: 90, // 1440px
+  xxl: 120, // 1920px
+  xxxl: 140, // 2240px
 };
 
 export default breakpoints;

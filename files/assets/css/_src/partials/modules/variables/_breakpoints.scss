@@ -1,10 +1,11 @@
 $breakpoints: (
-  'xxs': 20em,
-  'xs': 30em,
-  'sm': 48em,
-  'md': 62em,
-  'lg': 75em,
-  'xl': 90em,
-  'xxl': 120em,
-  'xxxl': 140em,
+  'xxs': 20em, // 320px
+  'xs': 30em, // 480px
+  'sm': 48em, // 768px
+  'ms': 62em, // 992px
+  'md': 64em, // 1024px
+  'lg': 80em, // 1280px
+  'xl': 90em, // 1440px
+  'xxl': 120em, // 1920px
+  'xxxl': 140em, // 2240px
 );
