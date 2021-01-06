@@ -45,7 +45,7 @@
   direction: initial;
 }
 
-@mixin grid-item-span($columns-to-span: $grid-columns, $rows-to-span: $grid-columns) {
+@mixin grid-item-span($columns-to-span: $grid-columns, $rows-to-span: $grid-rows) {
   grid-column: span $columns-to-span;
 	grid-row: span $rows-to-span;
 }
@@ -144,7 +144,7 @@
         @include grid-item-span('auto');
 
         @for $i from 1 through $grid-columns {
-          @for $ii from 1 through $grid-columns {
+          @for $ii from 1 through $grid-rows {
             &-#{$i}-#{$ii} {
               @include grid-item;
               @include grid-item-span($i, $ii);
