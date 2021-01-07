@@ -17,8 +17,6 @@ cd /path/to/project/directory
 strapboot
 ```
 
-After that run `npm install` to install all dependencies.
-
 ### Gulp
 You can start the main tasks with the following commands:
 
@@ -31,7 +29,7 @@ Check the gulpfile for further information.
 
 ## Caveat
 
-Support for IE and early Edge versions (before Chromium) has been dropped. Use at your own risk.
+Support for IE and early Edge versions (before Chromium) has been ~~dropped~~ added back again, but still, use at your own risk.
 
 ## License
 

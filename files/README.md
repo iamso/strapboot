@@ -15,15 +15,11 @@ There are 2 main gulp tasks to run:
 | `npm start` | Runs the `dev` task. This also includes the `watch` task. |
 | `npm run dist` | Runs the `dist` task. |
 
-## Caveat
-
-Support for IE and early Edge versions (before Chromium) has been dropped. Use at your own risk.
-
 ## Credits
 
-This project has been bootstrapped with [strapboot](https://www.npmjs.com/package/strapboot).
+This project has been bootstrapped with [{%= pkg.name %}@{%= pkg.version %}](https://www.npmjs.com/package/{%= pkg.name %}/v/{%= pkg.version %} "{%= pkg.name %}: {%= pkg.description %}").
 
-[![NPM](https://nodei.co/npm/strapboot.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/strapboot)
+[![NPM](https://nodei.co/npm/{%= pkg.name %}.png?mini=true)](https://www.npmjs.com/package/{%= pkg.name %})
 
 ## License
 
