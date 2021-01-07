@@ -34,7 +34,7 @@
       taskrunner: 'gulp',
       styles: 'css',
       scripts: 'webpack',
-      packagemanger: 'npm',
+      packagemanager: 'npm',
       ...answers,
     };
 
