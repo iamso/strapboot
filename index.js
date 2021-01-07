@@ -14,6 +14,8 @@
   const user      = process.env.USER;
   const gitUser   = require('git-config').sync().user;
 
+  const pkg       = require('./package.json');
+
   const base      = __dirname;
 
   _.templateSettings = {
@@ -35,6 +37,7 @@
       styles: 'css',
       scripts: 'webpack',
       packagemanager: 'npm',
+      pkg,
       ...answers,
     };
 
@@ -64,8 +67,8 @@
       await git.addRemote('origin', answers.repository);
       console.log('Stage files');
       await git.add(['.']);
-      console.log('Create initial commit "strapboot setup"');
-      await git.commit('strapboot setup');
+      console.log(`Create initial commit "${pkg.name} setup"`);
+      await git.commit(`${pkg.name} setup`);
     }
 
     async function installDependencies() {
