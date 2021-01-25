@@ -14,11 +14,14 @@
   const through   = require('through2');
   const globule   = require('globule');
   const figlet    = require('figlet');
+  const mkdirp    = require('mkdirp');
 
   const user      = process.env.USER;
   const gitUser   = require('git-config').sync().user;
 
-  const dir       = cwd;
+  const dirArg    = process.argv[2];
+  const dir       = path.join(cwd, dirArg);
+  const newDir    = path.relative(cwd, dir);
 
   const strapboot = require('../index');
 
@@ -31,7 +34,7 @@
       type: 'input',
       name: 'name',
       message: 'project name:',
-      default: path.basename(cwd),
+      default: path.basename(dir),
       validate: (input) => {
         return /^([a-z0-9\-\_\.]+)$/.test(input);
       },
@@ -94,6 +97,12 @@
 
   console.log(banner);
 
+  if (newDir) {
+    await mkdirp(dir);
+    process.chdir(dir);
+    console.log(`\nDirectory "${colors.bold(newDir)}" created.`);
+  }
+
   if (globule.find(`${dir}/{.,}*`, `!${dir}/**/.DS_Store`).length) {
     console.log(colors.red.bold('\nDirectory is not empty!'));
     return;
@@ -102,6 +111,5 @@
   console.log('\nAnswer the questions below to setup the project.\n');
 
   const answers = await inquirer.prompt(questions);
-  await strapboot(answers, dir);
-
+  await strapboot(answers, dir, newDir);
 })();

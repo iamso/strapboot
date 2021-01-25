@@ -24,7 +24,7 @@
     escape: /\{%-(.+?)%\}/g
   };
 
-  module.exports = async (answers, dir) => {
+  module.exports = async (answers, dir, newDir) => {
 
     let files = vfs.src([
       `${base}/files/{.,}**/{.,}*`,
@@ -62,25 +62,27 @@
     async function createRepo() {
       console.log(colors.bold('\n\nCreating repository:'));
       console.log('Init repository');
-      await git.init();
+      await git.cwd(dir).init();
       console.log(`Add remote origin ${colors.underline(answers.repository)}`);
-      await git.addRemote('origin', answers.repository);
+      await git.cwd(dir).addRemote('origin', answers.repository);
       console.log('Stage files');
-      await git.add(['.']);
+      await git.cwd(dir).add(['.']);
       console.log(`Create initial commit "${pkg.name} setup"`);
-      await git.commit(`${pkg.name} setup`);
+      await git.cwd(dir).commit(`${pkg.name} setup`);
     }
 
     async function installDependencies() {
-        const options = require(`${dir}/package.json`);
         console.log(colors.bold('\n\nInstalling dependencies:'));
         npm().cwd(dir).output(true).install();
     }
 
     async function writeInstructions() {
       console.log(colors.bold('\n\nInstructions:'));
-      console.log(`You can now start development with ${colors.underline(`${answers.packagemanager} start`)}.`);
-      console.log(`And build with ${colors.underline(`${answers.packagemanager} run dist`)}.`);
+      if (newDir) {
+        console.log(colors.bold.underline(`cd ${newDir}`));
+      }
+      console.log(colors.bold.underline(`${answers.packagemanager} start`), '(dev)');
+      console.log(colors.bold.underline(`${answers.packagemanager} run dist`), '(build)');
     }
 
     function sort() {
