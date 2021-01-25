@@ -13,6 +13,7 @@
   const colors    = require('colors');
   const through   = require('through2');
   const globule   = require('globule');
+  const figlet    = require('figlet');
 
   const user      = process.env.USER;
   const gitUser   = require('git-config').sync().user;
@@ -20,6 +21,10 @@
   const dir       = cwd;
 
   const strapboot = require('../index');
+
+  const pkg       = require('../package.json');
+
+  const banner    = `\n${figlet.textSync(pkg.name, {font: 'Pagga'})}\n${colors.dim(`Version ${pkg.version}`)}`;
 
   let questions = [
     {
@@ -86,6 +91,8 @@
       },
     },
   ];
+
+  console.log(banner);
 
   if (globule.find(`${dir}/{.,}*`, `!${dir}/**/.DS_Store`).length) {
     console.log(colors.red.bold('\nDirectory is not empty!'));
