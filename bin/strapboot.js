@@ -19,7 +19,7 @@
   const user      = process.env.USER;
   const gitUser   = require('git-config').sync().user;
 
-  const dirArg    = process.argv[2];
+  const dirArg    = process.argv[2] || '';
   const dir       = path.join(cwd, dirArg);
   const newDir    = path.relative(cwd, dir);
 
