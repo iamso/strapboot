@@ -98,9 +98,12 @@
   console.log(banner);
 
   if (newDir) {
-    await mkdirp(dir);
+    if (!fs.existsSync(dir)) {
+      await mkdirp(dir);
+      console.log(`\nDirectory "${colors.bold(newDir)}" created.`);
+    }
+
     process.chdir(dir);
-    console.log(`\nDirectory "${colors.bold(newDir)}" created.`);
   }
 
   if (globule.find(`${dir}/{.,}*`, `!${dir}/**/.DS_Store`).length) {
