@@ -1,5 +1,5 @@
 const currentCacheName = 'cache-v1.0';
-const offlineUrl = '/error/404';
+const offlineUrl = '/';
 const urlsToCache = [
   offlineUrl,
   '/',
