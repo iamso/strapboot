@@ -1,0 +1,12 @@
+{
+  "short_name": "{%= name %}",
+  "name": "{%= name %}",
+  "icons": [{
+    "src": "apple-touch-icon-precomposed.png",
+    "type": "image/png",
+    "sizes": "192x192"
+  }],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
+}
