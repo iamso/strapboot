@@ -1,16 +1,11 @@
 const webpack = require('webpack');
 const path = require('path');
-const Visualizer = require('webpack-visualizer-plugin');
+const Visualizer = require('webpack-visualizer-plugin2');
 const pkg = require('./package.json');
 
 let include = [
   /assets/,
 ];
-// if (pkg.dependencies) {
-//   for (let dependency of Object.keys(pkg.dependencies)) {
-//     include.push(new RegExp(`node_modules/${dependency.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}/.*`, 'gi'));
-//   }
-// }
 
 module.exports = {
   name: 'js',
@@ -36,8 +31,6 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    // new webpack.ProvidePlugin({}),
     new Visualizer(),
   ],
 
@@ -55,7 +48,6 @@ module.exports = {
             ],
             presets: [
               ['@babel/env', {
-                // modules: false,
                 useBuiltIns: 'usage',
                 corejs: 3
               }]

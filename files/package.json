@@ -53,7 +53,7 @@
     "postcss-preset-env": "^6.7.0",
     "postcss-reporter": "^7.0.2",
     "webpack-stream": "^6.1.2",
-    "webpack-visualizer-plugin": "^0.1.11"
+    "webpack-visualizer-plugin2": "^1.0.0"
   },
   "dependencies": {
     "autocreate.js": "0.*",
