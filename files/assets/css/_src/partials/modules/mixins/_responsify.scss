@@ -1,19 +1,44 @@
-// repeats a list of values to a param (e.g. font-size) and repeats this mapping for every breakpoint; Use for responsive spacing, font-sizes, margins, or whatever you want to adjust list-based
-@mixin responsify($values: (1em), $param: 'font-size', $prefix: '') {
-	@if ($prefix == '-') {
-		#{$param}: -1 * first($values);
-  }
-  @else {
-		#{$param}: first($values);
+// set list of values matching breakpoints (index) for a given parameter.
+// $values: list of values to set
+// $param: parameter to assign values to
+// $negate: if value should be negated (* -1)
+// $from: start from this breakpoint (inclusive)
+// $to: stop after this breakpoint
+// $exclude: list of breakpoints to exclude
+@mixin responsify($values: (1em), $param: 'font-size', $negate: false, $from: null, $to: null, $exclude: ()) {
+
+	// get the index for the from and to breakpoints
+	$fromIndex: index(($breakpoints), ($from breakpoint($from)));
+	$toIndex: index(($breakpoints), ($to breakpoint($to)));
+
+	// set default index, if no index is returned
+	$fromIndex: 0 !default;
+	$toIndex: length($breakpoints) !default;
+
+	// only set initial value if:
+	// - from index is below or equal to 1 (0 means no from breakpoint)
+	// - first breakpoint is not in the list of excluded breakpoints
+	@if ($fromIndex <= 1 and not index($exclude, index-to-key(1, $breakpoints))) {
+		@if ($negate) {
+			#{$param}: -1 * first($values);
+		}
+		@else {
+			#{$param}: first($values);
+		}
 	}
 
+	// loop through the list of breakpoints
 	@each $breakpoint, $size in $breakpoints {
     $index: index(($breakpoints), ($breakpoint $size));
 
-		// loop for every breakpoint until list of values is empty
-    @include media('>=#{$breakpoint}') {
-			@if (length($values) >= $index) {
-				@if ($prefix == '-') {
+		// only set value if:
+		// - the index is not higher than the length of values
+		// - the index is not below the from index
+		// - the index is not above the to index
+		// - the index is not in the list of excluded breakpoints
+		@if (length($values) >= $index and $index >= $fromIndex and $index <= $toIndex and not index($exclude, $breakpoint)) {
+    	@include media('>=#{$breakpoint}') {
+				@if ($negate) {
 					#{$param}: -1 * nth($values, $index);
         }
         @else {
