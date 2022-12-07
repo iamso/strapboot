@@ -19,7 +19,7 @@
     "mkdirp": "^1.0.4",
     "npm-commands": "^1.1.0",
     "shelljs": "^0.8.4",
-    "simple-git": "^2.36.2",
+    "simple-git": "^3.15.0",
     "through2": "^4.0.2",
     "vinyl-fs": "^3.0.3"
   },
